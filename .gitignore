@@ -73,4 +73,7 @@ DerivedData/
 ### Xcode Patch ###
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+### Firebase
+assets/GoogleService-Info.plist
+
 # End of https://www.gitignore.io/api/xcode,macos,cocoapods
