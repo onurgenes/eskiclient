@@ -10,7 +10,13 @@ import Moya
 import Kanna
 
 final class NetworkManager: Networkable {
-    var client = MoyaProvider<EksiAPI>()
+    
+    var client: MoyaProvider<EksiAPI> = {
+        var config = NetworkLoggerPlugin.Configuration()
+        config.logOptions = .verbose
+        let logger = NetworkLoggerPlugin(configuration: config)
+        return MoyaProvider<EksiAPI>(plugins: [logger])
+    }()
     
     func fetch(_ targetAPI: EksiAPI, completion: @escaping(Result<Data, Error>)->()) {
         client.request(targetAPI) { result in
