@@ -78,11 +78,9 @@ extension EksiAPI: TargetType {
     }
     
     var headers: [String : String]? {
-        return [ "X-Requested-With": "XMLHttpRequest",
-                 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 12_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari Line/9.12.0",
-                 "Accept-Language": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7,ru;q=0.6",
-                 "Accept-Encoding": "gzip, deflate, br"]
+        return ["X-Requested-With": "XMLHttpRequest",
+                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 12_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari Line/9.12.0",
+                "Accept-Language": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7,ru;q=0.6",
+                "Accept-Encoding": "gzip, deflate, br"]
     }
-    
-    
 }
