@@ -9,6 +9,7 @@
 import UIKit
 
 final class HomeCoordinator: Coordinator {
+    weak var parentCoordinator: Coordinator?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     var networkManager: NetworkManager
@@ -25,5 +26,12 @@ final class HomeCoordinator: Coordinator {
         vc.viewModel = vm
         vm.coordinator = self
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func openHeading(url: String) {
+        let headingCoordinator = HeadingCoordinator(navigationController: navigationController, url: url)
+        headingCoordinator.parentCoordinator = self
+        childCoordinators.append(headingCoordinator)
+        headingCoordinator.start()
     }
 }

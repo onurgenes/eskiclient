@@ -63,25 +63,7 @@ extension HomeVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let link = viewModel.headingLinks[indexPath.row] {
-            let nm = NetworkManager()
-            nm.getHeading(url: link) { res in
-                switch res {
-                case .failure(let err):
-                    print(err)
-                case .success(let val):
-                    if let doc = try? HTML(html: val, encoding: .utf8) {
-                        for baslik in doc.xpath("//*[@id='entry-item-list']/li") {
-                            if let html = baslik.toHTML {
-                                let data = Data(html.utf8)
-                                if let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
-                                    print(attributedString.string)
-                                }
-                            }
-                            
-                        }
-                    }
-                }
-            }
+            viewModel.openHeading(url: link)
         } else {
             print("Can't get link")
         }
