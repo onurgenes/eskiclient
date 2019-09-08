@@ -8,8 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		312189F8CE828FB7D6C67582 /* Pods_eskiclient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85403D40BDBE45F1FE17A7B4 /* Pods_eskiclient.framework */; };
+		6E10D76123249C81003CC840 /* BaseTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10D76023249C81003CC840 /* BaseTableVC.swift */; };
+		6E10D76323249C98003CC840 /* BaseVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10D76223249C98003CC840 /* BaseVM.swift */; };
+		6E10D76523249CC2003CC840 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10D76423249CC2003CC840 /* BaseVC.swift */; };
+		6E10D76723249CDF003CC840 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10D76623249CDF003CC840 /* HomeVM.swift */; };
+		6E10D76923249D06003CC840 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10D76823249D06003CC840 /* HomeCoordinator.swift */; };
 		6EFD1EC3231528F3005941F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EC2231528F3005941F1 /* AppDelegate.swift */; };
-		6EFD1EC5231528F3005941F1 /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EC4231528F3005941F1 /* HomePageVC.swift */; };
+		6EFD1EC5231528F3005941F1 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EC4231528F3005941F1 /* HomeVC.swift */; };
 		6EFD1ECA231528F5005941F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EFD1EC9231528F5005941F1 /* Assets.xcassets */; };
 		6EFD1ECD231528F5005941F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFD1ECB231528F5005941F1 /* LaunchScreen.storyboard */; };
 		6EFD1ED523152A79005941F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EFD1ED423152A79005941F1 /* GoogleService-Info.plist */; };
@@ -17,15 +22,19 @@
 		6EFD1ED923153850005941F1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1ED823153850005941F1 /* AppCoordinator.swift */; };
 		6EFD1EDB23153952005941F1 /* EksiAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EDA23153952005941F1 /* EksiAPI.swift */; };
 		6EFD1EDD23155972005941F1 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EDC23155972005941F1 /* Networkable.swift */; };
-		6EFD1EDF23155A6E005941F1 /* HomePageHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EDE23155A6E005941F1 /* HomePageHeading.swift */; };
 		6EFD1EE123155B77005941F1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EE023155B77005941F1 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		232BE6828454E87804F7F1B0 /* Pods-eskiclient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eskiclient.release.xcconfig"; path = "Target Support Files/Pods-eskiclient/Pods-eskiclient.release.xcconfig"; sourceTree = "<group>"; };
+		6E10D76023249C81003CC840 /* BaseTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableVC.swift; sourceTree = "<group>"; };
+		6E10D76223249C98003CC840 /* BaseVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVM.swift; sourceTree = "<group>"; };
+		6E10D76423249CC2003CC840 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		6E10D76623249CDF003CC840 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
+		6E10D76823249D06003CC840 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		6EFD1EBF231528F3005941F1 /* eskiclient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eskiclient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EFD1EC2231528F3005941F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6EFD1EC4231528F3005941F1 /* HomePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVC.swift; sourceTree = "<group>"; };
+		6EFD1EC4231528F3005941F1 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		6EFD1EC9231528F5005941F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6EFD1ECC231528F5005941F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6EFD1ECE231528F5005941F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -34,7 +43,6 @@
 		6EFD1ED823153850005941F1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6EFD1EDA23153952005941F1 /* EksiAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EksiAPI.swift; sourceTree = "<group>"; };
 		6EFD1EDC23155972005941F1 /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
-		6EFD1EDE23155A6E005941F1 /* HomePageHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageHeading.swift; sourceTree = "<group>"; };
 		6EFD1EE023155B77005941F1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		842B38F5B970C2C72915D687 /* Pods-eskiclient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eskiclient.debug.xcconfig"; path = "Target Support Files/Pods-eskiclient/Pods-eskiclient.debug.xcconfig"; sourceTree = "<group>"; };
 		85403D40BDBE45F1FE17A7B4 /* Pods_eskiclient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eskiclient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +69,46 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6E10D76A23249D6E003CC840 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6EFD1EC4231528F3005941F1 /* HomeVC.swift */,
+				6E10D76623249CDF003CC840 /* HomeVM.swift */,
+				6E10D76823249D06003CC840 /* HomeCoordinator.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6E10D76B2324A81A003CC840 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				6EFD1ED623153796005941F1 /* Coordinator.swift */,
+				6E10D76023249C81003CC840 /* BaseTableVC.swift */,
+				6E10D76223249C98003CC840 /* BaseVM.swift */,
+				6E10D76423249CC2003CC840 /* BaseVC.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		6E10D76D2324A82B003CC840 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6EFD1EDA23153952005941F1 /* EksiAPI.swift */,
+				6EFD1EDC23155972005941F1 /* Networkable.swift */,
+				6EFD1EE023155B77005941F1 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		6E10D76E2324A838003CC840 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6EFD1EC2231528F3005941F1 /* AppDelegate.swift */,
+				6EFD1ED823153850005941F1 /* AppCoordinator.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		6EFD1EB6231528F3005941F1 = {
 			isa = PBXGroup;
 			children = (
@@ -82,18 +130,14 @@
 		6EFD1EC1231528F3005941F1 /* eskiclient */ = {
 			isa = PBXGroup;
 			children = (
-				6EFD1EC2231528F3005941F1 /* AppDelegate.swift */,
-				6EFD1EC4231528F3005941F1 /* HomePageVC.swift */,
+				6E10D76E2324A838003CC840 /* App */,
+				6E10D76B2324A81A003CC840 /* Base */,
+				6E10D76D2324A82B003CC840 /* Network */,
+				6E10D76A23249D6E003CC840 /* Home */,
 				6EFD1EC9231528F5005941F1 /* Assets.xcassets */,
 				6EFD1ECB231528F5005941F1 /* LaunchScreen.storyboard */,
 				6EFD1ED423152A79005941F1 /* GoogleService-Info.plist */,
 				6EFD1ECE231528F5005941F1 /* Info.plist */,
-				6EFD1ED623153796005941F1 /* Coordinator.swift */,
-				6EFD1ED823153850005941F1 /* AppCoordinator.swift */,
-				6EFD1EDA23153952005941F1 /* EksiAPI.swift */,
-				6EFD1EDC23155972005941F1 /* Networkable.swift */,
-				6EFD1EE023155B77005941F1 /* NetworkManager.swift */,
-				6EFD1EDE23155A6E005941F1 /* HomePageHeading.swift */,
 			);
 			path = eskiclient;
 			sourceTree = "<group>";
@@ -223,11 +267,15 @@
 			files = (
 				6EFD1EDB23153952005941F1 /* EksiAPI.swift in Sources */,
 				6EFD1ED923153850005941F1 /* AppCoordinator.swift in Sources */,
-				6EFD1EC5231528F3005941F1 /* HomePageVC.swift in Sources */,
+				6EFD1EC5231528F3005941F1 /* HomeVC.swift in Sources */,
+				6E10D76723249CDF003CC840 /* HomeVM.swift in Sources */,
 				6EFD1EC3231528F3005941F1 /* AppDelegate.swift in Sources */,
+				6E10D76923249D06003CC840 /* HomeCoordinator.swift in Sources */,
+				6E10D76323249C98003CC840 /* BaseVM.swift in Sources */,
 				6EFD1EE123155B77005941F1 /* NetworkManager.swift in Sources */,
-				6EFD1EDF23155A6E005941F1 /* HomePageHeading.swift in Sources */,
+				6E10D76523249CC2003CC840 /* BaseVC.swift in Sources */,
 				6EFD1EDD23155972005941F1 /* Networkable.swift in Sources */,
+				6E10D76123249C81003CC840 /* BaseTableVC.swift in Sources */,
 				6EFD1ED723153796005941F1 /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

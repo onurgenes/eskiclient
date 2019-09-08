@@ -69,28 +69,34 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - TinyConstraints (4.0.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Kanna
   - Moya (~> 14.0.0-beta.1)
+  - TinyConstraints
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - FirebaseCoreDiagnostics
+    - FirebaseCoreDiagnosticsInterop
+    - GoogleUtilities
+    - Kanna
+    - nanopb
   trunk:
     - Alamofire
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
-    - FirebaseCoreDiagnostics
-    - FirebaseCoreDiagnosticsInterop
     - FirebaseInstanceID
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
-    - Kanna
     - Moya
     - nanopb
+    - TinyConstraints
 
 SPEC CHECKSUMS:
   Alamofire: b752289c6040d77e9738610c9080276f18276842
@@ -107,7 +113,8 @@ SPEC CHECKSUMS:
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
   Moya: 1ec11d431b7850b55e28f559e179dfd0649fa80c
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: a0b63fec46696c7bd6338410ae6d4715623021d9
+PODFILE CHECKSUM: 748b55f3181b582d8dc5bd76cdaacf2f36135039
 
 COCOAPODS: 1.8.0.beta.1

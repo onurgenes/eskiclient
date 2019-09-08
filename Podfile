@@ -5,4 +5,5 @@ target 'eskiclient' do
   pod 'Moya', '~> 14.0.0-beta.1'
   pod 'Firebase/Analytics'
   pod 'Kanna'
+  pod 'TinyConstraints'
 end

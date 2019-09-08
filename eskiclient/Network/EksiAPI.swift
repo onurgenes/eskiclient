@@ -33,7 +33,8 @@ extension EksiAPI: TargetType {
         case .message:
             return ""
         case .heading(let url):
-            return url
+            let removedParamUrl = url.split(separator: "?").first!
+            return String(removedParamUrl)
         case .entry:
             return ""
         }
@@ -71,7 +72,10 @@ extension EksiAPI: TargetType {
         case .message:
             return .requestPlain
         case .heading:
-            return .requestPlain
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateString = dateFormatter.string(from: Date())
+            return .requestParameters(parameters: ["day": dateString], encoding: URLEncoding.default)
         case .entry:
             return .requestPlain
         }

@@ -18,12 +18,15 @@ final class AppCoordinator: Coordinator {
     init() {
         window = UIWindow()
         childCoordinators = []
-        navigationController = UINavigationController(rootViewController: HomePageVC())
+        navigationController = UINavigationController()
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
     
     func start() {
-        
+        let networkManager = NetworkManager()
+        let homeCoordinator = HomeCoordinator(navigationController: navigationController, networkManager: networkManager)
+        childCoordinators.append(homeCoordinator)
+        homeCoordinator.start()
     }
 }

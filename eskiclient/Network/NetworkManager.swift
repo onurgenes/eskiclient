@@ -18,31 +18,28 @@ final class NetworkManager: Networkable {
         return MoyaProvider<EksiAPI>(plugins: [logger])
     }()
     
-    func fetch(_ targetAPI: EksiAPI, completion: @escaping(Result<Data, Error>)->()) {
+    func fetch(_ targetAPI: EksiAPI, completion: @escaping(Result<String, Error>)->()) {
         client.request(targetAPI) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let value):
-                completion(.success(value.data))
-            }
-        }
-    }
-    
-    func getHomePage(completion: @escaping (Result<String, Error>) -> ()) {
-        client.request(.homepage) { (result) in
-            switch result {
-            case .failure(let err):
-                print(err)
-                completion(.failure(err))
-            case .success(let val):
                 do {
-                    let a = try val.mapString()
-                    completion(.success(a))
+                    let filteredResponse = try value.filterSuccessfulStatusCodes()
+                    let finalValue = try filteredResponse.mapString()
+                    completion(.success(finalValue))
                 } catch {
                     completion(.failure(error))
                 }
             }
         }
+    }
+    
+    func getHomePage(completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.homepage) { completion($0) }
+    }
+    
+    func getHeading(url: String, completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.heading(url: url)) { completion($0) }
     }
 }
