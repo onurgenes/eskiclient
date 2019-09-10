@@ -28,6 +28,7 @@ final class HeadingVM: HeadingVMProtocol {
     private(set) var authors = [String]()
     private(set) var dates = [String]()
     private(set) var favorites = [String]()
+    private(set) var title = ""
     
     init(networkManager: NetworkManager, url: String) {
         self.networkManager = networkManager
@@ -35,13 +36,16 @@ final class HeadingVM: HeadingVMProtocol {
     }
     
     func getHeading() {
-        networkManager.getHeading(url: url) { result in
+        networkManager.getHeading(url: url, isWithoutDate: true) { result in
             switch result {
             case .failure(let err):
                 print(err)
             case .success(let val):
                 do {
                     let doc = try HTML(html: val, encoding: .utf8)
+                    if let title = doc.title, let seperatedTitle = title.split(separator: "-").first {
+                        self.title = String(seperatedTitle)
+                    }
                     for baslik in doc.xpath("//*[@id='entry-item-list']/li") {
                         if let entry = baslik.xpath("div[@class='content']").first?.toHTML?.data(using: .utf8),
                             let author = baslik.xpath("footer/div[@class='info']/a[@class='entry-author']").first?.text,

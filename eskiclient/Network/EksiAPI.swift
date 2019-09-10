@@ -13,7 +13,7 @@ enum EksiAPI {
     case otherPage(pageNumber: Int)
     case me
     case message
-    case heading(url: String)
+    case heading(url: String, isWithoutDate: Bool)
     case entry
 }
 
@@ -32,7 +32,7 @@ extension EksiAPI: TargetType {
             return ""
         case .message:
             return ""
-        case .heading(let url):
+        case .heading(let url, _):
             let removedParamUrl = url.split(separator: "?").first!
             return String(removedParamUrl)
         case .entry:
@@ -71,11 +71,15 @@ extension EksiAPI: TargetType {
             return .requestPlain
         case .message:
             return .requestPlain
-        case .heading:
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let dateString = dateFormatter.string(from: Date())
-            return .requestParameters(parameters: ["day": dateString], encoding: URLEncoding.default)
+        case .heading(_, let isWithoutDate):
+            if isWithoutDate {
+                return .requestPlain
+            } else {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let dateString = dateFormatter.string(from: Date())
+                return .requestParameters(parameters: ["day": dateString], encoding: URLEncoding.default)
+            }
         case .entry:
             return .requestPlain
         }

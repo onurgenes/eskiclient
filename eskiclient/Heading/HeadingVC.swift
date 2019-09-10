@@ -19,6 +19,7 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
 
 extension HeadingVC: HeadingVMOutputProtocol {
     func didGetHeading() {
+        title = viewModel.title
         tableView.reloadData()
     }
     
