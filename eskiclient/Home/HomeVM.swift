@@ -39,6 +39,10 @@ final class HomeVM: HomeVMProtocol {
                 self.delegate?.failedGetHomepage(error: err)
             case .success(let val):
                 do {
+                    self.headingNames.removeAll()
+                    self.headingCounts.removeAll()
+                    self.headingLinks.removeAll()
+                    
                     let doc = try HTML(html: val, encoding: .utf8)
                     for heading in doc.xpath("//li/a") {
                         self.headingNames.append(heading.xpath("text()[1]").first?.text?.trimmingCharacters(in: .whitespaces))

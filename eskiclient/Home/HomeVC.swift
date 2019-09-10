@@ -12,17 +12,31 @@ import Alamofire
 
 final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
     
+    lazy var tableRefreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(getHomePage), for: .valueChanged)
+        return rc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.getHomepage()
+        getHomePage()
+        
+        tableView.refreshControl = tableRefreshControl
         
         title = "e$ki"
+    }
+    
+    @objc func getHomePage() {
+        tableRefreshControl.beginRefreshing()
+        viewModel.getHomepage()
     }
 }
 
 extension HomeVC: HomeVMOutputProtocol {
     func didGetHomepage() {
+        tableRefreshControl.endRefreshing()
         tableView.reloadData()
     }
     
