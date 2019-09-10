@@ -32,7 +32,7 @@ extension HeadingVC {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? HeadingCell else { fatalError() }
         let currentCellNumber = indexPath.row
         cell.contentTextView.attributedText = viewModel.entries[currentCellNumber]
-        cell.authorLabel.text = viewModel.authors[currentCellNumber]
+        cell.authorButton.setTitle(viewModel.authors[currentCellNumber], for: .normal)
         cell.dateLabel.text = viewModel.dates[currentCellNumber]
         cell.textLabel?.numberOfLines = 0
         return cell

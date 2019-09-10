@@ -50,7 +50,7 @@ final class HeadingVM: HeadingVMProtocol {
                             attributedString.setBaseFont(baseFont: UIFont.preferredFont(forTextStyle: .body))
                             
                             self.authors.append(author)
-                            self.entries.append(attributedString)
+                            self.entries.append(attributedString.trimWhiteSpace())
                             self.dates.append(date)
                         }
                     }

@@ -10,7 +10,7 @@ import UIKit
 import Kanna
 import Alamofire
 
-final class HomeVC: BaseTableVC<HomeVM, UITableViewCell> {
+final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +55,10 @@ extension HomeVC {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? HomeCell else { fatalError() }
         let currentCellNumber = indexPath.row
-        cell.textLabel?.text = viewModel.headingNames[currentCellNumber]
+        cell.titleLabel.text = viewModel.headingNames[currentCellNumber]
+        cell.countLabel.text = viewModel.headingCounts[currentCellNumber]
         return cell
     }
     

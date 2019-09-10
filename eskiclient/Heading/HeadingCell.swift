@@ -19,24 +19,25 @@ final class HeadingCell: UITableViewCell {
         return tv
     }()
     
-    lazy var authorLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.numberOfLines = 1
-        lbl.textAlignment = .right
-        return lbl
+    lazy var authorButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.contentHorizontalAlignment = .right
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        return btn
     }()
     
     lazy var dateLabel: UILabel = {
         let lbl = UILabel()
         lbl.numberOfLines = 0
+        lbl.font = UIFont.systemFont(ofSize: 14, weight: .light)
         lbl.textAlignment = .right
         return lbl
     }()
     
     lazy var infoStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [dateLabel, authorLabel])
+        let sv = UIStackView(arrangedSubviews: [dateLabel, authorButton])
         sv.axis = .vertical
-        sv.spacing = 6
+        sv.spacing = 2
         sv.distribution = .fill
         return sv
     }()
@@ -49,10 +50,10 @@ final class HeadingCell: UITableViewCell {
         addSubview(contentTextView)
         addSubview(infoStackView)
         
-        infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10))
         
-        contentTextView.edgesToSuperview(excluding: .bottom, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        contentTextView.bottomToTop(of: infoStackView, offset: 10)
+        contentTextView.edgesToSuperview(excluding: .bottom, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10))
+        contentTextView.bottomToTop(of: infoStackView, offset: -10)
         
     }
     
