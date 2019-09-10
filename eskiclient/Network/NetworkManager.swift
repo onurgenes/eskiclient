@@ -12,10 +12,14 @@ import Kanna
 final class NetworkManager: Networkable {
     
     var client: MoyaProvider<EksiAPI> = {
+#if DEBUG
         var config = NetworkLoggerPlugin.Configuration()
         config.logOptions = .verbose
         let logger = NetworkLoggerPlugin(configuration: config)
         return MoyaProvider<EksiAPI>(plugins: [logger])
+#else
+        return MoyaProvider<EksiAPI>()
+#endif
     }()
     
     func fetch(_ targetAPI: EksiAPI, completion: @escaping(Result<String, Error>)->()) {
