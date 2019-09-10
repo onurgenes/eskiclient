@@ -69,12 +69,16 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - QuickLayout (3.0.0)
+  - SwiftEntryKit (1.1.3):
+    - QuickLayout (= 3.0.0)
   - TinyConstraints (4.0.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Kanna
   - Moya (~> 14.0.0-beta.2)
+  - SwiftEntryKit
   - TinyConstraints
 
 SPEC REPOS:
@@ -97,6 +101,8 @@ SPEC REPOS:
     - GoogleUtilities
     - Moya
     - nanopb
+    - QuickLayout
+    - SwiftEntryKit
 
 SPEC CHECKSUMS:
   Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
@@ -113,8 +119,10 @@ SPEC CHECKSUMS:
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
   Moya: 788e592b92fadb10e30d350ed1a9f75c91eb1368
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
+  SwiftEntryKit: be00509cf6e1e88b57bb96cf2114b09cf20ee84a
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: 3fd057b228fad47c0b0cd8d5bff4838dc7afa15f
+PODFILE CHECKSUM: 6b6349e4a4b964c2a784065f0c4c6f402722e625
 
 COCOAPODS: 1.8.0.beta.1

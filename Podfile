@@ -6,4 +6,5 @@ target 'eskiclient' do
   pod 'Firebase/Analytics'
   pod 'Kanna'
   pod 'TinyConstraints'
+  pod 'SwiftEntryKit'
 end

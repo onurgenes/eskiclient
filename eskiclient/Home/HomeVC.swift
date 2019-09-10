@@ -41,7 +41,7 @@ extension HomeVC: HomeVMOutputProtocol {
     }
     
     func failedGetHomepage(error: Error) {
-        print(error)
+        SwiftMessagesViewer.error(message: error.localizedDescription)
     }
 }
 

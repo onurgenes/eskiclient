@@ -23,7 +23,7 @@ extension HeadingVC: HeadingVMOutputProtocol {
     }
     
     func failedGetHeading(error: Error) {
-        print(error)
+        SwiftMessagesViewer.error(message: error.localizedDescription)
     }
 }
 
