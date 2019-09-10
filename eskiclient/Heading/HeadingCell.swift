@@ -19,6 +19,15 @@ final class HeadingCell: UITableViewCell {
         return tv
     }()
     
+    lazy var dateButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.titleLabel?.numberOfLines = 0
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        btn.setTitleColor(.lightGray, for: .normal)
+        btn.contentHorizontalAlignment = .right
+        return btn
+    }()
+    
     lazy var authorButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.contentHorizontalAlignment = .right
@@ -26,18 +35,23 @@ final class HeadingCell: UITableViewCell {
         return btn
     }()
     
-    lazy var dateLabel: UILabel = {
+    lazy var favoriteCountLabel: UILabel = {
         let lbl = UILabel()
-        lbl.numberOfLines = 0
-        lbl.font = UIFont.systemFont(ofSize: 14, weight: .light)
-        lbl.textAlignment = .right
+        lbl.textAlignment = .left
+        lbl.text = "0 favori"
         return lbl
     }()
     
+    lazy var bottomStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [favoriteCountLabel, authorButton])
+        sv.axis = .horizontal
+        sv.spacing = 4
+        return sv
+    }()
+    
     lazy var infoStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [dateLabel, authorButton])
+        let sv = UIStackView(arrangedSubviews: [dateButton, bottomStackView])
         sv.axis = .vertical
-        sv.spacing = 2
         sv.distribution = .fill
         return sv
     }()
@@ -50,7 +64,7 @@ final class HeadingCell: UITableViewCell {
         addSubview(contentTextView)
         addSubview(infoStackView)
         
-        infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10))
+        infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         
         contentTextView.edgesToSuperview(excluding: .bottom, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10))
         contentTextView.bottomToTop(of: infoStackView, offset: -10)

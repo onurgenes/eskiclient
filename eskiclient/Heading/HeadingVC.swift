@@ -33,7 +33,8 @@ extension HeadingVC {
         let currentCellNumber = indexPath.row
         cell.contentTextView.attributedText = viewModel.entries[currentCellNumber]
         cell.authorButton.setTitle(viewModel.authors[currentCellNumber], for: .normal)
-        cell.dateLabel.text = viewModel.dates[currentCellNumber]
+        cell.dateButton.setTitle(viewModel.dates[currentCellNumber], for: .normal)
+        cell.favoriteCountLabel.text = viewModel.favorites[currentCellNumber] + " favori"
         cell.textLabel?.numberOfLines = 0
         return cell
     }

@@ -27,6 +27,7 @@ final class HeadingVM: HeadingVMProtocol {
     private(set) var entries = [NSAttributedString]()
     private(set) var authors = [String]()
     private(set) var dates = [String]()
+    private(set) var favorites = [String]()
     
     init(networkManager: NetworkManager, url: String) {
         self.networkManager = networkManager
@@ -44,7 +45,8 @@ final class HeadingVM: HeadingVMProtocol {
                     for baslik in doc.xpath("//*[@id='entry-item-list']/li") {
                         if let entry = baslik.xpath("div[@class='content']").first?.toHTML?.data(using: .utf8),
                             let author = baslik.xpath("footer/div[@class='info']/a[@class='entry-author']").first?.text,
-                            let date = baslik.xpath("footer/div[@class='info']/a[@class='entry-date permalink']").first?.text {
+                            let date = baslik.xpath("footer/div[@class='info']/a[@class='entry-date permalink']").first?.text,
+                            let favoriteCount = baslik.xpath("@data-favorite-count").first?.text {
                             let attributedString = try NSMutableAttributedString(data: entry, options: [.documentType: NSAttributedString.DocumentType.html,
                                                                                                        .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
                             attributedString.setBaseFont(baseFont: UIFont.preferredFont(forTextStyle: .body))
@@ -52,6 +54,7 @@ final class HeadingVM: HeadingVMProtocol {
                             self.authors.append(author)
                             self.entries.append(attributedString.trimWhiteSpace())
                             self.dates.append(date)
+                            self.favorites.append(favoriteCount)
                         }
                     }
                     self.delegate?.didGetHeading()
