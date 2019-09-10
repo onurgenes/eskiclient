@@ -18,7 +18,7 @@ final class CustomTextView: UITextView, UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         if !URL.absoluteString.starts(with: "http") {
-            print("https://eksisozluk.com", URL.absoluteString.split(separator: "/").last)
+//            print("https://eksisozluk.com", URL.absoluteString.split(separator: "/").last)
             return false
         }
         return true

@@ -9,7 +9,7 @@
 import TinyConstraints
 import SwiftEntryKit
 
-final class HeySentView: UIView {
+final class SuccessView: UIView {
     
     lazy var titleLabel: UILabel = {
         let lbl = UILabel()
