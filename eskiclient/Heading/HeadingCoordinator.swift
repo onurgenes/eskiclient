@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HeadingCoordinator: Coordinator {
+final class HeadingCoordinator: NSObject, Coordinator {
     weak var parentCoordinator: Coordinator?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
@@ -26,6 +26,22 @@ final class HeadingCoordinator: Coordinator {
         let vc = HeadingVC()
         vc.viewModel = vm
         vm.coordinator = self
+        navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+extension HeadingCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
+            return
+        }
+        
+        if navigationController.viewControllers.contains(fromViewController) {
+            return
+        }
+        
+        guard fromViewController is HeadingVC else { return }
+        parentCoordinator?.didFinish(coordinator: self)
     }
 }
