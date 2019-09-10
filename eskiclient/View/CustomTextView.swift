@@ -6,4 +6,23 @@
 //  Copyright © 2019 Onur Geneş. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class CustomTextView: UITextView, UITextViewDelegate {
+    
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        
+        delegate = self
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        print("https://eksisozluk.com", URL.absoluteString.split(separator: "/").last)
+        
+        return false
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

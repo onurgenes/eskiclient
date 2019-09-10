@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HeadingVC: BaseTableVC<HeadingVM, UITableViewCell> {
+final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +29,11 @@ extension HeadingVC: HeadingVMOutputProtocol {
 
 extension HeadingVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? HeadingCell else { fatalError() }
         let currentCellNumber = indexPath.row
-        cell.textLabel?.attributedText = viewModel.entries[currentCellNumber]
+        cell.contentTextView.attributedText = viewModel.entries[currentCellNumber]
+        cell.authorLabel.text = viewModel.authors[currentCellNumber]
+        cell.dateLabel.text = viewModel.dates[currentCellNumber]
         cell.textLabel?.numberOfLines = 0
         return cell
     }
