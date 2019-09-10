@@ -18,6 +18,7 @@ final class SwiftMessagesViewer {
         attributes.entranceAnimation = .translation
         attributes.exitAnimation = .translation
         attributes.displayDuration = 0.7
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
         SwiftEntryKit.display(entry: SuccessView(title: title, message: message), using: attributes)
     }
     
@@ -28,6 +29,7 @@ final class SwiftMessagesViewer {
         attributes.entranceAnimation = .translation
         attributes.exitAnimation = .translation
         attributes.displayDuration = 1.0
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
         SwiftEntryKit.display(entry: ErrorView(message: "Please try again later."), using: attributes)
     }
 }
