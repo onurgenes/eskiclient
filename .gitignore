@@ -74,6 +74,9 @@ DerivedData/
 # **/xcshareddata/WorkspaceSettings.xcsettings
 
 ### Firebase
-assets/GoogleService-Info.plist
+# assets/GoogleService-Info.plist
+
+### Bitrise
+codesigndoc_exports/
 
 # End of https://www.gitignore.io/api/xcode,macos,cocoapods
