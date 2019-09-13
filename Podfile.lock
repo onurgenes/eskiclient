@@ -82,7 +82,7 @@ DEPENDENCIES:
   - TinyConstraints
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - Firebase
     - FirebaseAnalytics
@@ -122,4 +122,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6b6349e4a4b964c2a784065f0c4c6f402722e625
 
-COCOAPODS: 1.8.0.beta.1
+COCOAPODS: 1.7.5
