@@ -74,7 +74,7 @@ DerivedData/
 # **/xcshareddata/WorkspaceSettings.xcsettings
 
 ### Firebase
-# assets/GoogleService-Info.plist
+assets/GoogleService-Info.plist
 
 ### Bitrise
 codesigndoc_exports/

@@ -37,7 +37,7 @@ final class HomeCell: UITableViewCell {
         
         addSubview(stackView)
         countLabel.width(50, relation: .equalOrLess, isActive: true)
-        stackView.edgesToSuperview(insets: TinyEdgeInsets(top: 10, left: 10, bottom: 10, right: 16))
+        stackView.edgesToSuperview(insets: TinyEdgeInsets(top: 10, left: 10, bottom: 10, right: 16), usingSafeArea: true)
     }
     
     required init?(coder aDecoder: NSCoder) {
