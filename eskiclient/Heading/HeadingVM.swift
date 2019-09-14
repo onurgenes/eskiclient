@@ -10,7 +10,7 @@ import Foundation
 import Kanna
 
 protocol HeadingVMProtocol: BaseVMProtocol {
-    func getHeading()
+    func getHeading(isWithoutDate: Bool)
 }
 
 protocol HeadingVMOutputProtocol: BaseVMOutputProtocol {
@@ -35,12 +35,15 @@ final class HeadingVM: HeadingVMProtocol {
         self.url = url
     }
     
-    func getHeading() {
-        networkManager.getHeading(url: url, isWithoutDate: true) { result in
+    func getHeading(isWithoutDate: Bool) {
+        networkManager.getHeading(url: url, isWithoutDate: isWithoutDate) { result in
             switch result {
             case .failure(let err):
                 print(err)
             case .success(let val):
+                self.entries.removeAll()
+                self.dates.removeAll()
+                self.authors.removeAll()
                 do {
                     let doc = try HTML(html: val, encoding: .utf8)
                     if let title = doc.title, let seperatedTitle = title.split(separator: "-").first {

@@ -10,10 +10,28 @@ import UIKit
 
 final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
     
+    private let headerView = HeadingHeaderView()
+    private let footerView = HeadingFooterView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.getHeading()
+        setHeaderFooter()
+        viewModel.getHeading(isWithoutDate: false)
+    }
+    
+    private func setHeaderFooter() {
+        headerView.frame.size.height = 40
+        footerView.frame.size.height = 40
+        tableView.tableFooterView = footerView
+        tableView.tableHeaderView = headerView
+        
+        headerView.showAllButton.addTarget(self, action: #selector(getEntriesWithoutDate), for: .touchUpInside)
+    }
+    
+    @objc func getEntriesWithoutDate() {
+        tableView.tableHeaderView = nil
+        viewModel.getHeading(isWithoutDate: true)
     }
 }
 
