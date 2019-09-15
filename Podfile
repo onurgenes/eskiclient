@@ -7,4 +7,5 @@ target 'eskiclient' do
   pod 'Kanna'
   pod 'TinyConstraints'
   pod 'SwiftEntryKit'
+  pod 'FontAwesome.swift'
 end

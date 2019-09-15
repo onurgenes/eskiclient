@@ -31,6 +31,7 @@ PODS:
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/UserDefaults (~> 6.0)
+  - FontAwesome.swift (1.8.2)
   - GoogleAppMeasurement (6.1.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -76,6 +77,7 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Analytics
+  - FontAwesome.swift
   - Kanna
   - Moya (~> 14.0.0-beta.2)
   - SwiftEntryKit
@@ -90,6 +92,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
     - FirebaseInstanceID
+    - FontAwesome.swift
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -109,6 +112,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 4c04ae09d0ab027c30179828c6bb47764df1bd13
   FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
   FirebaseInstanceID: 550df9be1f99f751d8fcde3ac342a1e21a0e6c42
+  FontAwesome.swift: 7938d6a03113ff3f39001bde7f50be8a0903d605
   GoogleAppMeasurement: 86a82f0e1f20b8eedf8e20326530138fd71409de
   GoogleDataTransport: 8f9897b8e073687f24ca8d3c3a8013dec7d2d1cc
   GoogleDataTransportCCTSupport: 7455d07b98851aa63e4c05a34dad356ca588479e
@@ -120,6 +124,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: be00509cf6e1e88b57bb96cf2114b09cf20ee84a
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: 6b6349e4a4b964c2a784065f0c4c6f402722e625
+PODFILE CHECKSUM: d379e3f31d621474d971bdbed6039a7d0e07fb54
 
 COCOAPODS: 1.7.5
