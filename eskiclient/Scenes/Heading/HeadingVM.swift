@@ -10,7 +10,7 @@ import Foundation
 import Kanna
 
 protocol HeadingVMProtocol: BaseVMProtocol {
-    func getHeading(isWithoutDate: Bool)
+    func getHeading(isWithoutDate: Bool, focusTo: String, pageNumber: String?)
 }
 
 protocol HeadingVMOutputProtocol: BaseVMOutputProtocol {
@@ -29,14 +29,16 @@ final class HeadingVM: HeadingVMProtocol {
     private(set) var dates = [String]()
     private(set) var favorites = [String]()
     private(set) var title = ""
+    private(set) var currentPageNumber = ""
+    private(set) var focusToNumber = ""
     
     init(networkManager: NetworkManager, url: String) {
         self.networkManager = networkManager
         self.url = url
     }
     
-    func getHeading(isWithoutDate: Bool) {
-        networkManager.getHeading(url: url, isWithoutDate: isWithoutDate) { result in
+    func getHeading(isWithoutDate: Bool, focusTo: String, pageNumber: String?) {
+        networkManager.getHeading(url: url, isWithoutDate: isWithoutDate, focusTo: focusTo, pageNumber: pageNumber) { result in
             switch result {
             case .failure(let err):
                 print(err)
@@ -48,6 +50,13 @@ final class HeadingVM: HeadingVMProtocol {
                     let doc = try HTML(html: val, encoding: .utf8)
                     if let title = doc.title, let seperatedTitle = title.split(separator: "-").first {
                         self.title = String(seperatedTitle)
+                    }
+                    if let currentPageNumber = doc.xpath("//*[@id='topic']/div[@class='clearfix sub-title-container']/div[@class='pager']/@data-currentpage").first?.text {
+                        self.currentPageNumber = currentPageNumber
+                    }
+                    if let focusTo = doc.xpath("//*[@id='topic']/a[1]/@href").first?.text,
+                        let focusToNumber = focusTo.split(separator: "=").last {
+                        self.focusToNumber = String(focusToNumber)
                     }
                     for baslik in doc.xpath("//*[@id='entry-item-list']/li") {
                         if let entry = baslik.xpath("div[@class='content']").first?.toHTML?.data(using: .utf8),

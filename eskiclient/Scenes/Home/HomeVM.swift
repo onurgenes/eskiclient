@@ -10,7 +10,7 @@ import Foundation
 import Kanna
 
 protocol HomeVMProtocol: BaseVMProtocol {
-    func getHomepage()
+    func getHomepage(number: Int)
 }
 
 protocol HomeVMOutputProtocol: BaseVMOutputProtocol {
@@ -32,8 +32,8 @@ final class HomeVM: HomeVMProtocol {
     private(set) var headingCounts = [String?]()
     private(set) var headingLinks = [String?]()
     
-    func getHomepage() {
-        networkManager.getHomePage { result in
+    func getHomepage(number: Int) {
+        networkManager.getHomePage(number: number) { result in
             switch result {
             case .failure(let err):
                 self.delegate?.failedGetHomepage(error: err)

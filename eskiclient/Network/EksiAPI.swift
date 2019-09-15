@@ -9,11 +9,10 @@
 import Moya
 
 enum EksiAPI {
-    case homepage
-    case otherPage(pageNumber: Int)
+    case homepage(pageNumber: Int)
     case me
     case message
-    case heading(url: String, isWithoutDate: Bool)
+    case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?)
     case entry
 }
 
@@ -24,15 +23,13 @@ extension EksiAPI: TargetType {
     
     var path: String {
         switch self {
-        case .homepage:
-            return "/basliklar/bugun/1"
-        case .otherPage(let pageNumber):
-            return "/basliklar/bugun/\(pageNumber)"
+        case .homepage(let number):
+            return "/basliklar/bugun/\(number)"
         case .me:
             return ""
         case .message:
             return ""
-        case .heading(let url, _):
+        case .heading(let url, _, _, _):
             let removedParamUrl = url.split(separator: "?").first!
             return String(removedParamUrl)
         case .entry:
@@ -43,8 +40,6 @@ extension EksiAPI: TargetType {
     var method: Method {
         switch self {
         case .homepage:
-            return .get
-        case .otherPage:
             return .get
         case .me:
             return .get
@@ -65,20 +60,27 @@ extension EksiAPI: TargetType {
         switch self {
         case .homepage:
             return .requestPlain
-        case .otherPage:
-            return .requestPlain
         case .me:
             return .requestPlain
         case .message:
             return .requestPlain
-        case .heading(_, let isWithoutDate):
+        case .heading(_, let isWithoutDate, let focusTo, let pageNumber):
             if isWithoutDate {
-                return .requestPlain
+                if let pageNumber = pageNumber {
+                    return .requestParameters(parameters: ["p": pageNumber], encoding: URLEncoding.default)
+                } else {
+                    return .requestParameters(parameters: ["focusto": focusTo], encoding: URLEncoding.default)
+                }
+                
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 let dateString = dateFormatter.string(from: Date())
-                return .requestParameters(parameters: ["day": dateString], encoding: URLEncoding.default)
+                if let pageNumber = pageNumber {
+                    return .requestParameters(parameters: ["day": dateString, "p": pageNumber], encoding: URLEncoding.default)
+                } else {
+                    return .requestParameters(parameters: ["day": dateString], encoding: URLEncoding.default)
+                }
             }
         case .entry:
             return .requestPlain

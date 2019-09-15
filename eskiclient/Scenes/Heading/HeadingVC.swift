@@ -12,12 +12,13 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
     
     private let headerView = HeadingHeaderView()
     private let footerView = HeadingFooterView()
+    private var isWithoutDate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setHeaderFooter()
-        viewModel.getHeading(isWithoutDate: false)
+        viewModel.getHeading(isWithoutDate: false, focusTo: "", pageNumber: nil)
     }
     
     private func setHeaderFooter() {
@@ -27,18 +28,38 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         tableView.tableHeaderView = headerView
         
         headerView.showAllButton.addTarget(self, action: #selector(getEntriesWithoutDate), for: .touchUpInside)
+        
+        footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
+        footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
     }
     
     @objc func getEntriesWithoutDate() {
         tableView.tableHeaderView = nil
-        viewModel.getHeading(isWithoutDate: true)
+        isWithoutDate = true
+        viewModel.getHeading(isWithoutDate: true, focusTo: viewModel.focusToNumber, pageNumber: nil)
+    }
+    
+    @objc func getNextPage() {
+        if var currentPageNumber = Int(viewModel.currentPageNumber) {
+            currentPageNumber += 1
+            viewModel.getHeading(isWithoutDate: isWithoutDate, focusTo: "", pageNumber: String(currentPageNumber))
+        }
+    }
+    
+    @objc func getPreviousPage() {
+        if var currentPageNumber = Int(viewModel.currentPageNumber) {
+            currentPageNumber -= 1
+            viewModel.getHeading(isWithoutDate: isWithoutDate, focusTo: "", pageNumber: String(currentPageNumber))
+        }
     }
 }
 
 extension HeadingVC: HeadingVMOutputProtocol {
     func didGetHeading() {
         title = viewModel.title
+        footerView.currentPageNumberLabel.text = viewModel.currentPageNumber
         tableView.reloadData()
+        tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
     }
     
     func failedGetHeading(error: Error) {
