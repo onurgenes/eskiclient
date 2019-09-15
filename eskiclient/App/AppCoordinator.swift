@@ -24,10 +24,9 @@ final class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let networkManager = NetworkManager()
-        let homeCoordinator = HomeCoordinator(navigationController: navigationController, networkManager: networkManager)
-        homeCoordinator.parentCoordinator = self
-        childCoordinators.append(homeCoordinator)
-        homeCoordinator.start()
+        let tabBarCoordinator = TabBarCoordinator()
+        tabBarCoordinator.parentCoordinator = self
+        childCoordinators.append(tabBarCoordinator)
+        tabBarCoordinator.start()
     }
 }
