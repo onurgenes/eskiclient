@@ -43,7 +43,7 @@ final class NetworkManager: Networkable {
         fetch(.homepage) { completion($0) }
     }
     
-    func getHeading(url: String, isWithoutDate: Bool, completion: @escaping (Result<String, Error>) -> ()) {
-        fetch(.heading(url: url, isWithoutDate: isWithoutDate)) { completion($0) }
+    func getHeading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.heading(url: url, isWithoutDate: isWithoutDate, focusTo: focusTo, pageNumber: pageNumber)) { completion($0) }
     }
 }

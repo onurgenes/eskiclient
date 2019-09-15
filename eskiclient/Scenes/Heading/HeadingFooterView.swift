@@ -8,21 +8,42 @@
 
 import UIKit
 import TinyConstraints
+import FontAwesome_swift
 
 final class HeadingFooterView: UIView {
     
-    lazy var showAllButton: UIButton = {
+    lazy var nextPageButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("tüm entryler", for: .normal)
+        btn.titleLabel?.font = UIFont.fontAwesome(forTextStyle: UIFont.TextStyle.body, style: .solid)
+        btn.setTitle(String.fontAwesomeIcon(name: .chevronRight), for: .normal)
         return btn
+    }()
+    
+    lazy var currentPageNumberLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont.preferredFont(forTextStyle: .body)
+        return lbl
+    }()
+    
+    lazy var previousPageButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.titleLabel?.font = UIFont.fontAwesome(forTextStyle: UIFont.TextStyle.body, style: .solid)
+        btn.setTitle(String.fontAwesomeIcon(name: .chevronLeft), for: .normal)
+        return btn
+    }()
+    
+    lazy var stackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [previousPageButton, currentPageNumberLabel, nextPageButton])
+        sv.axis = .horizontal
+        sv.distribution = .equalCentering
+        return sv
     }()
     
     convenience init() {
         self.init(frame: .zero)
         
-        addSubview(showAllButton)
+        addSubview(stackView)
         
-        showAllButton.backgroundColor = .white
-        showAllButton.edgesToSuperview(usingSafeArea: true)
+        stackView.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 20, bottom: 0, right: 20), usingSafeArea: true)
     }
 }

@@ -13,7 +13,7 @@ enum EksiAPI {
     case otherPage(pageNumber: Int)
     case me
     case message
-    case heading(url: String, isWithoutDate: Bool)
+    case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?)
     case entry
 }
 
@@ -32,7 +32,7 @@ extension EksiAPI: TargetType {
             return ""
         case .message:
             return ""
-        case .heading(let url, _):
+        case .heading(let url, _, _, _):
             let removedParamUrl = url.split(separator: "?").first!
             return String(removedParamUrl)
         case .entry:
@@ -71,14 +71,23 @@ extension EksiAPI: TargetType {
             return .requestPlain
         case .message:
             return .requestPlain
-        case .heading(_, let isWithoutDate):
+        case .heading(_, let isWithoutDate, let focusTo, let pageNumber):
             if isWithoutDate {
-                return .requestPlain
+                if let pageNumber = pageNumber {
+                    return .requestParameters(parameters: ["p": pageNumber], encoding: URLEncoding.default)
+                } else {
+                    return .requestParameters(parameters: ["focusto": focusTo], encoding: URLEncoding.default)
+                }
+                
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 let dateString = dateFormatter.string(from: Date())
-                return .requestParameters(parameters: ["day": dateString], encoding: URLEncoding.default)
+                if let pageNumber = pageNumber {
+                    return .requestParameters(parameters: ["day": dateString, "p": pageNumber], encoding: URLEncoding.default)
+                } else {
+                    return .requestParameters(parameters: ["day": dateString], encoding: URLEncoding.default)
+                }
             }
         case .entry:
             return .requestPlain
