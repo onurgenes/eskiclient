@@ -9,8 +9,7 @@
 import Moya
 
 enum EksiAPI {
-    case homepage
-    case otherPage(pageNumber: Int)
+    case homepage(pageNumber: Int)
     case me
     case message
     case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?)
@@ -24,10 +23,8 @@ extension EksiAPI: TargetType {
     
     var path: String {
         switch self {
-        case .homepage:
-            return "/basliklar/bugun/1"
-        case .otherPage(let pageNumber):
-            return "/basliklar/bugun/\(pageNumber)"
+        case .homepage(let number):
+            return "/basliklar/bugun/\(number)"
         case .me:
             return ""
         case .message:
@@ -43,8 +40,6 @@ extension EksiAPI: TargetType {
     var method: Method {
         switch self {
         case .homepage:
-            return .get
-        case .otherPage:
             return .get
         case .me:
             return .get
@@ -64,8 +59,6 @@ extension EksiAPI: TargetType {
     var task: Task {
         switch self {
         case .homepage:
-            return .requestPlain
-        case .otherPage:
             return .requestPlain
         case .me:
             return .requestPlain

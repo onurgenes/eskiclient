@@ -39,8 +39,8 @@ final class NetworkManager: Networkable {
         }
     }
     
-    func getHomePage(completion: @escaping (Result<String, Error>) -> ()) {
-        fetch(.homepage) { completion($0) }
+    func getHomePage(number: Int, completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.homepage(pageNumber: number)) { completion($0) }
     }
     
     func getHeading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, completion: @escaping (Result<String, Error>) -> ()) {

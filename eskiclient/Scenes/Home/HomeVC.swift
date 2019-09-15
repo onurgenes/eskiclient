@@ -18,26 +18,47 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         return rc
     }()
     
+    private let footerView = HeadingFooterView()
+    private var currentPageNumber = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getHomePage()
         
         tableView.refreshControl = tableRefreshControl
+        tableView.tableFooterView = footerView
+        footerView.frame.size.height = 40
+        footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
+        footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
         
         title = "e$ki"
     }
     
+    @objc func getNextPage() {
+        currentPageNumber += 1
+        tableRefreshControl.beginRefreshing()
+        viewModel.getHomepage(number: currentPageNumber)
+    }
+    
+    @objc func getPreviousPage() {
+        currentPageNumber -= 1
+        tableRefreshControl.beginRefreshing()
+        viewModel.getHomepage(number: currentPageNumber)
+    }
+    
     @objc func getHomePage() {
         tableRefreshControl.beginRefreshing()
-        viewModel.getHomepage()
+        viewModel.getHomepage(number: 1)
     }
 }
 
 extension HomeVC: HomeVMOutputProtocol {
     func didGetHomepage() {
         tableRefreshControl.endRefreshing()
+        footerView.currentPageNumberLabel.text = String(currentPageNumber)
         tableView.reloadData()
+        tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
     }
     
     func failedGetHomepage(error: Error) {
