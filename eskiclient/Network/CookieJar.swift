@@ -11,9 +11,9 @@ import Foundation
 final class CookieJar {
     
     static func save(cookies: [HTTPCookie]) {
-        var cookieDict = [String : AnyObject]()
+        var cookieDict = UserDefaults.standard.dictionary(forKey: "cookiesKey")
         for cookie in cookies {
-            cookieDict[cookie.name] = cookie.properties as AnyObject
+            cookieDict?[cookie.name] = cookie.properties as AnyObject
         }
         UserDefaults.standard.set(cookieDict, forKey: "cookiesKey")
     }
