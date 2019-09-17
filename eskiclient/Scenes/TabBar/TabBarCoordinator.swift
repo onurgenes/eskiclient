@@ -28,7 +28,10 @@ final class TabBarCoordinator: Coordinator {
         
         
         
+        let tabBarNetworkManager = NetworkManager()
+        let tabBarVM = TabBarVM(networkManager: tabBarNetworkManager)
         let tabBarVC = TabBarVC()
+        tabBarVC.viewModel = tabBarVM
         tabBarVC.viewControllers = [homeNavController]
         app.window.rootViewController = tabBarVC
     }
