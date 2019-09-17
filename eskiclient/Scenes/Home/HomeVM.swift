@@ -67,12 +67,9 @@ final class HomeVM: HomeVMProtocol {
             case .success(let val):
                 do {
                     let doc = try HTML(html: val, encoding: .utf8)
-                    let a = doc.xpath("//*[@id='top-login-link']").first?.content
-                    if a != nil {
-                        UserDefaults.standard.set(false, forKey: "isLoggedIn")
-                    } else {
-                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                    }
+                    let loggedInTag = doc.xpath("//*[@id='top-login-link']").first?.content
+                    let isLoggedIn = loggedInTag != nil ? false : true
+                    UserDefaults.standard.set(isLoggedIn, forKey: "isLoggedIn")
                 } catch {
                     print(error)
                 }

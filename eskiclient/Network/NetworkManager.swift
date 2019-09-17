@@ -13,14 +13,14 @@ import Alamofire
 final class NetworkManager: Networkable {
     
     var client: MoyaProvider<EksiAPI> = {
-#if DEBUG
+        #if DEBUG
         var config = NetworkLoggerPlugin.Configuration()
         config.logOptions = .verbose
         let logger = NetworkLoggerPlugin(configuration: config)
         return MoyaProvider<EksiAPI>(plugins: [logger])
-#else
+        #else
         return MoyaProvider<EksiAPI>()
-#endif
+        #endif
     }()
     
     func fetch(_ targetAPI: EksiAPI, completion: @escaping(Result<String, Error>)->()) {
@@ -32,6 +32,11 @@ final class NetworkManager: Networkable {
                 completion(.failure(error))
             case .success(let value):
                 do {
+                    if let headerFields = value.response?.allHeaderFields as? [String: String],
+                        let URL = value.request?.url {
+                        let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
+                        CookieJar.save(cookies: cookies)
+                    }
                     let filteredResponse = try value.filterSuccessfulStatusCodes()
                     let finalValue = try filteredResponse.mapString()
                     completion(.success(finalValue))

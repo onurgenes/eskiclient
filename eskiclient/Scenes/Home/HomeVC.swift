@@ -26,6 +26,7 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         
         title = "e$ki"
         getHomePage()
+        viewModel.getLanding()
         
         tableView.refreshControl = tableRefreshControl
         tableView.tableFooterView = footerView
