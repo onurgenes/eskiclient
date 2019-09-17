@@ -24,6 +24,7 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "e$ki"
         getHomePage()
         
         tableView.refreshControl = tableRefreshControl
@@ -32,7 +33,7 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
         footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
         
-        title = "e$ki"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "giriş", style: .plain, target: self, action: #selector(openLoginTapped))
     }
     
     @objc func getNextPage() {
@@ -50,6 +51,10 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
     @objc func getHomePage() {
         tableRefreshControl.beginRefreshing()
         viewModel.getHomepage(number: 1)
+    }
+    
+    @objc func openLoginTapped() {
+        viewModel.openLogin()
     }
 }
 

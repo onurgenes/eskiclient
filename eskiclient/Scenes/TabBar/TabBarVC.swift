@@ -10,8 +10,24 @@ import UIKit
 
 final class TabBarVC: UITabBarController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    var viewModel: TabBarVMProtocol! {
+        didSet {
+            viewModel.delegate = self
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.checkLoggedIn()
+    }
+}
+
+extension TabBarVC: TabBarVMOutputProtocol {
+    func didCheckLoggedIn() {
+        // TODO: Do some magic because user is logged in
+    }
+    
+    func failedCheckLoggedIn() {
+        // TODO: Remove controller because user is not logged in!
     }
 }

@@ -57,7 +57,12 @@ final class HomeVM: HomeVMProtocol {
         }
     }
     
+    
     func openHeading(url: String) {
         (coordinator as! HomeCoordinator).openHeading(url: url)
+    }
+    
+    func openLogin() {
+        (coordinator as! HomeCoordinator).openLogin()
     }
 }
