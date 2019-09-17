@@ -8,6 +8,7 @@
 
 import Moya
 import Kanna
+import Alamofire
 
 final class NetworkManager: Networkable {
     
@@ -23,6 +24,8 @@ final class NetworkManager: Networkable {
     }()
     
     func fetch(_ targetAPI: EksiAPI, completion: @escaping(Result<String, Error>)->()) {
+        // Set cookies for session management
+        client.session.sessionConfiguration.httpCookieStorage?.setCookies(CookieJar.retrive(), for: URL(string: "https://eksisozluk.com"), mainDocumentURL: nil)
         client.request(targetAPI) { result in
             switch result {
             case .failure(let error):
@@ -37,6 +40,10 @@ final class NetworkManager: Networkable {
                 }
             }
         }
+    }
+    
+    func getLanding(completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.landing) { completion($0) }
     }
     
     func getHomePage(number: Int, completion: @escaping (Result<String, Error>) -> ()) {

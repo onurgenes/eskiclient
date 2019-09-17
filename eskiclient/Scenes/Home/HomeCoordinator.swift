@@ -34,4 +34,11 @@ final class HomeCoordinator: Coordinator {
         childCoordinators.append(headingCoordinator)
         headingCoordinator.start()
     }
+    
+    func openLogin() {
+        let loginCoordinator = LoginCoordinator(navigationController: navigationController)
+        loginCoordinator.parentCoordinator = self
+        childCoordinators.append(loginCoordinator)
+        loginCoordinator.start()
+    }
 }

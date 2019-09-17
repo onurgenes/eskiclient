@@ -11,6 +11,7 @@ import Kanna
 
 protocol HomeVMProtocol: BaseVMProtocol {
     func getHomepage(number: Int)
+    func getLanding()
 }
 
 protocol HomeVMOutputProtocol: BaseVMOutputProtocol {
@@ -57,7 +58,33 @@ final class HomeVM: HomeVMProtocol {
         }
     }
     
+    func getLanding() {
+        //*[@id='top-login-link']
+        networkManager.getLanding { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let val):
+                do {
+                    let doc = try HTML(html: val, encoding: .utf8)
+                    let a = doc.xpath("//*[@id='top-login-link']").first?.content
+                    if a != nil {
+                        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                    } else {
+                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
+    
     func openHeading(url: String) {
         (coordinator as! HomeCoordinator).openHeading(url: url)
+    }
+    
+    func openLogin() {
+        (coordinator as! HomeCoordinator).openLogin()
     }
 }
