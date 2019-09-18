@@ -6,7 +6,7 @@
 //  Copyright © 2019 Onur Geneş. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol LoginVMProtocol: BaseVMProtocol {
     
