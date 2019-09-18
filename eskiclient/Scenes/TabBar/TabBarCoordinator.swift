@@ -26,13 +26,18 @@ final class TabBarCoordinator: Coordinator {
         childCoordinators.append(homeCoordinator)
         homeCoordinator.start()
         
-        
+        let profileNavController = UINavigationController()
+        let profileNetworkManager = NetworkManager()
+        let profileCoordinator = ProfileCoordinator(navigationController: profileNavController, networkManager: profileNetworkManager)
+        profileCoordinator.parentCoordinator = self
+        childCoordinators.append(profileCoordinator)
+        profileCoordinator.start()
         
         let tabBarNetworkManager = NetworkManager()
         let tabBarVM = TabBarVM(networkManager: tabBarNetworkManager)
         let tabBarVC = TabBarVC()
         tabBarVC.viewModel = tabBarVM
-        tabBarVC.viewControllers = [homeNavController]
+        tabBarVC.viewControllers = [homeNavController, profileNavController]
         app.window.rootViewController = tabBarVC
     }
 }

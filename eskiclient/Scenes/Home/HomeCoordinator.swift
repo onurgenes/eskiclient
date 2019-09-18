@@ -23,6 +23,7 @@ final class HomeCoordinator: Coordinator {
     func start() {
         let vm = HomeVM(networkManager: networkManager)
         let vc = HomeVC()
+        vc.title = "e$ki"
         vc.viewModel = vm
         vm.coordinator = self
         navigationController.pushViewController(vc, animated: true)

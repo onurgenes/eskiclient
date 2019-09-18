@@ -10,4 +10,9 @@ import UIKit
 
 final class ProfileVC: BaseVC<ProfileVM, ProfileView> {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
 }

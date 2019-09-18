@@ -18,4 +18,5 @@ protocol ProfileVMOutputProtocol: BaseVMOutputProtocol {
 
 final class ProfileVM: BaseVMProtocol {
     weak var delegate: ProfileVMOutputProtocol?
+    weak var coordinator: ProfileCoordinator?
 }

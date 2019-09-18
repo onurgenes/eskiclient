@@ -24,7 +24,6 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "e$ki"
         getHomePage()
         
         tableView.refreshControl = tableRefreshControl
