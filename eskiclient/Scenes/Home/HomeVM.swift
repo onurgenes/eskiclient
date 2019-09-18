@@ -44,7 +44,7 @@ final class HomeVM: HomeVMProtocol {
                     self.headingLinks.removeAll()
                     
                     let doc = try HTML(html: val, encoding: .utf8)
-                    for heading in doc.xpath("//li/a") {
+                    for heading in doc.xpath("//*[@id='content-body']/ul/li/a") {
                         self.headingNames.append(heading.xpath("text()[1]").first?.text?.trimmingCharacters(in: .whitespaces))
                         self.headingCounts.append(heading.xpath("small/text()[1]").first?.text?.trimmingCharacters(in: .whitespaces))
                         self.headingLinks.append(heading["href"])

@@ -10,17 +10,28 @@ import Foundation
 
 final class CookieJar {
     
+    static let cookiesKey = "cookiesKey"
+    
     static func save(cookies: [HTTPCookie]) {
-        var cookieDict = UserDefaults.standard.dictionary(forKey: "cookiesKey")
-        for cookie in cookies {
-            cookieDict?[cookie.name] = cookie.properties as AnyObject
+        let cookieDict = UserDefaults.standard.dictionary(forKey: cookiesKey)
+        if var newDict = cookieDict {
+            for cookie in cookies {
+                newDict[cookie.name] = cookie.properties as AnyObject
+            }
+            UserDefaults.standard.set(newDict, forKey: cookiesKey)
+        } else {
+            var newDict = [String: Any]()
+            for cookie in cookies {
+                newDict[cookie.name] = cookie.properties as AnyObject
+            }
+            UserDefaults.standard.set(newDict, forKey: cookiesKey)
         }
-        UserDefaults.standard.set(cookieDict, forKey: "cookiesKey")
+        
     }
     
     static func retrive() -> [HTTPCookie] {
         var cookies = [HTTPCookie]()
-        if let cookieDictionary = UserDefaults.standard.dictionary(forKey: "cookiesKey") {
+        if let cookieDictionary = UserDefaults.standard.dictionary(forKey: cookiesKey) {
             for (_, cookieProperties) in cookieDictionary {
                 if let cookie = HTTPCookie(properties: cookieProperties as! [HTTPCookiePropertyKey : Any] ) {
                     cookies.append(cookie)
