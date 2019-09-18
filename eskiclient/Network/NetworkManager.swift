@@ -8,7 +8,6 @@
 
 import Moya
 import Kanna
-import Alamofire
 
 final class NetworkManager: Networkable {
     
@@ -39,6 +38,13 @@ final class NetworkManager: Networkable {
                     }
                     let filteredResponse = try value.filterSuccessfulStatusCodes()
                     let finalValue = try filteredResponse.mapString()
+                    
+                    // Checking is logged in with all request
+                    let doc = try? HTML(html: finalValue, encoding: .utf8)
+                    let loggedInTag = doc?.xpath("//*[@id='top-login-link']").first?.content
+                    let isLoggedIn = loggedInTag != nil ? false : true
+                    NotificationCenter.default.post(name: .loginNotificationName, object: nil, userInfo: ["isLoggedIn": isLoggedIn])
+                    
                     completion(.success(finalValue))
                 } catch {
                     completion(.failure(error))
