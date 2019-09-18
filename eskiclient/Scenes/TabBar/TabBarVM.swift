@@ -22,7 +22,7 @@ protocol TabBarVMOutputProtocol: AnyObject {
 
 final class TabBarVM: TabBarVMProtocol {
     weak var delegate: TabBarVMOutputProtocol?
-    weak var coordinator: Coordinator?
+    weak var coordinator: TabBarCoordinator?
     let networkManager: NetworkManager
     
     init(networkManager: NetworkManager) {
