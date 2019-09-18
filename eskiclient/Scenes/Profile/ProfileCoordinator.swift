@@ -6,4 +6,21 @@
 //  Copyright © 2019 Onur Geneş. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class ProfileCoordinator: Coordinator {
+    weak var parentCoordinator: Coordinator?
+    var navigationController: UINavigationController
+    var childCoordinators: [Coordinator]
+    let networkManager: NetworkManager
+    
+    init(navigationController: UINavigationController, networkManager: NetworkManager) {
+        self.networkManager = networkManager
+        self.navigationController = navigationController
+        childCoordinators = []
+    }
+    
+    func start() {
+        
+    }
+}

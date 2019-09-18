@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+protocol ProfileVMProtocol: BaseVMProtocol {
+    
+}
+
+protocol ProfileVMOutputProtocol: BaseVMOutputProtocol {
+    
+}
+
+final class ProfileVM: BaseVMProtocol {
+    weak var delegate: ProfileVMOutputProtocol?
+}

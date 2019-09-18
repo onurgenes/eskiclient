@@ -6,4 +6,8 @@
 //  Copyright © 2019 Onur Geneş. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class ProfileVC: BaseVC<ProfileVM, ProfileView> {
+    
+}
