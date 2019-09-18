@@ -20,7 +20,7 @@ protocol HeadingVMOutputProtocol: BaseVMOutputProtocol {
 
 final class HeadingVM: HeadingVMProtocol {
     weak var delegate: HeadingVMOutputProtocol?
-    weak var coordinator: Coordinator?
+    weak var coordinator: HeadingCoordinator?
     let networkManager: NetworkManager
     var url: String
     

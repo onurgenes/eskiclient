@@ -20,7 +20,7 @@ protocol HomeVMOutputProtocol: BaseVMOutputProtocol {
 
 final class HomeVM: HomeVMProtocol {
     weak var delegate: HomeVMOutputProtocol?
-    weak var coordinator: Coordinator?
+    weak var coordinator: HomeCoordinator?
     
     let networkManager: NetworkManager
     
@@ -59,10 +59,10 @@ final class HomeVM: HomeVMProtocol {
     
     
     func openHeading(url: String) {
-        (coordinator as! HomeCoordinator).openHeading(url: url)
+        coordinator?.openHeading(url: url)
     }
     
     func openLogin() {
-        (coordinator as! HomeCoordinator).openLogin()
+        coordinator?.openLogin()
     }
 }
