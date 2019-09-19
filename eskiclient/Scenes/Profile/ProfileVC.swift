@@ -12,7 +12,18 @@ final class ProfileVC: BaseVC<ProfileVM, ProfileView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let username = UserDefaults.standard.string(forKey: "currentUsername") {
+            viewModel.getProfile(username: username)
+        }
+    }
+}
+
+extension ProfileVC: ProfileVMOutputProtocol {
+    func didGetProfile() {
         
+    }
+    
+    func failedGetProfile() {
         
     }
 }

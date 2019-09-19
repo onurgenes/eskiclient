@@ -21,7 +21,7 @@ final class ProfileCoordinator: Coordinator {
     }
     
     func start() {
-        let profileVM = ProfileVM()
+        let profileVM = ProfileVM(networkManager: networkManager)
         let profileVC = ProfileVC()
         profileVC.title = "profile"
         profileVC.viewModel = profileVM

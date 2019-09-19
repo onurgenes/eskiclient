@@ -43,6 +43,13 @@ final class NetworkManager: Networkable {
                     let doc = try? HTML(html: finalValue, encoding: .utf8)
                     let loggedInTag = doc?.xpath("//*[@id='top-login-link']").first?.content
                     let isLoggedIn = loggedInTag != nil ? false : true
+                    if isLoggedIn {
+                        if let username = doc?.xpath("//*[@id='top-navigation']/ul/li[6]/a/@href").first?.content {
+                            let username = username.split(separator: "/").last
+                            UserDefaults.standard.set(username, forKey: "currentUsername")
+                        }
+                        
+                    }
                     NotificationCenter.default.post(name: .loginNotificationName, object: nil, userInfo: ["isLoggedIn": isLoggedIn])
                     
                     completion(.success(finalValue))
@@ -59,5 +66,9 @@ final class NetworkManager: Networkable {
     
     func getHeading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.heading(url: url, isWithoutDate: isWithoutDate, focusTo: focusTo, pageNumber: pageNumber)) { completion($0) }
+    }
+    
+    func getMe(username: String, completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.me(username: username)) { completion($0) }
     }
 }

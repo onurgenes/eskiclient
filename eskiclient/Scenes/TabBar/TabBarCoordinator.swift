@@ -47,6 +47,9 @@ final class TabBarCoordinator: Coordinator {
     }
     
     private func addProfile() {
+        if tabBarVC.viewControllers!.contains(where: { $0 is ProfileVC }) {
+            return
+        }
         let profileNavController = UINavigationController()
         let profileNetworkManager = NetworkManager()
         let profileCoordinator = ProfileCoordinator(navigationController: profileNavController, networkManager: profileNetworkManager)

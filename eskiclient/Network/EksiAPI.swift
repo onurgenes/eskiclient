@@ -10,7 +10,7 @@ import Moya
 
 enum EksiAPI {
     case homepage(pageNumber: Int)
-    case me
+    case me(username: String)
     case message
     case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?)
     case entry
@@ -25,8 +25,8 @@ extension EksiAPI: TargetType {
         switch self {
         case .homepage(let number):
             return "/basliklar/bugun/\(number)"
-        case .me:
-            return ""
+        case .me(let username):
+            return "/biri/\(username)"
         case .message:
             return ""
         case .heading(let url, _, _, _):
