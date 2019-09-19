@@ -18,6 +18,7 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         return rc
     }()
     
+    private let loginButton = UIBarButtonItem(title: "giriş", style: .plain, target: self, action: #selector(openLoginTapped))
     private let footerView = HeadingFooterView()
     private var currentPageNumber = 1
     
@@ -32,13 +33,21 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
         footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "giriş", style: .plain, target: self, action: #selector(openLoginTapped))
         
-        NotificationCenter.default.addObserver(self, selector: #selector(removeLoginButton), name: .loginNotificationName, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(removeLoginButton(_:)), name: .loginNotificationName, object: nil)
     }
     
-    @objc func removeLoginButton() {
-        navigationItem.rightBarButtonItem = nil
+    @objc func removeLoginButton(_ notification: Notification) {
+        if let data = notification.userInfo as? [String: Bool],
+            let isLoggedIn = data["isLoggedIn"] {
+            if isLoggedIn {
+                navigationItem.rightBarButtonItem = nil
+            } else {
+                navigationItem.rightBarButtonItem = loginButton
+            }
+        }
+        
     }
     
     @objc func getNextPage() {
