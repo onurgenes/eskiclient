@@ -14,19 +14,12 @@ final class CookieJar {
     
     static func save(cookies: [HTTPCookie]) {
         let cookieDict = UserDefaults.standard.dictionary(forKey: cookiesKey)
-        if var newDict = cookieDict {
-            for cookie in cookies {
-                newDict[cookie.name] = cookie.properties as AnyObject
-            }
-            UserDefaults.standard.set(newDict, forKey: cookiesKey)
-        } else {
-            var newDict = [String: Any]()
-            for cookie in cookies {
-                newDict[cookie.name] = cookie.properties as AnyObject
-            }
-            UserDefaults.standard.set(newDict, forKey: cookiesKey)
+        var newDict = [String: Any]()
+        if let dict = cookieDict { newDict = dict }
+        for cookie in cookies {
+            newDict[cookie.name] = cookie.properties as AnyObject
         }
-        
+        UserDefaults.standard.set(newDict, forKey: cookiesKey)
     }
     
     static func retrive() -> [HTTPCookie] {
