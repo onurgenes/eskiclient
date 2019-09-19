@@ -16,10 +16,6 @@ final class TabBarVC: UITabBarController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewModel.checkLoggedIn()
-    }
 }
 
 extension TabBarVC: TabBarVMOutputProtocol {

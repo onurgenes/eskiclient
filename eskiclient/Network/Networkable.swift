@@ -14,7 +14,6 @@ protocol Networkable: AnyObject {
     
     typealias ResultHTML = Result<HTMLDocument, Error>
     
-    func getLanding(completion: @escaping (Result<String, Error>) -> ())
     func getHomePage(number: Int, completion: @escaping (Result<String, Error>) -> ())
     func getHeading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, completion: @escaping (Result<String, Error>) -> ())
 }

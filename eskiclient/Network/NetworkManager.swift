@@ -53,10 +53,6 @@ final class NetworkManager: Networkable {
         }
     }
     
-    func getLanding(completion: @escaping (Result<String, Error>) -> ()) {
-        fetch(.landing) { completion($0) }
-    }
-    
     func getHomePage(number: Int, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.homepage(pageNumber: number)) { completion($0) }
     }

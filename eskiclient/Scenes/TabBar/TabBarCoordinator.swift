@@ -13,9 +13,22 @@ final class TabBarCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
     
+    let tabBarVC = TabBarVC()
+    
     init() {
         navigationController = UINavigationController()
         childCoordinators = []
+        NotificationCenter.default.addObserver(self, selector: #selector(onReceivedLogin), name: .loginNotificationName, object: nil)
+    }
+    
+    @objc func onReceivedLogin(_ notification:Notification) {
+        if let data = notification.userInfo as? [String: Bool], let isLoggedIn = data["isLoggedIn"] {
+            if isLoggedIn {
+                addProfile()
+            } else {
+                removeProfile()
+            }
+        }
     }
     
     func start() {
@@ -26,6 +39,14 @@ final class TabBarCoordinator: Coordinator {
         childCoordinators.append(homeCoordinator)
         homeCoordinator.start()
         
+        let tabBarNetworkManager = NetworkManager()
+        let tabBarVM = TabBarVM(networkManager: tabBarNetworkManager)
+        tabBarVC.viewModel = tabBarVM
+        tabBarVC.viewControllers = [homeNavController]
+        app.window.rootViewController = tabBarVC
+    }
+    
+    private func addProfile() {
         let profileNavController = UINavigationController()
         let profileNetworkManager = NetworkManager()
         let profileCoordinator = ProfileCoordinator(navigationController: profileNavController, networkManager: profileNetworkManager)
@@ -33,11 +54,10 @@ final class TabBarCoordinator: Coordinator {
         childCoordinators.append(profileCoordinator)
         profileCoordinator.start()
         
-        let tabBarNetworkManager = NetworkManager()
-        let tabBarVM = TabBarVM(networkManager: tabBarNetworkManager)
-        let tabBarVC = TabBarVC()
-        tabBarVC.viewModel = tabBarVM
-        tabBarVC.viewControllers = [homeNavController, profileNavController]
-        app.window.rootViewController = tabBarVC
+        tabBarVC.viewControllers?.append(profileNavController)
+    }
+    
+    private func removeProfile() {
+        tabBarVC.viewControllers = tabBarVC.viewControllers?.filter{ !($0 is ProfileVC) }
     }
 }

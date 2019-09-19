@@ -33,6 +33,12 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "giriş", style: .plain, target: self, action: #selector(openLoginTapped))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(removeLoginButton), name: .loginNotificationName, object: nil)
+    }
+    
+    @objc func removeLoginButton() {
+        navigationItem.rightBarButtonItem = nil
     }
     
     @objc func getNextPage() {
