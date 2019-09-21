@@ -18,18 +18,18 @@ final class LoginVC: BaseVC<LoginVM, LoginView> {
         let url = URL(string: "https://eksisozluk.com/giris")!
         let urlRequest = URLRequest(url: url)
         baseView.webView.load(urlRequest)
-        
-        for cookie in CookieJar.retrive() {
-            print(cookie)
-        }
     }
-    
 }
 
 extension LoginVC: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         WKWebsiteDataStore.default().httpCookieStore.getAllCookies { (cookies) in
             CookieJar.save(cookies: cookies)
+        }
+        
+        if webView.url == URL(string: "https://eksisozluk.com/") {
+            viewModel.finishLogin()
+            navigationController?.popViewController(animated: true)
         }
     }
 }

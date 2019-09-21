@@ -9,7 +9,7 @@
 import Foundation
 
 protocol LoginVMProtocol: BaseVMProtocol {
-    
+    func finishLogin()
 }
 
 protocol LoginVMOutputProtocol: BaseVMOutputProtocol {
@@ -19,4 +19,8 @@ protocol LoginVMOutputProtocol: BaseVMOutputProtocol {
 final class LoginVM: LoginVMProtocol {
     weak var delegate: LoginVMOutputProtocol?
     weak var coordinator: LoginCoordinator?
+    
+    func finishLogin() {
+        coordinator?.finishLogin()
+    }
 }

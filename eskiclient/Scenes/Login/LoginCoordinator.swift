@@ -25,4 +25,8 @@ final class LoginCoordinator: Coordinator {
         loginVM.coordinator = self
         navigationController.pushViewController(loginVC, animated: true)
     }
+    
+    func finishLogin() {
+        parentCoordinator?.didFinish(coordinator: self)
+    }
 }
