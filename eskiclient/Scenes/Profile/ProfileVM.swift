@@ -27,23 +27,27 @@ final class ProfileVM: ProfileVMProtocol {
         self.networkManager = networkManager
     }
     
+    private(set) var userHeadings = [UserHeading]()
+    
     func getProfile(username: String) {
-        networkManager.getMe(username: username) { result in
+        networkManager.getLatestEntries(username: username) { result in
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let val):
+                self.userHeadings.removeAll()
                 do {
                     let doc = try HTML(html: val, encoding: .utf8)
-                    if let username = doc.xpath("//*[@id='user-profile-title']/a").first?.content {
-                        print(username)
-                    }
-                    let topics = doc.xpath("//*[@id='title']")
-                    for topic in topics {
-                        print(topic)
+                    for baslik in doc.xpath("//*[@id='content-body']/ul/li/a") {
+                        let text = baslik.xpath("text()[1]").first?.content?.trimmingCharacters(in: .whitespacesAndNewlines)
+                        let link = baslik["href"]
+                        let entryNumber = baslik.xpath("span/text()").first?.content
+                        let heading = UserHeading(text: text, link: link, entryNumber: entryNumber)
+                        self.userHeadings.append(heading)
+                        self.delegate?.didGetProfile()
                     }
                 } catch {
-                    print(error)
+                    self.delegate?.failedGetProfile()
                 }
             }
         }

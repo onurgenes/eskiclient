@@ -70,11 +70,11 @@ extension HeadingVC: HeadingVMOutputProtocol {
 extension HeadingVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? HeadingCell else { fatalError() }
-        let currentCellNumber = indexPath.row
-        cell.contentTextView.attributedText = viewModel.entries[currentCellNumber]
-        cell.authorButton.setTitle(viewModel.authors[currentCellNumber], for: .normal)
-        cell.dateButton.setTitle(viewModel.dates[currentCellNumber], for: .normal)
-        cell.favoriteCountLabel.text = viewModel.favorites[currentCellNumber] + " favori"
+        let entry = viewModel.entries[indexPath.row]
+        cell.contentTextView.attributedText = entry.content
+        cell.authorButton.setTitle(entry.author, for: .normal)
+        cell.dateButton.setTitle(entry.date, for: .normal)
+        cell.favoriteCountLabel.text = entry.favoritesCount + " favori"
         cell.textLabel?.numberOfLines = 0
         return cell
     }

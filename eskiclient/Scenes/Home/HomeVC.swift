@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Kanna
-import Alamofire
 
 final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
     
@@ -87,19 +85,19 @@ extension HomeVC: HomeVMOutputProtocol {
 
 extension HomeVC {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.headingNames.count
+        return viewModel.headings.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? HomeCell else { fatalError() }
-        let currentCellNumber = indexPath.row
-        cell.titleLabel.text = viewModel.headingNames[currentCellNumber]
-        cell.countLabel.text = viewModel.headingCounts[currentCellNumber]
+        let heading = viewModel.headings[indexPath.row]
+        cell.titleLabel.text = heading.name
+        cell.countLabel.text = heading.count
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let link = viewModel.headingLinks[indexPath.row] {
+        if let link = viewModel.headings[indexPath.row].link {
             viewModel.openHeading(url: link)
         } else {
             print("Can't get link")

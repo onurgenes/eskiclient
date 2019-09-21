@@ -11,6 +11,7 @@ import Moya
 enum EksiAPI {
     case homepage(pageNumber: Int)
     case me(username: String)
+    case getLatestEntries(username: String)
     case message
     case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?)
     case entry
@@ -27,6 +28,8 @@ extension EksiAPI: TargetType {
             return "/basliklar/bugun/\(number)"
         case .me(let username):
             return "/biri/\(username)"
+        case .getLatestEntries(let username):
+            return "/basliklar/istatistik/\(username)/son-entryleri"
         case .message:
             return ""
         case .heading(let url, _, _, _):
@@ -42,6 +45,8 @@ extension EksiAPI: TargetType {
         case .homepage:
             return .get
         case .me:
+            return .get
+        case .getLatestEntries:
             return .get
         case .message:
             return .get
@@ -61,6 +66,8 @@ extension EksiAPI: TargetType {
         case .homepage:
             return .requestPlain
         case .me:
+            return .requestPlain
+        case .getLatestEntries:
             return .requestPlain
         case .message:
             return .requestPlain

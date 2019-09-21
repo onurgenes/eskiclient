@@ -28,9 +28,7 @@ final class HomeVM: HomeVMProtocol {
         self.networkManager = networkManager
     }
     
-    private(set) var headingNames = [String?]()
-    private(set) var headingCounts = [String?]()
-    private(set) var headingLinks = [String?]()
+    private(set) var headings = [Heading]()
     
     func getHomepage(number: Int) {
         networkManager.getHomePage(number: number) { result in
@@ -39,15 +37,14 @@ final class HomeVM: HomeVMProtocol {
                 self.delegate?.failedGetHomepage(error: err)
             case .success(let val):
                 do {
-                    self.headingNames.removeAll()
-                    self.headingCounts.removeAll()
-                    self.headingLinks.removeAll()
+                    self.headings.removeAll()
                     
                     let doc = try HTML(html: val, encoding: .utf8)
-                    for heading in doc.xpath("//*[@id='content-body']/ul/li/a") {
-                        self.headingNames.append(heading.xpath("text()[1]").first?.text?.trimmingCharacters(in: .whitespaces))
-                        self.headingCounts.append(heading.xpath("small/text()[1]").first?.text?.trimmingCharacters(in: .whitespaces))
-                        self.headingLinks.append(heading["href"])
+                    for headingData in doc.xpath("//*[@id='content-body']/ul/li/a") {
+                        let heading = Heading(name: headingData.xpath("text()[1]").first?.text?.trimmingCharacters(in: .whitespaces),
+                                              count: headingData.xpath("small/text()[1]").first?.text?.trimmingCharacters(in: .whitespaces),
+                                              link: headingData["href"])
+                        self.headings.append(heading)
                     }
                     self.delegate?.didGetHomepage()
                 } catch {

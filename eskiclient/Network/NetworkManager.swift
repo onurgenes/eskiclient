@@ -71,4 +71,8 @@ final class NetworkManager: Networkable {
     func getMe(username: String, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.me(username: username)) { completion($0) }
     }
+    
+    func getLatestEntries(username: String, completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.getLatestEntries(username: username)) { completion($0) }
+    }
 }

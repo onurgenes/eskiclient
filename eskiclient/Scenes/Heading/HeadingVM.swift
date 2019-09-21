@@ -24,10 +24,7 @@ final class HeadingVM: HeadingVMProtocol {
     let networkManager: NetworkManager
     var url: String
     
-    private(set) var entries = [NSAttributedString]()
-    private(set) var authors = [String]()
-    private(set) var dates = [String]()
-    private(set) var favorites = [String]()
+    private(set) var entries = [Entry]()
     private(set) var title = ""
     private(set) var currentPageNumber = ""
     private(set) var focusToNumber = ""
@@ -44,8 +41,6 @@ final class HeadingVM: HeadingVMProtocol {
                 print(err)
             case .success(let val):
                 self.entries.removeAll()
-                self.dates.removeAll()
-                self.authors.removeAll()
                 do {
                     let doc = try HTML(html: val, encoding: .utf8)
                     if let title = doc.title, let seperatedTitle = title.split(separator: "-").first {
@@ -67,10 +62,8 @@ final class HeadingVM: HeadingVMProtocol {
                                                                                                        .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
                             attributedString.setBaseFont(baseFont: UIFont.preferredFont(forTextStyle: .body))
                             
-                            self.authors.append(author)
-                            self.entries.append(attributedString.trimWhiteSpace())
-                            self.dates.append(date)
-                            self.favorites.append(favoriteCount)
+                            let entry = Entry(content: attributedString.trimWhiteSpace(), author: author, date: date, favoritesCount: favoriteCount)
+                            self.entries.append(entry)
                         }
                     }
                     self.delegate?.didGetHeading()
