@@ -22,20 +22,22 @@ final class HeadingVM: HeadingVMProtocol {
     weak var delegate: HeadingVMOutputProtocol?
     weak var coordinator: HeadingCoordinator?
     let networkManager: NetworkManager
-    var url: String
+    let url: String
+    let isQuery: Bool
     
     private(set) var entries = [Entry]()
     private(set) var title = ""
     private(set) var currentPageNumber = ""
     private(set) var focusToNumber = ""
     
-    init(networkManager: NetworkManager, url: String) {
+    init(networkManager: NetworkManager, url: String, isQuery: Bool) {
         self.networkManager = networkManager
         self.url = url
+        self.isQuery = isQuery
     }
     
     func getHeading(isWithoutDate: Bool, focusTo: String, pageNumber: String?) {
-        networkManager.getHeading(url: url, isWithoutDate: isWithoutDate, focusTo: focusTo, pageNumber: pageNumber) { result in
+        networkManager.getHeading(url: url, isWithoutDate: isWithoutDate, focusTo: focusTo, pageNumber: pageNumber, isQuery: isQuery) { result in
             switch result {
             case .failure(let err):
                 print(err)
@@ -73,5 +75,9 @@ final class HeadingVM: HeadingVMProtocol {
                 }
             }
         }
+    }
+    
+    func openSelectedHeading(url: String) {
+        coordinator?.openSelectedHeading(url: url, isQuery: true)
     }
 }

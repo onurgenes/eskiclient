@@ -11,8 +11,8 @@ import TinyConstraints
 
 final class HeadingCell: UITableViewCell {
     
-    lazy var contentTextView: CustomTextView = {
-        let tv = CustomTextView()
+    lazy var contentTextView: UITextView = {
+        let tv = UITextView()
         tv.isScrollEnabled = false
         tv.dataDetectorTypes = [.link]
         tv.isEditable = false

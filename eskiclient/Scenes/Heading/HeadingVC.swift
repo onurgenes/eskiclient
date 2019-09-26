@@ -72,6 +72,7 @@ extension HeadingVC {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? HeadingCell else { fatalError() }
         let entry = viewModel.entries[indexPath.row]
         cell.contentTextView.attributedText = entry.content
+        cell.contentTextView.delegate = self
         cell.authorButton.setTitle(entry.author, for: .normal)
         cell.dateButton.setTitle(entry.date, for: .normal)
         cell.favoriteCountLabel.text = entry.favoritesCount + " favori"
@@ -85,5 +86,16 @@ extension HeadingVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+}
+
+extension HeadingVC: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if !URL.absoluteString.starts(with: "http") {
+            let queryString = String(URL.absoluteString.split(separator: "/").last ?? "")
+            viewModel.openSelectedHeading(url: queryString)
+            return false
+        }
+        return true
     }
 }

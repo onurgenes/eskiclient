@@ -12,22 +12,31 @@ final class HeadingCoordinator: NSObject, Coordinator {
     weak var parentCoordinator: Coordinator?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
-    var url: String
+    let url: String
+    let isQuery: Bool
     
-    init(navigationController: UINavigationController, url: String) {
+    init(navigationController: UINavigationController, url: String, isQuery: Bool) {
         self.navigationController = navigationController
         self.url = url
+        self.isQuery = isQuery
         childCoordinators = []
     }
     
     func start() {
         let networkManager = NetworkManager()
-        let vm = HeadingVM(networkManager: networkManager, url: url)
+        let vm = HeadingVM(networkManager: networkManager, url: url, isQuery: isQuery)
         let vc = HeadingVC()
         vc.viewModel = vm
         vm.coordinator = self
         navigationController.delegate = self
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func openSelectedHeading(url: String, isQuery: Bool) {
+        let coordinator = HeadingCoordinator(navigationController: navigationController, url: url, isQuery: isQuery)
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
     }
 }
 

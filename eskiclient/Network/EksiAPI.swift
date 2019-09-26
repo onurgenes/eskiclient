@@ -13,7 +13,7 @@ enum EksiAPI {
     case me(username: String)
     case getLatestEntries(username: String)
     case message
-    case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?)
+    case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, isQuery: Bool)
     case entry
 }
 
@@ -32,9 +32,13 @@ extension EksiAPI: TargetType {
             return "/basliklar/istatistik/\(username)/son-entryleri"
         case .message:
             return ""
-        case .heading(let url, _, _, _):
-            let removedParamUrl = url.split(separator: "?").first!
-            return String(removedParamUrl)
+        case .heading(let url, _, _, _, let isQuery):
+            if isQuery {
+                return "/"
+            } else {
+                let removedParamUrl = url.split(separator: "?").first!
+                return String(removedParamUrl)
+            }
         case .entry:
             return ""
         }
@@ -71,22 +75,28 @@ extension EksiAPI: TargetType {
             return .requestPlain
         case .message:
             return .requestPlain
-        case .heading(_, let isWithoutDate, let focusTo, let pageNumber):
-            if isWithoutDate {
-                if let pageNumber = pageNumber {
-                    return .requestParameters(parameters: ["p": pageNumber], encoding: URLEncoding.default)
-                } else {
-                    return .requestParameters(parameters: ["focusto": focusTo], encoding: URLEncoding.default)
-                }
-                
+        case .heading(let url, let isWithoutDate, let focusTo, let pageNumber, let isQuery):
+            if isQuery {
+                let path = url.split(separator: "=").last ?? ""
+                let param = String(path)
+                return .requestParameters(parameters: ["q": param], encoding: URLEncoding.default)
             } else {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let dateString = dateFormatter.string(from: Date())
-                if let pageNumber = pageNumber {
-                    return .requestParameters(parameters: ["day": dateString, "p": pageNumber], encoding: URLEncoding.default)
+                if isWithoutDate {
+                    if let pageNumber = pageNumber {
+                        return .requestParameters(parameters: ["p": pageNumber], encoding: URLEncoding.default)
+                    } else {
+                        return .requestParameters(parameters: ["focusto": focusTo], encoding: URLEncoding.default)
+                    }
+                    
                 } else {
-                    return .requestParameters(parameters: ["day": dateString], encoding: URLEncoding.default)
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    let dateString = dateFormatter.string(from: Date())
+                    if let pageNumber = pageNumber {
+                        return .requestParameters(parameters: ["day": dateString, "p": pageNumber], encoding: URLEncoding.default)
+                    } else {
+                        return .requestParameters(parameters: ["day": dateString], encoding: URLEncoding.default)
+                    }
                 }
             }
         case .entry:

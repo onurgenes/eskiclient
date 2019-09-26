@@ -30,7 +30,7 @@ final class HomeCoordinator: Coordinator {
     }
     
     func openHeading(url: String) {
-        let headingCoordinator = HeadingCoordinator(navigationController: navigationController, url: url)
+        let headingCoordinator = HeadingCoordinator(navigationController: navigationController, url: url, isQuery: false)
         headingCoordinator.parentCoordinator = self
         childCoordinators.append(headingCoordinator)
         headingCoordinator.start()
