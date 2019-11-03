@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		312189F8CE828FB7D6C67582 /* Pods_eskiclient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85403D40BDBE45F1FE17A7B4 /* Pods_eskiclient.framework */; };
 		6E0143E22332898B001AC9CE /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0143E12332898B001AC9CE /* ProfileCoordinator.swift */; };
 		6E0143E623328B8B001AC9CE /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0143E523328B8B001AC9CE /* ProfileVM.swift */; };
 		6E0143E823328BC9001AC9CE /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0143E723328BC9001AC9CE /* ProfileVC.swift */; };
@@ -52,10 +51,12 @@
 		6EFD1EDB23153952005941F1 /* EksiAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EDA23153952005941F1 /* EksiAPI.swift */; };
 		6EFD1EDD23155972005941F1 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EDC23155972005941F1 /* Networkable.swift */; };
 		6EFD1EE123155B77005941F1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EE023155B77005941F1 /* NetworkManager.swift */; };
+		A3C5E305FD4F6C863641767A /* Pods_eskiclient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B12F774CF188DE4A3A90CEB /* Pods_eskiclient.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		232BE6828454E87804F7F1B0 /* Pods-eskiclient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eskiclient.release.xcconfig"; path = "Target Support Files/Pods-eskiclient/Pods-eskiclient.release.xcconfig"; sourceTree = "<group>"; };
+		3B12F774CF188DE4A3A90CEB /* Pods_eskiclient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eskiclient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D0220D8B0D2F2C44FA0FE9D /* Pods-eskiclient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eskiclient.debug.xcconfig"; path = "Target Support Files/Pods-eskiclient/Pods-eskiclient.debug.xcconfig"; sourceTree = "<group>"; };
 		6E0143E12332898B001AC9CE /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		6E0143E523328B8B001AC9CE /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
 		6E0143E723328BC9001AC9CE /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
@@ -102,8 +103,7 @@
 		6EFD1EDA23153952005941F1 /* EksiAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EksiAPI.swift; sourceTree = "<group>"; };
 		6EFD1EDC23155972005941F1 /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
 		6EFD1EE023155B77005941F1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		842B38F5B970C2C72915D687 /* Pods-eskiclient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eskiclient.debug.xcconfig"; path = "Target Support Files/Pods-eskiclient/Pods-eskiclient.debug.xcconfig"; sourceTree = "<group>"; };
-		85403D40BDBE45F1FE17A7B4 /* Pods_eskiclient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eskiclient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A3B31BA41388A2873735E46 /* Pods-eskiclient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eskiclient.release.xcconfig"; path = "Target Support Files/Pods-eskiclient/Pods-eskiclient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				312189F8CE828FB7D6C67582 /* Pods_eskiclient.framework in Frameworks */,
+				A3C5E305FD4F6C863641767A /* Pods_eskiclient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,8 +121,8 @@
 		2A6C3374778D19E75CC32262 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				842B38F5B970C2C72915D687 /* Pods-eskiclient.debug.xcconfig */,
-				232BE6828454E87804F7F1B0 /* Pods-eskiclient.release.xcconfig */,
+				3D0220D8B0D2F2C44FA0FE9D /* Pods-eskiclient.debug.xcconfig */,
+				9A3B31BA41388A2873735E46 /* Pods-eskiclient.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -263,7 +263,7 @@
 				6EFD1EC1231528F3005941F1 /* eskiclient */,
 				6EFD1EC0231528F3005941F1 /* Products */,
 				2A6C3374778D19E75CC32262 /* Pods */,
-				9D32AAD3169E14BE95E4FA98 /* Frameworks */,
+				A5A99A0A25F4AA2F9702751F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -293,10 +293,10 @@
 			path = eskiclient;
 			sourceTree = "<group>";
 		};
-		9D32AAD3169E14BE95E4FA98 /* Frameworks */ = {
+		A5A99A0A25F4AA2F9702751F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				85403D40BDBE45F1FE17A7B4 /* Pods_eskiclient.framework */,
+				3B12F774CF188DE4A3A90CEB /* Pods_eskiclient.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -308,11 +308,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EFD1ED1231528F5005941F1 /* Build configuration list for PBXNativeTarget "eskiclient" */;
 			buildPhases = (
-				9482CD15D084B198965B3404 /* [CP] Check Pods Manifest.lock */,
+				0CDD35415224DBEFBE4A3CD0 /* [CP] Check Pods Manifest.lock */,
 				6EFD1EBB231528F3005941F1 /* Sources */,
 				6EFD1EBC231528F3005941F1 /* Frameworks */,
 				6EFD1EBD231528F3005941F1 /* Resources */,
-				FF29BA266D195756B7BC246F /* [CP] Embed Pods Frameworks */,
+				BE1479EFF843C196BFDEB4F1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -370,7 +370,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9482CD15D084B198965B3404 /* [CP] Check Pods Manifest.lock */ = {
+		0CDD35415224DBEFBE4A3CD0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -392,7 +392,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FF29BA266D195756B7BC246F /* [CP] Embed Pods Frameworks */ = {
+		BE1479EFF843C196BFDEB4F1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -592,7 +592,7 @@
 		};
 		6EFD1ED2231528F5005941F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 842B38F5B970C2C72915D687 /* Pods-eskiclient.debug.xcconfig */;
+			baseConfigurationReference = 3D0220D8B0D2F2C44FA0FE9D /* Pods-eskiclient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -611,7 +611,7 @@
 		};
 		6EFD1ED3231528F5005941F1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 232BE6828454E87804F7F1B0 /* Pods-eskiclient.release.xcconfig */;
+			baseConfigurationReference = 9A3B31BA41388A2873735E46 /* Pods-eskiclient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

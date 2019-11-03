@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.0.0-rc.2)
+  - Alamofire (5.0.0-rc.3)
   - Firebase/AdMob (6.11.0):
     - Firebase/CoreOnly
     - Google-Mobile-Ads-SDK (~> 7.50)
@@ -67,17 +67,17 @@ PODS:
   - GoogleUtilities/UserDefaults (6.3.1):
     - GoogleUtilities/Logger
   - Kanna (5.0.0)
-  - Moya (14.0.0-beta.4):
-    - Moya/Core (= 14.0.0-beta.4)
-  - Moya/Core (14.0.0-beta.4):
-    - Alamofire (= 5.0.0-rc.2)
-  - nanopb (0.3.901):
-    - nanopb/decode (= 0.3.901)
-    - nanopb/encode (= 0.3.901)
-  - nanopb/decode (0.3.901)
-  - nanopb/encode (0.3.901)
+  - Moya (14.0.0-beta.5):
+    - Moya/Core (= 14.0.0-beta.5)
+  - Moya/Core (14.0.0-beta.5):
+    - Alamofire (= 5.0.0-rc.3)
+  - nanopb (0.3.9011):
+    - nanopb/decode (= 0.3.9011)
+    - nanopb/encode (= 0.3.9011)
+  - nanopb/decode (0.3.9011)
+  - nanopb/encode (0.3.9011)
   - QuickLayout (3.0.0)
-  - SwiftEntryKit (1.2.0):
+  - SwiftEntryKit (1.2.1):
     - QuickLayout (= 3.0.0)
   - TinyConstraints (4.0.1)
 
@@ -113,7 +113,7 @@ SPEC REPOS:
     - TinyConstraints
 
 SPEC CHECKSUMS:
-  Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
+  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
   Firebase: bc9cfc7a96c73268656d5aaab453ff1b4b530e0e
   FirebaseAnalytics: 0e3ecff2c5d86070f7d4325e21f1edabfbd558dc
   FirebaseCore: beeff42c07c30ea94702471d99db2089b594fbbd
@@ -127,10 +127,10 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: f6ab1962e9dc05ab1fb938b795e5b310209edeec
   GoogleUtilities: f895fde57977df4e0233edda0dbeac490e3703b6
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
-  Moya: 53fa45a72929809e0b8bba44a0a53d8d0827bcfe
-  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Moya: 2c16c3fe92eda302070213452281b59198f946d8
+  nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
-  SwiftEntryKit: 8303faf480f405b57df16b6fc2b251647cf40349
+  SwiftEntryKit: 1661b766dd22b07679e6ebb326ccfbd81ceb0a20
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
 PODFILE CHECKSUM: 46373da52df780f729ec46d597301214a0218ef4
