@@ -22,7 +22,6 @@ final class HeadingHeaderView: UIView {
         
         addSubview(showAllButton)
         
-        showAllButton.backgroundColor = .white
         showAllButton.edgesToSuperview(usingSafeArea: true)
     }
 }
