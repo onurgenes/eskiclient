@@ -45,5 +45,13 @@ final class HeadingFooterView: UIView {
         addSubview(stackView)
         
         stackView.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 20, bottom: 0, right: 20), usingSafeArea: true)
+        
+        backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
     }
 }

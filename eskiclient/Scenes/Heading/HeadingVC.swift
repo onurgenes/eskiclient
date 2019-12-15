@@ -26,11 +26,19 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         footerView.frame.size.height = 40
         tableView.tableFooterView = footerView
         tableView.tableHeaderView = headerView
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
         
         headerView.showAllButton.addTarget(self, action: #selector(getEntriesWithoutDate), for: .touchUpInside)
         
         footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
         footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
     }
     
     @objc func getEntriesWithoutDate() {

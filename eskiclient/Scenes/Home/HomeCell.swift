@@ -76,6 +76,8 @@ final class HomeCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
         chevronImageView.image = UIImage.fontAwesomeIcon(name: .chevronRight,
                                                          style: .solid,
                                                          textColor: traitCollection.userInterfaceStyle == .dark ? .lightGray : .darkGray,

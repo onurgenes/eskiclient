@@ -17,6 +17,11 @@ final class HeadingCell: UITableViewCell {
     
     weak var delegate: TappedAuthorProtocol?
     
+    lazy var insetView: UIView = {
+        let v = UIView()
+        return v
+    }()
+    
     lazy var contentTextView: UITextView = {
         let tv = UITextView()
         tv.isScrollEnabled = false
@@ -66,13 +71,31 @@ final class HeadingCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubview(contentTextView)
-        addSubview(infoStackView)
+        contentView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        contentView.addSubview(insetView)
+        insetView.edgesToSuperview(insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
+        
+        insetView.addSubview(contentTextView)
+        insetView.addSubview(infoStackView)
         
         infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), usingSafeArea: true)
         
         contentTextView.edgesToSuperview(excluding: .bottom, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
         contentTextView.bottomToTop(of: infoStackView, offset: -10)
+        
+        insetView.layer.cornerRadius = 8
+        insetView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) : .white
+        contentTextView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) : .white
+        
+        selectionStyle = .none
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        insetView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) : .white
+        contentView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        contentTextView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) : .white
     }
     
     @objc func didTapAuthorButton() {
