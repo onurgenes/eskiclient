@@ -12,10 +12,16 @@ final class ProfileVC: BaseTableVC<ProfileVM, ProfileCell> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let username = UserDefaults.standard.string(forKey: "currentUsername") {
+        
+        if let username = viewModel.otherProfileUsername {
+            title = username
+            viewModel.getProfile(username: username)
+        } else if let username = UserDefaults.standard.string(forKey: "currentUsername") {
             title = username
             viewModel.getProfile(username: username)
         }
+        
+        
     }
 }
 

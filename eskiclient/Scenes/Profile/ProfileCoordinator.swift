@@ -14,6 +14,8 @@ final class ProfileCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     let networkManager: NetworkManager
     
+    var otherProfileUserName: String?
+    
     init(navigationController: UINavigationController, networkManager: NetworkManager) {
         self.networkManager = networkManager
         self.navigationController = navigationController
@@ -26,6 +28,7 @@ final class ProfileCoordinator: Coordinator {
         profileVC.title = "profile"
         profileVC.viewModel = profileVM
         profileVM.coordinator = self
+        profileVM.otherProfileUsername = otherProfileUserName
         navigationController.pushViewController(profileVC, animated: true)
     }
 }

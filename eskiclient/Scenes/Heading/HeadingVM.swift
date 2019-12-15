@@ -11,6 +11,8 @@ import Kanna
 
 protocol HeadingVMProtocol: BaseVMProtocol {
     func getHeading(isWithoutDate: Bool, focusTo: String, pageNumber: String?)
+    func openSelectedAuthor(name: String)
+    func openSelectedHeading(url: String)
 }
 
 protocol HeadingVMOutputProtocol: BaseVMOutputProtocol {
@@ -58,6 +60,8 @@ final class HeadingVM: HeadingVMProtocol {
                     for baslik in doc.xpath("//*[@id='entry-item-list']/li") {
                         if let entry = baslik.xpath("div[@class='content']").first?.toHTML?.data(using: .utf8),
                             let author = baslik.xpath("footer/div[@class='info']/a[@class='entry-author']").first?.text,
+//                            let authorBiriURL = baslik.xpath("footer/div[@class='info']/a[@class='entry-author']/@href").first?.content,
+//                            let authorLink = URL(string:  "https://eksisozluk.com/biri" + authorBiriURL),
                             let date = baslik.xpath("footer/div[@class='info']/a[@class='entry-date permalink']").first?.text,
                             let favoriteCount = baslik.xpath("@data-favorite-count").first?.text {
                             let attributedString = try NSMutableAttributedString(data: entry,
@@ -69,8 +73,7 @@ final class HeadingVM: HeadingVMProtocol {
                             if #available(iOS 13.0, *) {
                                 attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: NSRange(location: 0, length: attributedString.length))
                             }
-                            
-                            let entry = Entry(content: attributedString.trimWhiteSpace(), author: author, date: date, favoritesCount: favoriteCount)
+                            let entry = Entry(content: attributedString.trimWhiteSpace(), author: author,/* authorLink: authorLink,*/ date: date, favoritesCount: favoriteCount)
                             self.entries.append(entry)
                         }
                     }
@@ -85,5 +88,10 @@ final class HeadingVM: HeadingVMProtocol {
     
     func openSelectedHeading(url: String) {
         coordinator?.openSelectedHeading(url: url, isQuery: true)
+    }
+    
+    func openSelectedAuthor(name: String) {
+        let nameWithoutSpace = name.replacingOccurrences(of: " ", with: "-")
+        coordinator?.openSelectedAuthor(name: nameWithoutSpace)
     }
 }

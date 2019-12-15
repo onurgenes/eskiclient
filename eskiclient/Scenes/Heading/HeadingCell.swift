@@ -9,7 +9,13 @@
 import UIKit
 import TinyConstraints
 
+protocol TappedAuthorProtocol: AnyObject {
+    func didTappedAuthor(name: String)
+}
+
 final class HeadingCell: UITableViewCell {
+    
+    weak var delegate: TappedAuthorProtocol?
     
     lazy var contentTextView: UITextView = {
         let tv = UITextView()
@@ -32,6 +38,7 @@ final class HeadingCell: UITableViewCell {
         let btn = UIButton(type: .system)
         btn.contentHorizontalAlignment = .right
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        btn.addTarget(self, action: #selector(didTapAuthorButton), for: .touchUpInside)
         return btn
     }()
     
@@ -66,7 +73,12 @@ final class HeadingCell: UITableViewCell {
         
         contentTextView.edgesToSuperview(excluding: .bottom, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
         contentTextView.bottomToTop(of: infoStackView, offset: -10)
-        
+    }
+    
+    @objc func didTapAuthorButton() {
+        if let authorName = authorButton.titleLabel?.text {
+            self.delegate?.didTappedAuthor(name: authorName)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

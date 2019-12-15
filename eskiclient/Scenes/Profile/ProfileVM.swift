@@ -23,6 +23,8 @@ final class ProfileVM: ProfileVMProtocol {
     weak var coordinator: ProfileCoordinator?
     let networkManager: NetworkManager
     
+    var otherProfileUsername: String?
+    
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
     }

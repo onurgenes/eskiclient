@@ -67,13 +67,14 @@ extension HeadingVC: HeadingVMOutputProtocol {
     }
 }
 
-extension HeadingVC {
+extension HeadingVC: TappedAuthorProtocol {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? HeadingCell else { fatalError() }
         let entry = viewModel.entries[indexPath.row]
         cell.contentTextView.attributedText = entry.content
         cell.contentTextView.delegate = self
         cell.authorButton.setTitle(entry.author, for: .normal)
+        cell.delegate = self
         cell.dateButton.setTitle(entry.date, for: .normal)
         cell.favoriteCountLabel.text = entry.favoritesCount + " favori"
         cell.textLabel?.numberOfLines = 0
@@ -86,6 +87,10 @@ extension HeadingVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+    
+    func didTappedAuthor(name: String) {
+        viewModel.openSelectedAuthor(name: name)
     }
 }
 

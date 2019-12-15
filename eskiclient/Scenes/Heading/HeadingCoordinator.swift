@@ -38,6 +38,15 @@ final class HeadingCoordinator: NSObject, Coordinator {
         coordinator.parentCoordinator = self
         coordinator.start()
     }
+    
+    func openSelectedAuthor(name: String) {
+        let networkManager = NetworkManager()
+        let coordinator = ProfileCoordinator(navigationController: navigationController, networkManager: networkManager)
+        coordinator.otherProfileUserName = name
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
+    }
 }
 
 extension HeadingCoordinator: UINavigationControllerDelegate {
