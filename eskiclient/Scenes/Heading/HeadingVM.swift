@@ -42,7 +42,7 @@ final class HeadingVM: HeadingVMProtocol {
         networkManager.getHeading(url: url, isWithoutDate: isWithoutDate, focusTo: focusTo, pageNumber: pageNumber, isQuery: isQuery) { result in
             switch result {
             case .failure(let err):
-                print(err)
+                self.delegate?.failedGetHeading(error: err)
             case .success(let val):
                 self.entries.removeAll()
                 do {
