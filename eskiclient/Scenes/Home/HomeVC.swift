@@ -26,12 +26,21 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         
         tableView.refreshControl = tableRefreshControl
         tableView.tableFooterView = footerView
+        tableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
+        tableView.separatorStyle = .none
+        
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        
         footerView.frame.size.height = 40
         footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
         footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "giriş", style: .plain, target: self, action: #selector(openLoginTapped))
         NotificationCenter.default.addObserver(self, selector: #selector(removeLoginButton(_:)), name: .loginNotificationName, object: nil)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
     }
     
     @objc func removeLoginButton(_ notification: Notification) {
