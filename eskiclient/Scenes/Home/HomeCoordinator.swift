@@ -23,7 +23,8 @@ final class HomeCoordinator: Coordinator {
     func start() {
         let vm = HomeVM(networkManager: networkManager)
         let vc = HomeVC()
-        vc.title = "e$ki"
+        vc.title = "eşki"
+        vc.tabBarItem.image = UIImage.fontAwesomeIcon(name: .lemon, style: .solid, textColor: .white, size: CGSize(width: 32, height: 32))
         vc.viewModel = vm
         vm.coordinator = self
         navigationController.pushViewController(vc, animated: true)

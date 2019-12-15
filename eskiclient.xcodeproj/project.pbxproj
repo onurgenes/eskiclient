@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -91,7 +91,7 @@
 		6EB11BAE2331152400059647 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		6EB97E6523250E3900635B96 /* HeadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingCell.swift; sourceTree = "<group>"; };
 		6EB97E68232516E600635B96 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
-		6EFD1EBF231528F3005941F1 /* eskiclient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eskiclient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EFD1EBF231528F3005941F1 /* eşki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eşki.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EFD1EC2231528F3005941F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EFD1EC4231528F3005941F1 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		6EFD1EC9231528F5005941F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -270,7 +270,7 @@
 		6EFD1EC0231528F3005941F1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6EFD1EBF231528F3005941F1 /* eskiclient.app */,
+				6EFD1EBF231528F3005941F1 /* eşki.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -320,7 +320,7 @@
 			);
 			name = eskiclient;
 			productName = eskiclient;
-			productReference = 6EFD1EBF231528F3005941F1 /* eskiclient.app */;
+			productReference = 6EFD1EBF231528F3005941F1 /* eşki.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -603,7 +603,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.onurgenes.eskiclient;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "eşki";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -622,7 +622,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.onurgenes.eskiclient;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "eşki";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
