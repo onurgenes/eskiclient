@@ -40,8 +40,7 @@ final class HeadingCoordinator: NSObject, Coordinator {
     }
     
     func openSelectedAuthor(name: String) {
-        let networkManager = NetworkManager()
-        let coordinator = ProfileCoordinator(navigationController: navigationController, networkManager: networkManager)
+        let coordinator = ProfileCoordinator(navigationController: navigationController)
         coordinator.otherProfileUserName = name
         childCoordinators.append(coordinator)
         coordinator.parentCoordinator = self

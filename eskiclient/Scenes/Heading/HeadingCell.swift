@@ -44,6 +44,7 @@ final class HeadingCell: UITableViewCell {
         btn.contentHorizontalAlignment = .right
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         btn.addTarget(self, action: #selector(didTapAuthorButton), for: .touchUpInside)
+        btn.setTitleColor(UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0), for: .normal)
         return btn
     }()
     

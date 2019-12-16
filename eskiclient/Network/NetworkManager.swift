@@ -25,6 +25,7 @@ final class NetworkManager: Networkable {
     func fetch(_ targetAPI: EksiAPI, completion: @escaping(Result<String, Error>)->()) {
         // Set cookies for session management
         client.session.sessionConfiguration.httpCookieStorage?.setCookies(CookieJar.retrive(), for: URL(string: "https://eksisozluk.com"), mainDocumentURL: nil)
+        print(CookieJar.retrive())
         client.request(targetAPI) { result in
             switch result {
             case .failure(let error):
@@ -74,5 +75,23 @@ final class NetworkManager: Networkable {
     
     func getLatestEntries(username: String, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.getLatestEntries(username: username)) { completion($0) }
+    }
+    
+    func search(query: String, completion: @escaping (Result<SearchModel, Error>) -> ()) {
+        client.request(.search(query: query)) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let respose):
+                do {
+                    let value = try respose.filterSuccessfulStatusCodes()
+                    let model = try JSONDecoder().decode(SearchModel.self, from: value.data)
+                    completion(.success(model))
+                } catch {
+                    completion(.failure(error))
+                }
+                
+            }
+        }
     }
 }

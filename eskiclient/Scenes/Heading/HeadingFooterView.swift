@@ -16,6 +16,7 @@ final class HeadingFooterView: UIView {
         let btn = UIButton(type: .system)
         btn.titleLabel?.font = UIFont.fontAwesome(forTextStyle: UIFont.TextStyle.body, style: .solid)
         btn.setTitle(String.fontAwesomeIcon(name: .chevronRight), for: .normal)
+        btn.setTitleColor(UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0), for: .normal)
         return btn
     }()
     
@@ -29,6 +30,7 @@ final class HeadingFooterView: UIView {
         let btn = UIButton(type: .system)
         btn.titleLabel?.font = UIFont.fontAwesome(forTextStyle: UIFont.TextStyle.body, style: .solid)
         btn.setTitle(String.fontAwesomeIcon(name: .chevronLeft), for: .normal)
+        btn.setTitleColor(UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0), for: .normal)
         return btn
     }()
     

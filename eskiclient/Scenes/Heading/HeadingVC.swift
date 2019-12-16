@@ -22,8 +22,9 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
     }
     
     private func setHeaderFooter() {
-        headerView.frame.size.height = 40
-        footerView.frame.size.height = 40
+        headerView.frame.size.height = 60
+        footerView.frame.size.height = 80
+        
         tableView.tableFooterView = footerView
         tableView.tableHeaderView = headerView
         tableView.separatorStyle = .none

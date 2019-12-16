@@ -14,6 +14,7 @@ final class HeadingHeaderView: UIView {
     lazy var showAllButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("tüm entryler", for: .normal)
+        btn.setTitleColor(UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0), for: .normal)
         return btn
     }()
     

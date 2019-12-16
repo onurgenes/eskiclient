@@ -12,17 +12,16 @@ final class ProfileCoordinator: Coordinator {
     weak var parentCoordinator: Coordinator?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
-    let networkManager: NetworkManager
     
     var otherProfileUserName: String?
     
-    init(navigationController: UINavigationController, networkManager: NetworkManager) {
-        self.networkManager = networkManager
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         childCoordinators = []
     }
     
     func start() {
+        let networkManager = NetworkManager()
         let profileVM = ProfileVM(networkManager: networkManager)
         let profileVC = ProfileVC()
         profileVC.title = "profile"

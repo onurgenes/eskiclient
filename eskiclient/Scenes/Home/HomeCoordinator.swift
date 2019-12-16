@@ -12,15 +12,14 @@ final class HomeCoordinator: Coordinator {
     weak var parentCoordinator: Coordinator?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator]
-    var networkManager: NetworkManager
     
-    init(navigationController: UINavigationController, networkManager: NetworkManager) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.networkManager = networkManager
         childCoordinators = []
     }
     
     func start() {
+        let networkManager = NetworkManager()
         let vm = HomeVM(networkManager: networkManager)
         let vc = HomeVC()
         vc.title = "eşki"

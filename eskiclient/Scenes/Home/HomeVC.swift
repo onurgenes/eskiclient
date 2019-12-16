@@ -31,7 +31,7 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         
         tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
         
-        footerView.frame.size.height = 40
+        footerView.frame.size.height = 80
         footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
         footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
         
