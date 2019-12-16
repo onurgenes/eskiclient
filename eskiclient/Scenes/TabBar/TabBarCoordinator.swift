@@ -32,17 +32,22 @@ final class TabBarCoordinator: Coordinator {
     }
     
     func start() {
-        let homeNavController = UINavigationController()
-        let homeNetworkManager = NetworkManager()
-        let homeCoordinator = HomeCoordinator(navigationController: homeNavController, networkManager: homeNetworkManager)
+        let homeNavController = CustomNavController()
+        let homeCoordinator = HomeCoordinator(navigationController: homeNavController)
         homeCoordinator.parentCoordinator = self
         childCoordinators.append(homeCoordinator)
         homeCoordinator.start()
         
+        let searchNavController = CustomNavController()
+        let searchCoordinator = SearchCoordinator(navigationController: searchNavController)
+        searchCoordinator.parentCoordinator = self
+        childCoordinators.append(searchCoordinator)
+        searchCoordinator.start()
+        
         let tabBarNetworkManager = NetworkManager()
         let tabBarVM = TabBarVM(networkManager: tabBarNetworkManager)
         tabBarVC.viewModel = tabBarVM
-        tabBarVC.viewControllers = [homeNavController]
+        tabBarVC.viewControllers = [homeNavController, searchNavController]
         app.window.rootViewController = tabBarVC
     }
     
@@ -50,9 +55,8 @@ final class TabBarCoordinator: Coordinator {
         if tabBarVC.viewControllers!.contains(where: { ($0 as! UINavigationController).viewControllers.first is ProfileVC }) {
             return
         }
-        let profileNavController = UINavigationController()
-        let profileNetworkManager = NetworkManager()
-        let profileCoordinator = ProfileCoordinator(navigationController: profileNavController, networkManager: profileNetworkManager)
+        let profileNavController = CustomNavController()
+        let profileCoordinator = ProfileCoordinator(navigationController: profileNavController)
         profileCoordinator.parentCoordinator = self
         childCoordinators.append(profileCoordinator)
         profileCoordinator.start()

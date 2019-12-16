@@ -16,6 +16,12 @@ final class TabBarVC: UITabBarController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tabBar.tintColor = UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0)
+    }
+    
 }
 
 extension TabBarVC: TabBarVMOutputProtocol {
