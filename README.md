@@ -2,7 +2,10 @@
 # eskiclient
 client for https://eksisozluk.com
 
+Trying best for getting close to iOS Design guidelines.
+
 ## This project is in WIP state.
+
 Any breaking change can be made without proper warning.
 
 ## Dependencies
