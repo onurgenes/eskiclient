@@ -2,8 +2,9 @@
 # eskiclient
 client for https://eksisozluk.com
 
-## This project is in WIP state.
-Any breaking change can be made without proper warning.
+## Project is about to release!
+
+Working on this for releasing soon.
 
 ## Dependencies
 - Moya
