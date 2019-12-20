@@ -44,7 +44,7 @@ extension ProfileVC: ProfileVMOutputProtocol {
         tableView.reloadData()
     }
     
-    func failedGetProfile() {
-        
+    func failedGetProfile(error: Error) {
+        SwiftMessagesViewer.error(message: error.localizedDescription)
     }
 }

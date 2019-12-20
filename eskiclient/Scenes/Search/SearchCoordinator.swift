@@ -28,4 +28,19 @@ final class SearchCoordinator: Coordinator {
         searchVM.coordinator = self
         navigationController.pushViewController(searchVC, animated: true)
     }
+    
+    func openSelectedHeading(url: String, isQuery: Bool) {
+        let coordinator = HeadingCoordinator(navigationController: navigationController, url: url, isQuery: isQuery)
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
+    }
+    
+    func openSelectedAuthor(name: String) {
+        let coordinator = ProfileCoordinator(navigationController: navigationController)
+        coordinator.otherProfileUserName = name
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
+    }
 }

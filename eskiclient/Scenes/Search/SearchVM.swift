@@ -10,6 +10,9 @@ import Foundation
 
 protocol SearchVMProtocol: BaseVMProtocol {
     func search(query: String)
+    
+    func openSelectedAuthor(name: String)
+    func openSelectedHeading(url: String)
 }
 
 protocol SearchVMOutputProtocol: BaseVMOutputProtocol {
@@ -37,5 +40,14 @@ final class SearchVM: SearchVMProtocol {
                 self.delegate?.didSearch()
             }
         }
+    }
+    
+    func openSelectedAuthor(name: String) {
+        let nameWithoutSpace = name.replacingOccurrences(of: " ", with: "-")
+        coordinator?.openSelectedAuthor(name: nameWithoutSpace)
+    }
+    
+    func openSelectedHeading(url: String) {
+        coordinator?.openSelectedHeading(url: url, isQuery: true)
     }
 }

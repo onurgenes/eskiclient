@@ -25,7 +25,6 @@ final class NetworkManager: Networkable {
     func fetch(_ targetAPI: EksiAPI, completion: @escaping(Result<String, Error>)->()) {
         // Set cookies for session management
         client.session.sessionConfiguration.httpCookieStorage?.setCookies(CookieJar.retrive(), for: URL(string: "https://eksisozluk.com"), mainDocumentURL: nil)
-        print(CookieJar.retrive())
         client.request(targetAPI) { result in
             switch result {
             case .failure(let error):

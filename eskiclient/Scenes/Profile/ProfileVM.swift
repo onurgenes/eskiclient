@@ -15,7 +15,7 @@ protocol ProfileVMProtocol: BaseVMProtocol {
 
 protocol ProfileVMOutputProtocol: BaseVMOutputProtocol {
     func didGetProfile()
-    func failedGetProfile()
+    func failedGetProfile(error: Error)
 }
 
 final class ProfileVM: ProfileVMProtocol {
@@ -35,7 +35,7 @@ final class ProfileVM: ProfileVMProtocol {
         networkManager.getLatestEntries(username: username) { result in
             switch result {
             case .failure(let error):
-                print(error)
+                self.delegate?.failedGetProfile(error: error)
             case .success(let val):
                 self.userHeadings.removeAll()
                 do {
@@ -49,7 +49,7 @@ final class ProfileVM: ProfileVMProtocol {
                         self.delegate?.didGetProfile()
                     }
                 } catch {
-                    self.delegate?.failedGetProfile()
+                    self.delegate?.failedGetProfile(error: error)
                 }
             }
         }

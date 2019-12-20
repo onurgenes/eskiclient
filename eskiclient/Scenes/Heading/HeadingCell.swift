@@ -45,6 +45,7 @@ final class HeadingCell: UITableViewCell {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         btn.addTarget(self, action: #selector(didTapAuthorButton), for: .touchUpInside)
         btn.setTitleColor(UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0), for: .normal)
+        btn.titleLabel?.numberOfLines = 0
         return btn
     }()
     
@@ -55,15 +56,23 @@ final class HeadingCell: UITableViewCell {
         return lbl
     }()
     
+    lazy var optionButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.titleLabel?.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
+        btn.setTitle(String.fontAwesomeIcon(name: .ellipsisH), for: .normal)
+        return btn
+    }()
+    
     lazy var bottomStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [favoriteCountLabel, authorButton])
         sv.axis = .horizontal
         sv.spacing = 4
+        sv.distribution = .fillEqually
         return sv
     }()
     
     lazy var infoStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [dateButton, bottomStackView])
+        let sv = UIStackView(arrangedSubviews: [dateButton, bottomStackView, optionButton])
         sv.axis = .vertical
         sv.distribution = .fill
         return sv
@@ -79,7 +88,7 @@ final class HeadingCell: UITableViewCell {
         insetView.addSubview(contentTextView)
         insetView.addSubview(infoStackView)
         
-        infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), usingSafeArea: true)
+        infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
         
         contentTextView.edgesToSuperview(excluding: .bottom, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
         contentTextView.bottomToTop(of: infoStackView, offset: -10)

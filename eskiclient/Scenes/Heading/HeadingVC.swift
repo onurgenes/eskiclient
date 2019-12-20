@@ -106,7 +106,6 @@ extension HeadingVC: TappedAuthorProtocol {
 extension HeadingVC: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         if !URL.absoluteString.starts(with: "http") {
-            print(URL)
             let queryString = String(URL.absoluteString.removingPercentEncoding?.split(separator: "/").last ?? "")
             viewModel.openSelectedHeading(url: queryString)
             return false

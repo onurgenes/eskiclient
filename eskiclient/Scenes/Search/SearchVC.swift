@@ -29,10 +29,7 @@ final class SearchVC: BaseTableVC<SearchVM, SearchCell> {
         navigationItem.titleView = searchBar
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
-
+        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
     
@@ -66,7 +63,7 @@ extension SearchVC: SearchVMOutputProtocol {
     }
     
     func failedSearch(error: Error) {
-        print(error)
+        SwiftMessagesViewer.error(message: error.localizedDescription)
     }
 }
 
@@ -111,6 +108,15 @@ extension SearchVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        //        let model = indexPath.section == 0 ? viewModel.searchResult?.titles?[indexPath.row] : viewModel.searchResult?.nicks?[indexPath.row]
+        if indexPath.section == 0 {
+            if let model = viewModel.searchResult?.titles?[indexPath.row] {
+                viewModel.openSelectedHeading(url: model)
+            }
+        } else {
+            if let model = viewModel.searchResult?.nicks?[indexPath.row] {
+                viewModel.openSelectedAuthor(name: model)
+            }
+        }
     }
 }

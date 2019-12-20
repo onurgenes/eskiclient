@@ -1,29 +1,30 @@
 PODS:
   - Alamofire (5.0.0-rc.3)
-  - Firebase/AdMob (6.13.0):
+  - ContextMenu (0.5.1)
+  - Firebase/AdMob (6.14.0):
     - Firebase/CoreOnly
     - Google-Mobile-Ads-SDK (~> 7.50)
-  - Firebase/Analytics (6.13.0):
+  - Firebase/Analytics (6.14.0):
     - Firebase/Core
-  - Firebase/Core (6.13.0):
+  - Firebase/Core (6.14.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 6.1.6)
-  - Firebase/CoreOnly (6.13.0):
-    - FirebaseCore (= 6.4.0)
-  - FirebaseAnalytics (6.1.6):
-    - FirebaseCore (~> 6.4)
+    - FirebaseAnalytics (= 6.1.7)
+  - Firebase/CoreOnly (6.14.0):
+    - FirebaseCore (= 6.5.0)
+  - FirebaseAnalytics (6.1.7):
+    - FirebaseCore (~> 6.5)
     - FirebaseInstanceID (~> 4.2)
-    - GoogleAppMeasurement (= 6.1.6)
+    - GoogleAppMeasurement (= 6.1.7)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (= 0.3.9011)
-  - FirebaseCore (6.4.0):
+  - FirebaseCore (6.5.0):
     - FirebaseCoreDiagnostics (~> 1.0)
     - FirebaseCoreDiagnosticsInterop (~> 1.0)
-    - GoogleUtilities/Environment (~> 6.2)
-    - GoogleUtilities/Logger (~> 6.2)
+    - GoogleUtilities/Environment (~> 6.4)
+    - GoogleUtilities/Logger (~> 6.4)
   - FirebaseCoreDiagnostics (1.1.2):
     - FirebaseCoreDiagnosticsInterop (~> 1.0)
     - GoogleDataTransportCCTSupport (~> 1.0)
@@ -31,40 +32,40 @@ PODS:
     - GoogleUtilities/Logger (~> 6.2)
     - nanopb (~> 0.3.901)
   - FirebaseCoreDiagnosticsInterop (1.1.0)
-  - FirebaseInstanceID (4.2.7):
-    - FirebaseCore (~> 6.0)
-    - GoogleUtilities/Environment (~> 6.0)
-    - GoogleUtilities/UserDefaults (~> 6.0)
+  - FirebaseInstanceID (4.2.8):
+    - FirebaseCore (~> 6.5)
+    - GoogleUtilities/Environment (~> 6.4)
+    - GoogleUtilities/UserDefaults (~> 6.4)
   - FontAwesome.swift (1.8.2)
-  - Google-Mobile-Ads-SDK (7.53.0):
+  - Google-Mobile-Ads-SDK (7.53.1):
     - GoogleAppMeasurement (~> 6.0)
-  - GoogleAppMeasurement (6.1.6):
+  - GoogleAppMeasurement (6.1.7):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (= 0.3.9011)
   - GoogleDataTransport (3.2.0)
-  - GoogleDataTransportCCTSupport (1.2.2):
+  - GoogleDataTransportCCTSupport (1.2.3):
     - GoogleDataTransport (~> 3.2)
     - nanopb (~> 0.3.901)
-  - GoogleUtilities/AppDelegateSwizzler (6.3.2):
+  - GoogleUtilities/AppDelegateSwizzler (6.4.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.3.2)
-  - GoogleUtilities/Logger (6.3.2):
+  - GoogleUtilities/Environment (6.4.0)
+  - GoogleUtilities/Logger (6.4.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.3.2):
+  - GoogleUtilities/MethodSwizzler (6.4.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.3.2):
+  - GoogleUtilities/Network (6.4.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.3.2)"
-  - GoogleUtilities/Reachability (6.3.2):
+  - "GoogleUtilities/NSData+zlib (6.4.0)"
+  - GoogleUtilities/Reachability (6.4.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.3.2):
+  - GoogleUtilities/UserDefaults (6.4.0):
     - GoogleUtilities/Logger
   - Kanna (5.0.0)
   - Moya (14.0.0-beta.6):
@@ -82,6 +83,7 @@ PODS:
   - TinyConstraints (4.0.1)
 
 DEPENDENCIES:
+  - ContextMenu (from `https://github.com/GitHawkApp/ContextMenu.git`)
   - Firebase/AdMob
   - Firebase/Analytics
   - FontAwesome.swift
@@ -112,20 +114,30 @@ SPEC REPOS:
     - SwiftEntryKit
     - TinyConstraints
 
+EXTERNAL SOURCES:
+  ContextMenu:
+    :git: https://github.com/GitHawkApp/ContextMenu.git
+
+CHECKOUT OPTIONS:
+  ContextMenu:
+    :commit: 846252cc156cca279b5cfc426681d20fec8a8feb
+    :git: https://github.com/GitHawkApp/ContextMenu.git
+
 SPEC CHECKSUMS:
   Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
-  Firebase: 458d109512200d1aca2e1b9b6cf7d68a869a4a46
-  FirebaseAnalytics: 45f36d9c429fc91d206283900ab75390cd05ee8a
-  FirebaseCore: 307ea2508df730c5865334e41965bd9ea344b0e5
+  ContextMenu: 08e6f8c653ba1944764b1d3d2a31dd1046011412
+  Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
+  FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
+  FirebaseCore: 632e05cc5e1199d9147122c16d92305eb04c34bd
   FirebaseCoreDiagnostics: 511f4f3ed7d440bb69127e8b97c2bc8befae639e
   FirebaseCoreDiagnosticsInterop: e9b1b023157e3a2fc6418b5cb601e79b9af7b3a0
-  FirebaseInstanceID: ebd2ea79ee38db0cb5f5167b17a0d387e1cc7b6e
+  FirebaseInstanceID: ce993a3c3670a8f5d47ce371ac5d143c560608c5
   FontAwesome.swift: 7938d6a03113ff3f39001bde7f50be8a0903d605
-  Google-Mobile-Ads-SDK: 4b855e61f9c5a1a97cb55734ea372a4c36d00242
-  GoogleAppMeasurement: dfe55efa543e899d906309eaaac6ca26d249862f
+  Google-Mobile-Ads-SDK: fac081606dbd438d8db57198b83ba8b5f875a601
+  GoogleAppMeasurement: db118eb61a97dd8c4f7014e368d3c335cbbcf80a
   GoogleDataTransport: 8e9b210c97d55fbff306cc5468ff91b9cb32dcf5
-  GoogleDataTransportCCTSupport: ef79a4728b864946a8aafdbab770d5294faf3b5f
-  GoogleUtilities: 547a86735c6f0ee30ad17e94df4fc21f616b71cb
+  GoogleDataTransportCCTSupport: 202d7cdf9c4a7d81a2bb7f7e7e1ba6faa421b1f2
+  GoogleUtilities: 29bd0d8f850efbd28cff6d99e8b7da1f8d236bcf
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
   Moya: d4821fbcb3e784f34d2f82869e6855057a0b85d1
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
@@ -133,6 +145,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: 46373da52df780f729ec46d597301214a0218ef4
+PODFILE CHECKSUM: 0fea33c0cf7e07a5cc5c190ced6c8eaee9b461e9
 
 COCOAPODS: 1.8.4

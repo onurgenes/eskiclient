@@ -7,6 +7,7 @@ target 'eskiclient' do
   pod 'Firebase/AdMob'
   pod 'Kanna'
   pod 'TinyConstraints'
-  pod 'SwiftEntryKit'
-  pod 'FontAwesome.swift'
+  pod 'SwiftEntryKit', :inhibit_warnings => true
+  pod 'FontAwesome.swift', :inhibit_warnings => true
+  pod 'ContextMenu', :git => 'https://github.com/GitHawkApp/ContextMenu.git'
 end
