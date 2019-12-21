@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ContextMenu
+//import TinyConstraints
 
 final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
     
@@ -14,11 +16,31 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
     private let footerView = HeadingFooterView()
     private var isWithoutDate = false
     
+    //    lazy var floatingButton: UIButton = {
+    //        let btn = UIButton(type: .system)
+    //        btn.layer.cornerRadius = 20
+    //        btn.setTitle("+", for: .normal)
+    //        btn.backgroundColor = .red
+    //        btn.layer.masksToBounds = true
+    //        return btn
+    //    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setHeaderFooter()
         viewModel.getHeading(isWithoutDate: false, focusTo: "", pageNumber: nil)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "entry gir", style: .plain, target: self, action: #selector(addEntry))
+        
+        //        view.addSubview(floatingButton)
+        //        floatingButton.edgesToSuperview(excluding: [.left, .top], insets: TinyEdgeInsets(top: 0, left: 0, bottom: 20, right: 20), usingSafeArea: true)
+        //        floatingButton.height(40)
+        //        floatingButton.widthToHeight(of: floatingButton)
+    }
+    
+    @objc func addEntry() {
+        viewModel.openAddEntry()
     }
     
     private func setHeaderFooter() {
@@ -33,7 +55,12 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         headerView.showAllButton.addTarget(self, action: #selector(getEntriesWithoutDate), for: .touchUpInside)
         
         footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
-        footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
+        footerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(getPreviousPage)))
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(getFirstPage(_:)))
+        longPressGesture.minimumPressDuration = 1.0
+        longPressGesture.delaysTouchesEnded = true
+        footerView.addGestureRecognizer(longPressGesture)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -59,6 +86,15 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         if var currentPageNumber = Int(viewModel.currentPageNumber) {
             currentPageNumber -= 1
             viewModel.getHeading(isWithoutDate: isWithoutDate, focusTo: "", pageNumber: String(currentPageNumber))
+        }
+    }
+    
+    @objc func getFirstPage(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            viewModel.getHeading(isWithoutDate: isWithoutDate, focusTo: "", pageNumber: "1")
+        default:
+            break
         }
     }
 }
@@ -111,5 +147,15 @@ extension HeadingVC: UITextViewDelegate {
             return false
         }
         return true
+    }
+}
+
+extension HeadingVC: ContextMenuDelegate {
+    func contextMenuWillDismiss(viewController: UIViewController, animated: Bool) {
+        
+    }
+    
+    func contextMenuDidDismiss(viewController: UIViewController, animated: Bool) {
+        print("hey")
     }
 }

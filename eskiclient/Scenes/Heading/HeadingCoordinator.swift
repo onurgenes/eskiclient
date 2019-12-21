@@ -46,6 +46,17 @@ final class HeadingCoordinator: NSObject, Coordinator {
         coordinator.parentCoordinator = self
         coordinator.start()
     }
+    
+    func openAddEntry(newEntryModel: NewEntryModel) {
+        let coordinator = AddEntryCoordinator(navigationController: navigationController, newEntryModel: newEntryModel)
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
+    }
+    
+    func finishedAddEntry() {
+        childCoordinators = childCoordinators.filter{ !($0 is AddEntryCoordinator) }
+    }
 }
 
 extension HeadingCoordinator: UINavigationControllerDelegate {

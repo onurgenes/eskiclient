@@ -16,6 +16,7 @@ enum EksiAPI {
     case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, isQuery: Bool)
     case entry
     case search(query: String)
+//    case addEntry(text: String)
 }
 
 extension EksiAPI: TargetType {

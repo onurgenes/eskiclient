@@ -13,6 +13,7 @@ protocol HeadingVMProtocol: BaseVMProtocol {
     func getHeading(isWithoutDate: Bool, focusTo: String, pageNumber: String?)
     func openSelectedAuthor(name: String)
     func openSelectedHeading(url: String)
+    func openAddEntry()
 }
 
 protocol HeadingVMOutputProtocol: BaseVMOutputProtocol {
@@ -31,6 +32,7 @@ final class HeadingVM: HeadingVMProtocol {
     private(set) var title = ""
     private(set) var currentPageNumber = ""
     private(set) var focusToNumber = ""
+    private(set) var newEntryModel = NewEntryModel()
     
     init(networkManager: NetworkManager, url: String, isQuery: Bool) {
         self.networkManager = networkManager
@@ -49,6 +51,21 @@ final class HeadingVM: HeadingVMProtocol {
                     let doc = try HTML(html: val, encoding: .utf8)
                     if let title = doc.title, let seperatedTitle = title.split(separator: "-").first {
                         self.title = String(seperatedTitle)
+                    }
+                    if let token = doc.css("input[name^=__RequestVerificationToken]").first?["value"] {
+                        self.newEntryModel.token = token
+                    }
+                    if let id = doc.css("input[name^=Id]").first?["value"] {
+                        self.newEntryModel.id = id
+                    }
+                    if let returnUrl = doc.css("input[name^=ReturnUrl]").first?["value"] {
+                        self.newEntryModel.returnUrl = returnUrl
+                    }
+                    if let inputStartTime = doc.css("input[name^=InputStartTime]").first?["value"] {
+                        self.newEntryModel.inputStartTime = inputStartTime
+                    }
+                    if let requestTitle = doc.css("input[name^=Title]").first?["value"] {
+                        self.newEntryModel.title = requestTitle
                     }
                     if let currentPageNumber = doc.xpath("//*[@id='topic']/div[@class='clearfix sub-title-container']/div[@class='pager']/@data-currentpage").first?.text {
                         self.currentPageNumber = currentPageNumber
@@ -93,5 +110,13 @@ final class HeadingVM: HeadingVMProtocol {
     func openSelectedAuthor(name: String) {
         let nameWithoutSpace = name.replacingOccurrences(of: " ", with: "-")
         coordinator?.openSelectedAuthor(name: nameWithoutSpace)
+    }
+    
+    func openAddEntry() {
+        coordinator?.openAddEntry(newEntryModel: newEntryModel)
+    }
+    
+    func finishedAddEntry() {
+        coordinator?.finishedAddEntry()
     }
 }
