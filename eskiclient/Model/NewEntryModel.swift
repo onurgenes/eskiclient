@@ -14,4 +14,5 @@ struct NewEntryModel {
     var returnUrl: String = ""
     var inputStartTime: String = ""
     var title: String = ""
+    var text: String = ""
 }

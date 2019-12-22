@@ -14,12 +14,24 @@ final class AddEntryVC: BaseVC<AddEntryVM, AddEntryView> {
         super.viewDidLoad()
         
         let screenSize = app.window.screen.bounds
-        preferredContentSize = CGSize(width: screenSize.width - 120, height: screenSize.height / 2)
+        preferredContentSize = CGSize(width: screenSize.width - 60, height: screenSize.height / 2)
         
-        
+        baseView.sendButton.addTarget(self, action: #selector(sendEntry), for: .touchUpInside)
+    }
+    
+    @objc func sendEntry() {
+        if let text = baseView.entryTextView.text, !text.isEmpty {
+            viewModel.sendEntry(text: text)
+        }
     }
 }
 
 extension AddEntryVC: AddEntryVMOutputProtocol {
+    func didSendEntry() {
+        self.dismiss(animated: true)
+    }
     
+    func failedSendEntry(error: Error) {
+        SwiftMessagesViewer.error(message: error.localizedDescription)
+    }
 }

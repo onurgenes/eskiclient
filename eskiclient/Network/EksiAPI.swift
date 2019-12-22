@@ -16,7 +16,7 @@ enum EksiAPI {
     case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, isQuery: Bool)
     case entry
     case search(query: String)
-//    case addEntry(text: String)
+    case sendEntry(model: NewEntryModel)
 }
 
 extension EksiAPI: TargetType {
@@ -45,6 +45,9 @@ extension EksiAPI: TargetType {
             return ""
         case .search:
             return "/autocomplete/query"
+            
+        case .sendEntry:
+            return "/entry/ekle"
         }
     }
     
@@ -64,6 +67,8 @@ extension EksiAPI: TargetType {
             return .get
         case .search:
             return .get
+        case .sendEntry:
+            return .post
         }
     }
     
@@ -109,12 +114,18 @@ extension EksiAPI: TargetType {
             return .requestPlain
         case .search(let query):
             return .requestParameters(parameters: ["q": query], encoding: NoURLEncoding())
+        case .sendEntry(let model):
+            return .requestParameters(parameters: ["Content": model.text,
+                                                   "Title": model.title,
+                                                   "ReturnURL": model.returnUrl,
+                                                   "Id": model.id,
+                                                   "__RequestVerificationToken": model.token], encoding: URLEncoding.default)
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .search:
+        case .search, .sendEntry:
             return ["X-Requested-With": "XMLHttpRequest"]
         default:
             return nil

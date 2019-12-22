@@ -54,8 +54,8 @@ final class HeadingCoordinator: NSObject, Coordinator {
         coordinator.start()
     }
     
-    func finishedAddEntry() {
-        childCoordinators = childCoordinators.filter{ !($0 is AddEntryCoordinator) }
+    func finishedAddEntry(coordinator: Coordinator) {
+        didFinish(coordinator: coordinator)
     }
 }
 

@@ -115,8 +115,4 @@ final class HeadingVM: HeadingVMProtocol {
     func openAddEntry() {
         coordinator?.openAddEntry(newEntryModel: newEntryModel)
     }
-    
-    func finishedAddEntry() {
-        coordinator?.finishedAddEntry()
-    }
 }

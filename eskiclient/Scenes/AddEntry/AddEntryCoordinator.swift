@@ -41,6 +41,6 @@ extension AddEntryCoordinator: ContextMenuDelegate {
     }
     
     func contextMenuDidDismiss(viewController: UIViewController, animated: Bool) {
-        
+        (parentCoordinator as? HeadingCoordinator)?.finishedAddEntry(coordinator: self)
     }
 }

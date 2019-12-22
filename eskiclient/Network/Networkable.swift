@@ -19,4 +19,5 @@ protocol Networkable: AnyObject {
     func getMe(username: String, completion: @escaping (Result<String, Error>) -> ())
     func getLatestEntries(username: String, completion: @escaping (Result<String, Error>) -> ())
     func search(query: String, completion: @escaping (Result<SearchModel, Error>) -> ())
+    func sendEntry(model: NewEntryModel, completion: @escaping (Result<String, Error>) -> ())
 }

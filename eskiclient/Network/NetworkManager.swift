@@ -93,4 +93,8 @@ final class NetworkManager: Networkable {
             }
         }
     }
+    
+    func sendEntry(model: NewEntryModel, completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.sendEntry(model: model)) { completion($0) }
+    }
 }
