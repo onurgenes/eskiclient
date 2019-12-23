@@ -8,9 +8,12 @@
 
 import Foundation
 import Kanna
+import GoogleMobileAds
 
 protocol HomeVMProtocol: BaseVMProtocol {
     func getHomepage(number: Int)
+    
+    func initAdLoader(with: UIViewController)
 }
 
 protocol HomeVMOutputProtocol: BaseVMOutputProtocol {
@@ -18,17 +21,20 @@ protocol HomeVMOutputProtocol: BaseVMOutputProtocol {
     func failedGetHomepage(error: Error)
 }
 
-final class HomeVM: HomeVMProtocol {
+final class HomeVM: NSObject, HomeVMProtocol {
     weak var delegate: HomeVMOutputProtocol?
     weak var coordinator: HomeCoordinator?
     
     let networkManager: NetworkManager
     
+    var adLoader: GADAdLoader?
+    private var nativeAds = [GADUnifiedNativeAd]()
+    private(set) var headings = [Heading]()
+    var tableViewItems = [AnyObject]()
+    
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
     }
-    
-    private(set) var headings = [Heading]()
     
     func getHomepage(number: Int) {
         networkManager.getHomePage(number: number) { result in
@@ -38,6 +44,8 @@ final class HomeVM: HomeVMProtocol {
             case .success(let val):
                 do {
                     self.headings.removeAll()
+                    self.nativeAds.removeAll()
+                    self.tableViewItems.removeAll()
                     
                     let doc = try HTML(html: val, encoding: .utf8)
                     for headingData in doc.xpath("//*[@id='content-body']/ul/li/a") {
@@ -46,7 +54,13 @@ final class HomeVM: HomeVMProtocol {
                                               link: headingData["href"])
                         self.headings.append(heading)
                     }
-                    self.delegate?.didGetHomepage()
+                    self.tableViewItems = self.headings
+//                    if UserDefaults.standard.bool(forKey: "isAdsAllowed") {
+//                        self.adLoader?.load(GADRequest())
+//                    } else {
+//                        self.delegate?.didGetHomepage()
+//                    }
+                    self.adLoader?.load(GADRequest())
                 } catch {
                     self.delegate?.failedGetHomepage(error: error)
                 }
@@ -61,5 +75,35 @@ final class HomeVM: HomeVMProtocol {
     
     func openLogin() {
         coordinator?.openLogin()
+    }
+    
+    func initAdLoader(with: UIViewController) {
+        let multipleAdsOptions = GADMultipleAdsAdLoaderOptions()
+        multipleAdsOptions.numberOfAds = 3
+        
+        adLoader = GADAdLoader(adUnitID: "ca-app-pub-3940256099942544/3986624511",//"ca-app-pub-1229547290062551/1447347849",
+                                rootViewController: with,
+                                adTypes: [GADAdLoaderAdType.unifiedNative],
+                                options: [multipleAdsOptions])
+        adLoader?.delegate = self
+    }
+}
+
+extension HomeVM: GADUnifiedNativeAdLoaderDelegate {
+    func adLoader(_ adLoader: GADAdLoader, didReceive nativeAd: GADUnifiedNativeAd) {
+        
+        nativeAds.append(nativeAd)
+    }
+    
+    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError) {
+        self.delegate?.didGetHomepage()
+        print("ADERROR", error)
+    }
+    
+    func adLoaderDidFinishLoading(_ adLoader: GADAdLoader) {
+        for (index, ad) in nativeAds.enumerated() {
+            tableViewItems.insert(ad, at: (index + 1) * 5)
+        }
+        self.delegate?.didGetHomepage()
     }
 }
