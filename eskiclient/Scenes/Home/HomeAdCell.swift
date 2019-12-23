@@ -18,12 +18,11 @@ final class HomeAdCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        guard let nibObjects = Bundle.main.loadNibNamed("UnifiedNativeAdView", owner: nil, options: nil),
-          let adView = nibObjects.first as? GADUnifiedNativeAdView else {
-            assert(false, "Could not load nib file for adView")
-        }
-        
         contentView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        
+        guard let nibObjects = Bundle.main.loadNibNamed("UnifiedNativeAdView", owner: nil, options: nil), let adView = nibObjects.first as? GADUnifiedNativeAdView else {
+            return
+        }
         
         self.nativeAdView = adView
         addSubview(nativeAdView)
