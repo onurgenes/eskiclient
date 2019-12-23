@@ -8,8 +8,14 @@
 
 import Foundation
 
-struct Heading {
+final class Heading {
     let name: String?
     let count: String?
     let link: String?
+    
+    init(name: String?, count: String?, link: String?) {
+        self.name = name
+        self.count = count
+        self.link = link
+    }
 }
