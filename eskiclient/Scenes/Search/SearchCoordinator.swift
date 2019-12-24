@@ -30,7 +30,7 @@ final class SearchCoordinator: Coordinator {
     }
     
     func openSelectedHeading(url: String, isQuery: Bool) {
-        let coordinator = HeadingCoordinator(navigationController: navigationController, url: url, isQuery: isQuery)
+        let coordinator = HeadingCoordinator(navigationController: navigationController, url: url, isQuery: isQuery, isComingFromHeading: true)
         childCoordinators.append(coordinator)
         coordinator.parentCoordinator = self
         coordinator.start()

@@ -14,17 +14,19 @@ final class HeadingCoordinator: NSObject, Coordinator {
     var childCoordinators: [Coordinator]
     let url: String
     let isQuery: Bool
+    let isComingFromHeading: Bool
     
-    init(navigationController: UINavigationController, url: String, isQuery: Bool) {
+    init(navigationController: UINavigationController, url: String, isQuery: Bool, isComingFromHeading: Bool) {
         self.navigationController = navigationController
         self.url = url
         self.isQuery = isQuery
+        self.isComingFromHeading = isComingFromHeading
         childCoordinators = []
     }
     
     func start() {
         let networkManager = NetworkManager()
-        let vm = HeadingVM(networkManager: networkManager, url: url, isQuery: isQuery)
+        let vm = HeadingVM(networkManager: networkManager, url: url, isQuery: isQuery, isComingFromHeading: isComingFromHeading)
         let vc = HeadingVC()
         vc.viewModel = vm
         vm.coordinator = self
@@ -33,7 +35,7 @@ final class HeadingCoordinator: NSObject, Coordinator {
     }
     
     func openSelectedHeading(url: String, isQuery: Bool) {
-        let coordinator = HeadingCoordinator(navigationController: navigationController, url: url, isQuery: isQuery)
+        let coordinator = HeadingCoordinator(navigationController: navigationController, url: url, isQuery: isQuery, isComingFromHeading: true)
         childCoordinators.append(coordinator)
         coordinator.parentCoordinator = self
         coordinator.start()

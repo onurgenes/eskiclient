@@ -28,6 +28,7 @@ final class HeadingVM: HeadingVMProtocol {
     let networkManager: NetworkManager
     var url: String
     var isQuery: Bool
+    var isComingFromHeading: Bool
     
     private(set) var entries = [Entry]()
     private(set) var title = ""
@@ -36,14 +37,15 @@ final class HeadingVM: HeadingVMProtocol {
     private(set) var focusToNumber = ""
     private(set) var newEntryModel = NewEntryModel()
     
-    init(networkManager: NetworkManager, url: String, isQuery: Bool) {
+    init(networkManager: NetworkManager, url: String, isQuery: Bool, isComingFromHeading: Bool) {
         self.networkManager = networkManager
         self.url = url
         self.isQuery = isQuery
+        self.isComingFromHeading = isComingFromHeading
     }
     
     func getHeading(isWithoutDate: Bool, focusTo: String, pageNumber: String?) {
-        networkManager.getHeading(url: url, isWithoutDate: isWithoutDate, focusTo: focusTo, pageNumber: pageNumber, isQuery: isQuery) { result in
+        networkManager.getHeading(url: url, isWithoutDate: isComingFromHeading ? true : isWithoutDate, focusTo: focusTo, pageNumber: pageNumber, isQuery: isQuery) { result in
             switch result {
             case .failure(let err):
                 self.delegate?.failedGetHeading(error: err)
