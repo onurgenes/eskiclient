@@ -44,10 +44,19 @@ final class TabBarCoordinator: Coordinator {
         childCoordinators.append(searchCoordinator)
         searchCoordinator.start()
         
+        let settingsNavController = CustomNavController()
+        let settingsCoordinator = SettingsCoordinator(navigationController: settingsNavController)
+        settingsCoordinator.parentCoordinator = self
+        childCoordinators.append(settingsCoordinator)
+        settingsCoordinator.start()
+        
         let tabBarNetworkManager = NetworkManager()
         let tabBarVM = TabBarVM(networkManager: tabBarNetworkManager)
         tabBarVC.viewModel = tabBarVM
-        tabBarVC.viewControllers = [homeNavController, searchNavController]
+        tabBarVC.viewControllers = [homeCoordinator.navigationController,
+                                    searchCoordinator.navigationController,
+                                    settingsCoordinator.navigationController]
+        
         app.window.rootViewController = tabBarVC
     }
     

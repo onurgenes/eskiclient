@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.0.0-rc.3)
   - ContextMenu (0.5.1)
+  - Eureka (5.1.0)
   - Firebase/AdMob (6.14.0):
     - Firebase/CoreOnly
     - Google-Mobile-Ads-SDK (~> 7.50)
@@ -84,6 +85,7 @@ PODS:
 
 DEPENDENCIES:
   - ContextMenu (from `https://github.com/GitHawkApp/ContextMenu.git`)
+  - Eureka
   - Firebase/AdMob
   - Firebase/Analytics
   - FontAwesome.swift
@@ -95,6 +97,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Eureka
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -126,6 +129,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
   ContextMenu: 08e6f8c653ba1944764b1d3d2a31dd1046011412
+  Eureka: 18a5076dcf0c41f9cd9748aa1c42f4d11434bdae
   Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
   FirebaseCore: 632e05cc5e1199d9147122c16d92305eb04c34bd
@@ -145,6 +149,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: 0fea33c0cf7e07a5cc5c190ced6c8eaee9b461e9
+PODFILE CHECKSUM: bd965592eab15b0d3e9ff65d17a5ac55174c408d
 
 COCOAPODS: 1.8.4

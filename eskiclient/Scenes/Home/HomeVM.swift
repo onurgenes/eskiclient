@@ -55,12 +55,11 @@ final class HomeVM: NSObject, HomeVMProtocol {
                         self.headings.append(heading)
                     }
                     self.tableViewItems = self.headings
-//                    if UserDefaults.standard.bool(forKey: "isAdsAllowed") {
-//                        self.adLoader?.load(GADRequest())
-//                    } else {
-//                        self.delegate?.didGetHomepage()
-//                    }
-                    self.adLoader?.load(GADRequest())
+                    if UserDefaults.standard.bool(forKey: "isAdsAllowed") {
+                        self.adLoader?.load(GADRequest())
+                    } else {
+                        self.delegate?.didGetHomepage()
+                    }
                 } catch {
                     self.delegate?.failedGetHomepage(error: error)
                 }

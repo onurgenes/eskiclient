@@ -24,7 +24,7 @@ final class ProfileCoordinator: Coordinator {
         let networkManager = NetworkManager()
         let profileVM = ProfileVM(networkManager: networkManager)
         let profileVC = ProfileVC()
-        profileVC.title = "profile"
+        profileVC.title = "profil"
         profileVC.tabBarItem.image = UIImage.fontAwesomeIcon(name: .user, style: .solid, textColor: .white, size: CGSize(width: 32, height: 32))
         profileVC.viewModel = profileVM
         profileVM.coordinator = self
