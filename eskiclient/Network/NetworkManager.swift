@@ -68,6 +68,10 @@ final class NetworkManager: Networkable {
         fetch(.heading(url: url, isWithoutDate: isWithoutDate, focusTo: focusTo, pageNumber: pageNumber, isQuery: isQuery)) { completion($0) }
     }
     
+    func getEntry(number: String, completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.entry(number: number)) { completion($0) }
+    }
+    
     func getMe(username: String, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.me(username: username)) { completion($0) }
     }

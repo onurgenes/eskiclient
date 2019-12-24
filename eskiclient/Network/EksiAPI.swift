@@ -14,7 +14,7 @@ enum EksiAPI {
     case getLatestEntries(username: String)
     case message
     case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, isQuery: Bool)
-    case entry
+    case entry(number: String)
     case search(query: String)
     case sendEntry(model: NewEntryModel)
 }
@@ -41,8 +41,8 @@ extension EksiAPI: TargetType {
                 let removedParamUrl = url.split(separator: "?").first!
                 return String(removedParamUrl)
             }
-        case .entry:
-            return ""
+        case .entry(let number):
+            return "/entry/\(number)"
         case .search:
             return "/autocomplete/query"
             

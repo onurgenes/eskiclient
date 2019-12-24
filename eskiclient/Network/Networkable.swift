@@ -16,6 +16,7 @@ protocol Networkable: AnyObject {
     
     func getHomePage(number: Int, completion: @escaping (Result<String, Error>) -> ())
     func getHeading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, isQuery: Bool, completion: @escaping (Result<String, Error>) -> ())
+    func getEntry(number: String, completion: @escaping (Result<String, Error>) -> ())
     func getMe(username: String, completion: @escaping (Result<String, Error>) -> ())
     func getLatestEntries(username: String, completion: @escaping (Result<String, Error>) -> ())
     func search(query: String, completion: @escaping (Result<SearchModel, Error>) -> ())

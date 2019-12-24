@@ -13,4 +13,5 @@ struct Entry {
     let author: String
     let date: String
     let favoritesCount: String
+    let entryId: String
 }

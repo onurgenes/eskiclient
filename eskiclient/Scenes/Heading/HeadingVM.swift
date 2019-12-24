@@ -13,6 +13,7 @@ protocol HeadingVMProtocol: BaseVMProtocol {
     func getHeading(isWithoutDate: Bool, focusTo: String, pageNumber: String?)
     func openSelectedAuthor(name: String)
     func openSelectedHeading(url: String)
+    func openSelectedEntry(number: String)
     func openAddEntry()
 }
 
@@ -31,6 +32,7 @@ final class HeadingVM: HeadingVMProtocol {
     private(set) var entries = [Entry]()
     private(set) var title = ""
     private(set) var currentPageNumber = ""
+    private(set) var lastPageNumber = ""
     private(set) var focusToNumber = ""
     private(set) var newEntryModel = NewEntryModel()
     
@@ -74,13 +76,15 @@ final class HeadingVM: HeadingVMProtocol {
                         let focusToNumber = focusTo.split(separator: "=").last {
                         self.focusToNumber = String(focusToNumber)
                     }
+                    if let lastPageNumber = doc.xpath("//*[@id='topic']/div[@class='clearfix sub-title-container']/div[@class='pager']/@data-pagecount").first?.text {
+                        self.lastPageNumber = lastPageNumber
+                    }
                     for baslik in doc.xpath("//*[@id='entry-item-list']/li") {
                         if let entry = baslik.xpath("div[@class='content']").first?.toHTML?.data(using: .utf8),
                             let author = baslik.xpath("footer/div[@class='info']/a[@class='entry-author']").first?.text,
-//                            let authorBiriURL = baslik.xpath("footer/div[@class='info']/a[@class='entry-author']/@href").first?.content,
-//                            let authorLink = URL(string:  "https://eksisozluk.com/biri" + authorBiriURL),
                             let date = baslik.xpath("footer/div[@class='info']/a[@class='entry-date permalink']").first?.text,
-                            let favoriteCount = baslik.xpath("@data-favorite-count").first?.text {
+                            let favoriteCount = baslik.xpath("@data-favorite-count").first?.text,
+                            let entryId = baslik.xpath("@data-id").first?.text {
                             let attributedString = try NSMutableAttributedString(data: entry,
                                                                                  options: [.documentType: NSAttributedString.DocumentType.html,
                                                                                            .characterEncoding: String.Encoding.utf8.rawValue],
@@ -90,7 +94,7 @@ final class HeadingVM: HeadingVMProtocol {
                             if #available(iOS 13.0, *) {
                                 attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: NSRange(location: 0, length: attributedString.length))
                             }
-                            let entry = Entry(content: attributedString.trimWhiteSpace(), author: author,/* authorLink: authorLink,*/ date: date, favoritesCount: favoriteCount)
+                            let entry = Entry(content: attributedString.trimWhiteSpace(), author: author, date: date, favoritesCount: favoriteCount, entryId: entryId)
                             self.entries.append(entry)
                         }
                     }
@@ -110,6 +114,10 @@ final class HeadingVM: HeadingVMProtocol {
     func openSelectedAuthor(name: String) {
         let nameWithoutSpace = name.replacingOccurrences(of: " ", with: "-")
         coordinator?.openSelectedAuthor(name: nameWithoutSpace)
+    }
+    
+    func openSelectedEntry(number: String) {
+        coordinator?.openEntry(number: number)
     }
     
     func openAddEntry() {

@@ -16,15 +16,6 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
     private let footerView = HeadingFooterView()
     private var isWithoutDate = false
     
-    //    lazy var floatingButton: UIButton = {
-    //        let btn = UIButton(type: .system)
-    //        btn.layer.cornerRadius = 20
-    //        btn.setTitle("+", for: .normal)
-    //        btn.backgroundColor = .red
-    //        btn.layer.masksToBounds = true
-    //        return btn
-    //    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,11 +23,6 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         viewModel.getHeading(isWithoutDate: false, focusTo: "", pageNumber: nil)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "entry gir", style: .plain, target: self, action: #selector(addEntry))
-        
-        //        view.addSubview(floatingButton)
-        //        floatingButton.edgesToSuperview(excluding: [.left, .top], insets: TinyEdgeInsets(top: 0, left: 0, bottom: 20, right: 20), usingSafeArea: true)
-        //        floatingButton.height(40)
-        //        floatingButton.widthToHeight(of: floatingButton)
     }
     
     @objc func addEntry() {
@@ -55,12 +41,18 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         headerView.showAllButton.addTarget(self, action: #selector(getEntriesWithoutDate), for: .touchUpInside)
         
         footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
-        footerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(getPreviousPage)))
+        footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
+        //addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(getPreviousPage)))
         
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(getFirstPage(_:)))
-        longPressGesture.minimumPressDuration = 1.0
-        longPressGesture.delaysTouchesEnded = true
-        footerView.addGestureRecognizer(longPressGesture)
+        let backLongPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(getFirstPage(_:)))
+        backLongPressGesture.minimumPressDuration = 1.0
+        backLongPressGesture.delaysTouchesEnded = true
+        footerView.previousPageButton.addGestureRecognizer(backLongPressGesture)
+        
+        let nextLongPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(getLastPage(_:)))
+        nextLongPressGesture.minimumPressDuration = 1.0
+        nextLongPressGesture.delaysTouchesEnded = true
+        footerView.nextPageButton.addGestureRecognizer(nextLongPressGesture)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -93,6 +85,15 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         switch sender.state {
         case .ended:
             viewModel.getHeading(isWithoutDate: isWithoutDate, focusTo: "", pageNumber: "1")
+        default:
+            break
+        }
+    }
+    
+    @objc func getLastPage(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            viewModel.getHeading(isWithoutDate: isWithoutDate, focusTo: "", pageNumber: viewModel.lastPageNumber)
         default:
             break
         }
@@ -142,6 +143,11 @@ extension HeadingVC: TappedAuthorProtocol {
 extension HeadingVC: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         if !URL.absoluteString.starts(with: "http") {
+            let params = URL.absoluteString.removingPercentEncoding?.split(separator: "/")
+            if params?.contains("entry") ?? false {
+                viewModel.openSelectedEntry(number: String(params?.last ?? ""))
+                return false
+            }
             let queryString = String(URL.absoluteString.removingPercentEncoding?.split(separator: "/").last ?? "")
             viewModel.openSelectedHeading(url: queryString)
             return false

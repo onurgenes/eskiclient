@@ -34,7 +34,27 @@ final class SettingsVC: FormViewController {
                 })
                 $0.title = "bağış yap"
                 $0.onCellSelection(self.buttonTapped)
-        }
+            }
+            
+            +++ Section(header: "ikon", footer: "ana ekranda görmek istediğiniz ikonu seçin")
+            <<< SegmentedRow<String>() { row in
+                row.options = ["yazı", "ekşi"]
+                switch UIApplication.shared.alternateIconName {
+                case "Icon-alt":
+                    row.value = "ekşi"
+                default:
+                    row.value = "yazı"
+                }
+            }.onChange{ row in
+                switch row.value {
+                case "yazı":
+                    UIApplication.shared.setAlternateIconName(nil)
+                case "ekşi":
+                    UIApplication.shared.setAlternateIconName("Icon-alt")
+                default:
+                    break
+                }
+            }
     }
     
     func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
