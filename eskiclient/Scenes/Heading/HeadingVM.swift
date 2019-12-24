@@ -26,8 +26,8 @@ final class HeadingVM: HeadingVMProtocol {
     weak var delegate: HeadingVMOutputProtocol?
     weak var coordinator: HeadingCoordinator?
     let networkManager: NetworkManager
-    let url: String
-    let isQuery: Bool
+    var url: String
+    var isQuery: Bool
     
     private(set) var entries = [Entry]()
     private(set) var title = ""
@@ -51,6 +51,10 @@ final class HeadingVM: HeadingVMProtocol {
                 self.entries.removeAll()
                 do {
                     let doc = try HTML(html: val, encoding: .utf8)
+                    if let newUrl = doc.xpath("//h1[@id='title']/a[@itemprop='url']/@href").first?.content {
+                        self.isQuery = false
+                        self.url = String(newUrl.split(separator: "/").last!)
+                    }
                     if let title = doc.title, let seperatedTitle = title.split(separator: "-").first {
                         self.title = String(seperatedTitle)
                     }
