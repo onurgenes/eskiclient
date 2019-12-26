@@ -63,6 +63,13 @@ final class HeadingCoordinator: NSObject, Coordinator {
         coordinator.start()
     }
     
+    func openOutsideLink(url: URL) {
+        let coordinator = OutsideLinkCoordinator(navigationController: navigationController, url: url)
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
+    }
+    
     func finishedAddEntry(coordinator: Coordinator) {
         didFinish(coordinator: coordinator)
     }

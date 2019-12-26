@@ -24,9 +24,21 @@ final class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let tabBarCoordinator = TabBarCoordinator()
-        tabBarCoordinator.parentCoordinator = self
-        childCoordinators.append(tabBarCoordinator)
-        tabBarCoordinator.start()
+//        if UserDefaults.standard.bool(forKey: "isReturningUser") {
+            let tabBarCoordinator = TabBarCoordinator()
+            tabBarCoordinator.parentCoordinator = self
+            childCoordinators.append(tabBarCoordinator)
+            tabBarCoordinator.start()
+//            return
+//        }
+//        startOnboarding()
+    }
+    
+    func startOnboarding() {
+        let onboardCoordinator = OnboardCoordinator(navigationController: CustomNavController())
+        onboardCoordinator.parentCoordinator = self
+        childCoordinators.append(onboardCoordinator)
+        onboardCoordinator.start()
+        window.rootViewController = onboardCoordinator.navigationController
     }
 }

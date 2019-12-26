@@ -14,6 +14,7 @@ protocol HeadingVMProtocol: BaseVMProtocol {
     func openSelectedAuthor(name: String)
     func openSelectedHeading(url: String)
     func openSelectedEntry(number: String)
+    func openOutsideLink(url: URL)
     func openAddEntry()
 }
 
@@ -128,5 +129,9 @@ final class HeadingVM: HeadingVMProtocol {
     
     func openAddEntry() {
         coordinator?.openAddEntry(newEntryModel: newEntryModel)
+    }
+    
+    func openOutsideLink(url: URL) {
+        coordinator?.openOutsideLink(url: url)
     }
 }

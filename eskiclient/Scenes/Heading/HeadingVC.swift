@@ -152,16 +152,7 @@ extension HeadingVC: UITextViewDelegate {
             viewModel.openSelectedHeading(url: queryString)
             return false
         }
-        return true
-    }
-}
-
-extension HeadingVC: ContextMenuDelegate {
-    func contextMenuWillDismiss(viewController: UIViewController, animated: Bool) {
-        
-    }
-    
-    func contextMenuDidDismiss(viewController: UIViewController, animated: Bool) {
-        print("hey")
+        viewModel.openOutsideLink(url: URL)
+        return false
     }
 }
