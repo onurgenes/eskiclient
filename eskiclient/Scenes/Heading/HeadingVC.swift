@@ -22,7 +22,7 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         setHeaderFooter()
         viewModel.getHeading(isWithoutDate: false, focusTo: "", pageNumber: nil)
         
-        if let username = UserDefaults.standard.string(forKey: "currentUsername") {
+        if UserDefaults.standard.string(forKey: "currentUsername") != nil {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "entry gir", style: .plain, target: self, action: #selector(addEntry))
         }
     }
