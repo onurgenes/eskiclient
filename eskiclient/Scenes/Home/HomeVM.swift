@@ -80,7 +80,7 @@ final class HomeVM: NSObject, HomeVMProtocol {
         let multipleAdsOptions = GADMultipleAdsAdLoaderOptions()
         multipleAdsOptions.numberOfAds = 3
         
-        adLoader = GADAdLoader(adUnitID: "ca-app-pub-3940256099942544/3986624511",//"ca-app-pub-1229547290062551/1447347849",
+        adLoader = GADAdLoader(adUnitID: "ca-app-pub-1229547290062551/1447347849",
                                 rootViewController: with,
                                 adTypes: [GADAdLoaderAdType.unifiedNative],
                                 options: [multipleAdsOptions])
