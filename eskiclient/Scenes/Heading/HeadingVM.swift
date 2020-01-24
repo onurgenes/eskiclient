@@ -14,11 +14,8 @@ protocol HeadingVMProtocol: BaseVMProtocol {
     func openSelectedAuthor(name: String)
     func openSelectedHeading(url: String)
     func openSelectedEntry(number: String)
-<<<<<<< HEAD
     func openOutsideLink(url: URL)
-=======
     func vote(entry: Entry, isUpVote: Bool)
->>>>>>> adding options for entries
     func openAddEntry()
 }
 

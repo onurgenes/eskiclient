@@ -79,4 +79,7 @@ assets/GoogleService-Info.plist
 ### Bitrise
 codesigndoc_exports/
 
+### R.swift
+*.generated.swift
+
 # End of https://www.gitignore.io/api/xcode,macos,cocoapods
