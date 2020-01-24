@@ -63,6 +63,7 @@ final class HeadingCell: UITableViewCell {
         btn.titleLabel?.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
         btn.setTitle(String.fontAwesomeIcon(name: .ellipsisH), for: .normal)
         btn.addTarget(self, action: #selector(didTapOnOptions), for: .touchUpInside)
+        btn.setTitleColor(R.color.themeMain(), for: .normal)
         return btn
     }()
     
