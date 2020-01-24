@@ -86,7 +86,7 @@ final class HeadingCell: UITableViewCell {
         
         contentView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
         contentView.addSubview(insetView)
-        insetView.edgesToSuperview(insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
+        insetView.edgesToSuperview(insets: TinyEdgeInsets(top: 5, left: 10, bottom: 5, right: 10), usingSafeArea: true)
         
         insetView.addSubview(contentTextView)
         insetView.addSubview(infoStackView)

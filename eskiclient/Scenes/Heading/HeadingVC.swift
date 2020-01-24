@@ -115,7 +115,7 @@ extension HeadingVC: HeadingVMOutputProtocol {
     }
     
     func didVote(message: String) {
-        SwiftMessagesViewer.success(title: message, backgroundColor: .green)
+        SwiftMessagesViewer.success(title: message, backgroundColor: R.color.themeMain()!)
     }
     
     func failedVote(error: Error) {
