@@ -151,7 +151,7 @@ extension HeadingVC: HeadingTappedDelegate {
         ac.addAction(UIAlertAction(title: "resim olarak paylaş", style: .default, handler: { _ in
             let image = UIImage(view: cell)
             guard let url = URL(string: "https://eksisozluk.com/entry/" + entry.entryId) else { return }
-            let ac = UIActivityViewController(activityItems: [image, url], applicationActivities: nil)
+            let ac = UIActivityViewController(activityItems: [image], applicationActivities: nil)
             self.present(ac, animated: true)
         }))
         ac.addAction(UIAlertAction(title: "link olarak paylaş", style: .default, handler: { _ in
