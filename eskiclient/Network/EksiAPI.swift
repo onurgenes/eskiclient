@@ -17,6 +17,7 @@ enum EksiAPI {
     case entry(number: String)
     case search(query: String)
     case sendEntry(model: NewEntryModel)
+    case vote(model: Entry, isUpVote: Bool)
 }
 
 extension EksiAPI: TargetType {
@@ -48,6 +49,8 @@ extension EksiAPI: TargetType {
             
         case .sendEntry:
             return "/entry/ekle"
+        case .vote:
+            return "/entry/vote"
         }
     }
     
@@ -68,6 +71,8 @@ extension EksiAPI: TargetType {
         case .search:
             return .get
         case .sendEntry:
+            return .post
+        case .vote:
             return .post
         }
     }
@@ -120,12 +125,16 @@ extension EksiAPI: TargetType {
                                                    "ReturnURL": model.returnUrl,
                                                    "Id": model.id,
                                                    "__RequestVerificationToken": model.token], encoding: URLEncoding.default)
+        case .vote(let model, let isUpVote):
+            return .requestParameters(parameters: ["owner": model.authorId,
+                                                   "id": model.entryId,
+                                                   "rate": isUpVote ? "1" : "-1"], encoding: URLEncoding.default)
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .search, .sendEntry:
+        case .search, .sendEntry, .vote:
             return ["X-Requested-With": "XMLHttpRequest"]
         default:
             return nil

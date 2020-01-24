@@ -11,4 +11,5 @@ target 'eskiclient' do
   pod 'FontAwesome.swift', :inhibit_warnings => true
   pod 'ContextMenu', :git => 'https://github.com/GitHawkApp/ContextMenu.git'
   pod 'Eureka'
+  pod 'R.swift'
 end

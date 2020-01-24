@@ -113,19 +113,23 @@ extension HeadingVC: HeadingVMOutputProtocol {
     func failedGetHeading(error: Error) {
         SwiftMessagesViewer.error(message: error.localizedDescription)
     }
+    
+    func didVote(message: String) {
+        SwiftMessagesViewer.success(title: message, backgroundColor: .green)
+    }
+    
+    func failedVote(error: Error) {
+        SwiftMessagesViewer.error(message: error.localizedDescription)
+    }
 }
 
-extension HeadingVC: TappedAuthorProtocol {
+extension HeadingVC: HeadingTappedDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? HeadingCell else { fatalError() }
         let entry = viewModel.entries[indexPath.row]
-        cell.contentTextView.attributedText = entry.content
-        cell.contentTextView.delegate = self
-        cell.authorButton.setTitle(entry.author, for: .normal)
+        cell.setupWith(entry: entry)
         cell.delegate = self
-        cell.dateButton.setTitle(entry.date, for: .normal)
-        cell.favoriteCountLabel.text = entry.favoritesCount + " favori"
-        cell.textLabel?.numberOfLines = 0
+        cell.contentTextView.delegate = self
         return cell
     }
     
@@ -139,6 +143,30 @@ extension HeadingVC: TappedAuthorProtocol {
     
     func didTappedAuthor(name: String) {
         viewModel.openSelectedAuthor(name: name)
+    }
+    
+    func didTappedOnOptions(entry: Entry, cell: UITableViewCell) {
+        print(entry.entryId)
+        let ac = UIAlertController(title: "seçenekler", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "resim olarak paylaş", style: .default, handler: { _ in
+            let image = UIImage(view: cell)
+            guard let url = URL(string: "https://eksisozluk.com/entry/" + entry.entryId) else { return }
+            let ac = UIActivityViewController(activityItems: [image, url], applicationActivities: nil)
+            self.present(ac, animated: true)
+        }))
+        ac.addAction(UIAlertAction(title: "link olarak paylaş", style: .default, handler: { _ in
+            guard let url = URL(string: "https://eksisozluk.com/entry/" + entry.entryId) else { return }
+            let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            self.present(ac, animated: true)
+        }))
+        ac.addAction(UIAlertAction(title: "yukarı oyla", style: .default, handler: { _ in
+            self.viewModel.vote(entry: entry, isUpVote: true)
+        }))
+        ac.addAction(UIAlertAction(title: "aşağı oyla", style: .default, handler: { _ in
+            self.viewModel.vote(entry: entry, isUpVote: false)
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(ac, animated: true)
     }
 }
 

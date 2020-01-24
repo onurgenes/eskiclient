@@ -60,6 +60,30 @@ final class NetworkManager: Networkable {
         }
     }
     
+    private func fetchModel<T: Decodable>(_ eksiAPI: EksiAPI, completion: @escaping(Result<T, Error>)->()) {
+        client.session.sessionConfiguration.httpCookieStorage?.setCookies(CookieJar.retrive(), for: URL(string: "https://eksisozluk.com"), mainDocumentURL: nil)
+        client.request(eksiAPI) { result in
+            switch result {
+            case .success(let value):
+                let decoder = JSONDecoder()
+                do {
+                    if let headerFields = value.response?.allHeaderFields as? [String: String],
+                        let URL = value.request?.url {
+                        let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
+                        CookieJar.save(cookies: cookies)
+                    }
+                    let filteredResponse = try value.filterSuccessfulStatusCodes()
+                    let model = try decoder.decode(T.self, from: filteredResponse.data)
+                    completion(.success(model))
+                } catch let error {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func getHomePage(number: Int, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.homepage(pageNumber: number)) { completion($0) }
     }
@@ -96,6 +120,10 @@ final class NetworkManager: Networkable {
                 
             }
         }
+    }
+    
+    func vote(model: Entry, isUpVote: Bool, completion: @escaping (Result<VoteResultModel, Error>) -> ()) {
+        fetchModel(.vote(model: model, isUpVote: isUpVote)) { completion($0) }
     }
     
     func sendEntry(model: NewEntryModel, completion: @escaping (Result<String, Error>) -> ()) {

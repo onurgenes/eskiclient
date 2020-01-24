@@ -85,6 +85,9 @@ PODS:
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
   - QuickLayout (3.0.0)
+  - R.swift (5.1.0):
+    - R.swift.Library (~> 5.1.0)
+  - R.swift.Library (5.1.0)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
   - TinyConstraints (4.0.1)
@@ -97,6 +100,7 @@ DEPENDENCIES:
   - FontAwesome.swift
   - Kanna
   - Moya (~> 14.0.0-beta.3)
+  - R.swift
   - SwiftEntryKit
   - TinyConstraints
 
@@ -122,6 +126,8 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - QuickLayout
+    - R.swift
+    - R.swift.Library
     - SwiftEntryKit
     - TinyConstraints
 
@@ -156,9 +162,11 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
+  R.swift: 8cbc4fc69b740305b6a17c8a8ed968eb788962d9
+  R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: bd965592eab15b0d3e9ff65d17a5ac55174c408d
+PODFILE CHECKSUM: e77583fcc4219a98378a4c660a58b6b34815dd40
 
 COCOAPODS: 1.8.4

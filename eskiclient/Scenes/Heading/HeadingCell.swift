@@ -9,13 +9,15 @@
 import UIKit
 import TinyConstraints
 
-protocol TappedAuthorProtocol: AnyObject {
+protocol HeadingTappedDelegate: AnyObject {
     func didTappedAuthor(name: String)
+    func didTappedOnOptions(entry: Entry, cell: UITableViewCell)
 }
 
 final class HeadingCell: UITableViewCell {
     
-    weak var delegate: TappedAuthorProtocol?
+    weak var delegate: HeadingTappedDelegate?
+    weak var entry: Entry?
     
     lazy var insetView: UIView = {
         let v = UIView()
@@ -60,6 +62,7 @@ final class HeadingCell: UITableViewCell {
         let btn = UIButton(type: .system)
         btn.titleLabel?.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
         btn.setTitle(String.fontAwesomeIcon(name: .ellipsisH), for: .normal)
+        btn.addTarget(self, action: #selector(didTapOnOptions), for: .touchUpInside)
         return btn
     }()
     
@@ -100,6 +103,14 @@ final class HeadingCell: UITableViewCell {
         selectionStyle = .none
     }
     
+    func setupWith(entry: Entry) {
+        self.entry = entry
+        contentTextView.attributedText = entry.content
+        authorButton.setTitle(entry.author, for: .normal)
+        dateButton.setTitle(entry.date, for: .normal)
+        favoriteCountLabel.text = entry.favoritesCount + " favori"
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
@@ -112,6 +123,11 @@ final class HeadingCell: UITableViewCell {
         if let authorName = authorButton.titleLabel?.text {
             self.delegate?.didTappedAuthor(name: authorName)
         }
+    }
+    
+    @objc func didTapOnOptions() {
+        guard let entry = entry else { return }
+        self.delegate?.didTappedOnOptions(entry: entry, cell: self)
     }
     
     required init?(coder aDecoder: NSCoder) {

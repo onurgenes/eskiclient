@@ -14,13 +14,19 @@ protocol HeadingVMProtocol: BaseVMProtocol {
     func openSelectedAuthor(name: String)
     func openSelectedHeading(url: String)
     func openSelectedEntry(number: String)
+<<<<<<< HEAD
     func openOutsideLink(url: URL)
+=======
+    func vote(entry: Entry, isUpVote: Bool)
+>>>>>>> adding options for entries
     func openAddEntry()
 }
 
 protocol HeadingVMOutputProtocol: BaseVMOutputProtocol {
     func didGetHeading()
     func failedGetHeading(error: Error)
+    func didVote(message: String)
+    func failedVote(error: Error)
 }
 
 final class HeadingVM: HeadingVMProtocol {
@@ -91,7 +97,8 @@ final class HeadingVM: HeadingVMProtocol {
                             let author = baslik.xpath("footer/div[@class='info']/a[@class='entry-author']").first?.text,
                             let date = baslik.xpath("footer/div[@class='info']/a[@class='entry-date permalink']").first?.text,
                             let favoriteCount = baslik.xpath("@data-favorite-count").first?.text,
-                            let entryId = baslik.xpath("@data-id").first?.text {
+                            let entryId = baslik.xpath("@data-id").first?.text,
+                            let authorId = baslik.xpath("@data-author-id").first?.text  {
                             let attributedString = try NSMutableAttributedString(data: entry,
                                                                                  options: [.documentType: NSAttributedString.DocumentType.html,
                                                                                            .characterEncoding: String.Encoding.utf8.rawValue],
@@ -101,7 +108,7 @@ final class HeadingVM: HeadingVMProtocol {
                             if #available(iOS 13.0, *) {
                                 attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: NSRange(location: 0, length: attributedString.length))
                             }
-                            let entry = Entry(content: attributedString.trimWhiteSpace(), author: author, date: date, favoritesCount: favoriteCount, entryId: entryId)
+                            let entry = Entry(content: attributedString.trimWhiteSpace(), author: author, date: date, favoritesCount: favoriteCount, entryId: entryId, authorId: authorId)
                             self.entries.append(entry)
                         }
                     }
@@ -133,5 +140,17 @@ final class HeadingVM: HeadingVMProtocol {
     
     func openOutsideLink(url: URL) {
         coordinator?.openOutsideLink(url: url)
+    }
+    
+    func vote(entry: Entry, isUpVote: Bool) {
+        networkManager.vote(model: entry, isUpVote: isUpVote) { result in
+            switch result {
+            case .success(let voteResult):
+                guard let message = voteResult.message else { return }
+                self.delegate?.didVote(message: message)
+            case .failure(let error):
+                self.delegate?.failedVote(error: error)
+            }
+        }
     }
 }
