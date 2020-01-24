@@ -13,7 +13,7 @@ class CustomNavController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationBar.tintColor = UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0)
+        navigationBar.tintColor = R.color.themeMain()
     }
 
 }

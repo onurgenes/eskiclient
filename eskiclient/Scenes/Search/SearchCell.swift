@@ -32,7 +32,7 @@ final class SearchCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        contentView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
         contentView.addSubview(insetView)
         insetView.edgesToSuperview(insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
         
@@ -53,7 +53,7 @@ final class SearchCell: UITableViewCell {
                                                       size: CGSize(width: 30, height: 30))
         
         insetView.layer.cornerRadius = 8
-        insetView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) : .white
+        insetView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? R.color.darkGray() : .white
         
         selectionStyle = .none
     }
@@ -61,8 +61,8 @@ final class SearchCell: UITableViewCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        insetView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) : .white
-        contentView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        insetView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? R.color.darkGray() : .white
+        contentView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
     }
     
     required init?(coder: NSCoder) {

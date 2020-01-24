@@ -38,7 +38,7 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         tableView.tableFooterView = footerView
         tableView.tableHeaderView = headerView
         tableView.separatorStyle = .none
-        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
         
         headerView.showAllButton.addTarget(self, action: #selector(getEntriesWithoutDate), for: .touchUpInside)
         
@@ -60,7 +60,7 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
     }
     
     @objc func getEntriesWithoutDate() {

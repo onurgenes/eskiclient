@@ -16,7 +16,7 @@ final class SearchVC: BaseTableVC<SearchVM, SearchCell> {
         super.viewDidLoad()
         
         tableView.separatorStyle = .none
-        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
         
         searchBar.searchBarStyle = UISearchBar.Style.prominent
         searchBar.placeholder = "entry ya da suser ara..."
@@ -41,7 +41,7 @@ final class SearchVC: BaseTableVC<SearchVM, SearchCell> {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
         tableView.reloadData()
     }
 }

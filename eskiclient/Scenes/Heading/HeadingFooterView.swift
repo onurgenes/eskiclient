@@ -16,7 +16,7 @@ final class HeadingFooterView: UIView {
         let btn = UIButton(type: .system)
         btn.titleLabel?.font = UIFont.fontAwesome(forTextStyle: UIFont.TextStyle.body, style: .solid)
         btn.setTitle(String.fontAwesomeIcon(name: .chevronRight), for: .normal)
-        btn.setTitleColor(UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0), for: .normal)
+        btn.setTitleColor(R.color.themeMain(), for: .normal)
         return btn
     }()
     
@@ -30,7 +30,7 @@ final class HeadingFooterView: UIView {
         let btn = UIButton(type: .system)
         btn.titleLabel?.font = UIFont.fontAwesome(forTextStyle: UIFont.TextStyle.body, style: .solid)
         btn.setTitle(String.fontAwesomeIcon(name: .chevronLeft), for: .normal)
-        btn.setTitleColor(UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0), for: .normal)
+        btn.setTitleColor(R.color.themeMain(), for: .normal)
         return btn
     }()
     
@@ -48,12 +48,12 @@ final class HeadingFooterView: UIView {
         
         stackView.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 20, bottom: 0, right: 20), usingSafeArea: true)
         
-        backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
     }
 }

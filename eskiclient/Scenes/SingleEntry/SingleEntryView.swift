@@ -38,7 +38,7 @@ final class SingleEntryView: UIView {
         btn.contentHorizontalAlignment = .right
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
 //        btn.addTarget(self, action: #selector(didTapAuthorButton), for: .touchUpInside)
-        btn.setTitleColor(UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0), for: .normal)
+        btn.setTitleColor(R.color.themeMain(), for: .normal)
         btn.titleLabel?.numberOfLines = 0
         return btn
     }()
@@ -80,15 +80,15 @@ final class SingleEntryView: UIView {
         contentTextView.bottomToTop(of: infoStackView, offset: -10)
         
         insetView.layer.cornerRadius = 8
-        insetView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) : .white
-        contentTextView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) : .white
+        insetView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? R.color.darkGray() : .white
+        contentTextView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? R.color.darkGray() : .white
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        insetView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) : .white
-        backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
-        contentTextView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) : .white
+        insetView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? R.color.darkGray() : .white
+        backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
+        contentTextView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? R.color.darkGray() : .white
     }
 }

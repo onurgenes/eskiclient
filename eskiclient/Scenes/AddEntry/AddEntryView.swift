@@ -22,7 +22,7 @@ final class AddEntryView: UIView {
     lazy var sendButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("gönder", for: .normal)
-        btn.backgroundColor = UIColor(red: 92/255, green: 193/255, blue: 76/255, alpha: 1.0)
+        btn.backgroundColor = R.color.themeMain()
         btn.setTitleColor(.white, for: .normal)
         btn.layer.borderColor = UIColor.gray.cgColor
         btn.layer.cornerRadius = 5

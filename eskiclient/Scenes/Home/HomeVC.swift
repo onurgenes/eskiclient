@@ -35,7 +35,7 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         tableView.separatorStyle = .none
         tableView.register(HomeAdCell.self, forCellReuseIdentifier: adCellId)
         
-        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
         
         footerView.frame.size.height = 80
         footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
@@ -48,7 +48,7 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
     }
     
     @objc func removeLoginButton(_ notification: Notification) {
