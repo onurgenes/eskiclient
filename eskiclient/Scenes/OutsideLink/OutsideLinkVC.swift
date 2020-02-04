@@ -9,12 +9,19 @@
 import UIKit
 import WebKit
 
-final class OutsideLinkVC: BaseVC<OutsideLinkVM, WKWebView> {
+final class OutsideLinkVC: BaseVC<OutsideLinkVM, OutsideLinkView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        baseView.load(URLRequest(url: viewModel.url))
-        baseView.allowsBackForwardNavigationGestures = true
+        baseView.webView.load(URLRequest(url: viewModel.url))
+        baseView.webView.allowsBackForwardNavigationGestures = true
+        baseView.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "estimatedProgress" {
+            baseView.progressView.progress = Float(baseView.webView.estimatedProgress)
+        }
     }
 }

@@ -23,6 +23,6 @@ final class LoginView: UIView {
         
         addSubview(webView)
         
-        webView.edgesToSuperview()
+        webView.edgesToSuperview(usingSafeArea: true)
     }
 }
