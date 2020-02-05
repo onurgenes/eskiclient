@@ -5,6 +5,7 @@ target 'eskiclient' do
   pod 'Moya', '~> 14.0.0-beta.6'
   pod 'Firebase/Analytics'
   pod 'Firebase/AdMob'
+  pod 'Firebase/Crashlytics'
   pod 'Kanna'
   pod 'TinyConstraints'
   pod 'SwiftEntryKit', :inhibit_warnings => true
