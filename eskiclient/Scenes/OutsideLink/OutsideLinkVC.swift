@@ -7,21 +7,37 @@
 //
 
 import UIKit
-import WebKit
+import SafariServices
 
-final class OutsideLinkVC: BaseVC<OutsideLinkVM, OutsideLinkView> {
+final class OutsideLinkVC: SFSafariViewController {
+    
+    var viewModel: OutsideLinkVM! {
+        didSet {
+            viewModel.delegate = self
+        }
+    }
+    
+    override init(url URL: URL, configuration: SFSafariViewController.Configuration) {
+        super.init(url: URL, configuration: configuration)
+        
+        self.delegate = self
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        baseView.webView.load(URLRequest(url: viewModel.url))
-        baseView.webView.allowsBackForwardNavigationGestures = true
-        baseView.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
+        navigationController?.isNavigationBarHidden = true
     }
+}
+
+extension OutsideLinkVC: OutsideLinkVMOutputProtocol {
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "estimatedProgress" {
-            baseView.progressView.progress = Float(baseView.webView.estimatedProgress)
-        }
+}
+
+extension OutsideLinkVC: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        navigationController?.popViewController(animated: true)
+        navigationController?.isNavigationBarHidden = false
+        viewModel.didClose()
     }
 }

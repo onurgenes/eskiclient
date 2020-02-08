@@ -80,7 +80,6 @@
 		6EDDB80C23B48D2200EC60C8 /* OutsideLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDDB80B23B48D2200EC60C8 /* OutsideLinkCoordinator.swift */; };
 		6EDDB80E23B48D5A00EC60C8 /* OutsideLinkVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDDB80D23B48D5A00EC60C8 /* OutsideLinkVM.swift */; };
 		6EDDB81023B48D9E00EC60C8 /* OutsideLinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDDB80F23B48D9E00EC60C8 /* OutsideLinkVC.swift */; };
-		6EDDB81223B48DB400EC60C8 /* OutsideLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDDB81123B48DB400EC60C8 /* OutsideLinkView.swift */; };
 		6EFD1EC3231528F3005941F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EC2231528F3005941F1 /* AppDelegate.swift */; };
 		6EFD1EC5231528F3005941F1 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD1EC4231528F3005941F1 /* HomeVC.swift */; };
 		6EFD1ECA231528F5005941F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EFD1EC9231528F5005941F1 /* Assets.xcassets */; };
@@ -169,7 +168,6 @@
 		6EDDB80B23B48D2200EC60C8 /* OutsideLinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsideLinkCoordinator.swift; sourceTree = "<group>"; };
 		6EDDB80D23B48D5A00EC60C8 /* OutsideLinkVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsideLinkVM.swift; sourceTree = "<group>"; };
 		6EDDB80F23B48D9E00EC60C8 /* OutsideLinkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsideLinkVC.swift; sourceTree = "<group>"; };
-		6EDDB81123B48DB400EC60C8 /* OutsideLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsideLinkView.swift; sourceTree = "<group>"; };
 		6EFD1EBF231528F3005941F1 /* eski.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eski.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EFD1EC2231528F3005941F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EFD1EC4231528F3005941F1 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -436,7 +434,6 @@
 				6EDDB80B23B48D2200EC60C8 /* OutsideLinkCoordinator.swift */,
 				6EDDB80D23B48D5A00EC60C8 /* OutsideLinkVM.swift */,
 				6EDDB80F23B48D9E00EC60C8 /* OutsideLinkVC.swift */,
-				6EDDB81123B48DB400EC60C8 /* OutsideLinkView.swift */,
 			);
 			path = OutsideLink;
 			sourceTree = "<group>";
@@ -713,7 +710,6 @@
 				6EB11BAD23310D3400059647 /* TabBarVM.swift in Sources */,
 				6EDDB80023B4858400EC60C8 /* OnboardVM.swift in Sources */,
 				6E720C8D23B21770000260E4 /* SettingsView.swift in Sources */,
-				6EDDB81223B48DB400EC60C8 /* OutsideLinkView.swift in Sources */,
 				6ED756E623DB1D9C00307C7D /* R.generated.swift in Sources */,
 				6EB3ACAB23AE022D00BB6AD2 /* AddEntryCoordinator.swift in Sources */,
 				6EC8888223A7DED000CC2125 /* SearchVC.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 final class OutsideLinkCoordinator: NSObject, Coordinator {
     weak var parentCoordinator: Coordinator?
@@ -23,11 +24,15 @@ final class OutsideLinkCoordinator: NSObject, Coordinator {
     
     func start() {
         let vm = OutsideLinkVM(url: url)
-        let vc = OutsideLinkVC()
+        let vc = OutsideLinkVC(url: url, configuration: SFSafariViewController.Configuration())
         vc.viewModel = vm
         vm.coordinator = self
         navigationController.delegate = self
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.present(vc, animated: true)
+    }
+    
+    func didClose() {
+        parentCoordinator?.didFinish(coordinator: self)
     }
 }
 

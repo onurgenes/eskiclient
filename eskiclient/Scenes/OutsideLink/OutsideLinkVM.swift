@@ -9,7 +9,7 @@
 import Foundation
 
 protocol OutsideLinkVMProtocol: BaseVMProtocol {
-    
+    func didClose()
 }
 
 protocol OutsideLinkVMOutputProtocol: BaseVMOutputProtocol {
@@ -24,5 +24,9 @@ final class OutsideLinkVM: OutsideLinkVMProtocol {
     
     init(url: URL) {
         self.url = url
+    }
+    
+    func didClose() {
+        coordinator?.didClose()
     }
 }
