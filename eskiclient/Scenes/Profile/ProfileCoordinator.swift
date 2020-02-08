@@ -29,6 +29,14 @@ final class ProfileCoordinator: Coordinator {
         profileVC.viewModel = profileVM
         profileVM.coordinator = self
         profileVM.otherProfileUsername = otherProfileUserName
+        navigationController.navigationBar.prefersLargeTitles = true
         navigationController.pushViewController(profileVC, animated: true)
+    }
+    
+    func openHeading(url: String) {
+        let headingCoordinator = HeadingCoordinator(navigationController: navigationController, url: url, isQuery: false, isComingFromHeading: false)
+        headingCoordinator.parentCoordinator = self
+        childCoordinators.append(headingCoordinator)
+        headingCoordinator.start()
     }
 }

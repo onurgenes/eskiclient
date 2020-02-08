@@ -33,9 +33,14 @@ extension ProfileVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ProfileCell else { fatalError() }
         let heading = viewModel.userHeadings[indexPath.row]
-        cell.headingLabel.text = heading.text
-        cell.entryNumberLabel.text = heading.entryNumber
+        cell.titleLabel.text = heading.text
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let link = viewModel.userHeadings[indexPath.row].link {
+            viewModel.openHeading(url: link)
+        }
     }
 }
 

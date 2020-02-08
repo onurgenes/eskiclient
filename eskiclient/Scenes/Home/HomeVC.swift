@@ -43,6 +43,7 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "giriş", style: .plain, target: self, action: #selector(openLoginTapped))
         NotificationCenter.default.addObserver(self, selector: #selector(removeLoginButton(_:)), name: .loginNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getHomePage), name: .checkLoginNotificationName, object: nil)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

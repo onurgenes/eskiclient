@@ -69,14 +69,14 @@ final class SingleEntryView: UIView {
         self.init(frame: .zero)
         
         addSubview(insetView)
-        insetView.edgesToSuperview(insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
+        insetView.edgesToSuperview(insets: TinyEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), usingSafeArea: true)
         
         insetView.addSubview(contentTextView)
         insetView.addSubview(infoStackView)
         
-        infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
+        infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), usingSafeArea: true)
         
-        contentTextView.edgesToSuperview(excluding: .bottom, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
+        contentTextView.edgesToSuperview(excluding: .bottom, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), usingSafeArea: true)
         contentTextView.bottomToTop(of: infoStackView, offset: -10)
         
         insetView.layer.cornerRadius = 8

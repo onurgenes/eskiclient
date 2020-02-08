@@ -11,6 +11,7 @@ import Kanna
 
 protocol ProfileVMProtocol: BaseVMProtocol {
     func getProfile(username: String)
+    func openHeading(url: String)
 }
 
 protocol ProfileVMOutputProtocol: BaseVMOutputProtocol {
@@ -53,5 +54,9 @@ final class ProfileVM: ProfileVMProtocol {
                 }
             }
         }
+    }
+    
+    func openHeading(url: String) {
+        coordinator?.openHeading(url: url)
     }
 }

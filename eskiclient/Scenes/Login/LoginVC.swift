@@ -23,14 +23,18 @@ final class LoginVC: BaseVC<LoginVM, LoginView> {
 
 extension LoginVC: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        WKWebsiteDataStore.default().httpCookieStore.getAllCookies { (cookies) in
-            CookieJar.save(cookies: cookies)
-        }
         
         if webView.url == URL(string: "https://eksisozluk.com/") {
+            UIApplication.shared.beginIgnoringInteractionEvents()
             viewModel.finishLogin()
             navigationController?.popViewController(animated: true)
-            NotificationCenter.default.post(name: .loginNotificationName, object: nil, userInfo: ["isLoggedIn": true])
+            WKWebsiteDataStore.default().httpCookieStore.getAllCookies { (cookies) in
+                CookieJar.save(cookies: cookies)
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .checkLoginNotificationName, object: nil, userInfo: nil)
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                }
+            }
         }
     }
 }

@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
     static let loginNotificationName = Notification.Name("LoginNotification")
+    static let checkLoginNotificationName = Notification.Name("CheckLogin")
 }
