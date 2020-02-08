@@ -30,6 +30,7 @@ extension LoginVC: WKNavigationDelegate {
         if webView.url == URL(string: "https://eksisozluk.com/") {
             viewModel.finishLogin()
             navigationController?.popViewController(animated: true)
+            NotificationCenter.default.post(name: .loginNotificationName, object: nil, userInfo: ["isLoggedIn": true])
         }
     }
 }
