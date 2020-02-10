@@ -20,20 +20,16 @@ final class SettingsVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        form +++ Section(header: "reklam", footer: "uygulamaya destek olmak için reklamları açabilirsiniz :)")
+        iapObserver.delegate = self
+        
+        form +++ Section(header: "reklam", footer: "uygulamaya destek olmak için reklamları açabilirsiniz :)") {
+                $0.tag = "adsSection"
+            }
             <<< SwitchRow("isAdsAllowed") {
                 $0.title = "reklamları göster"
                 $0.value = UserDefaults.standard.bool(forKey: "isAdsAllowed")
             }.onChange{ row in
                 UserDefaults.standard.set(row.value, forKey: "isAdsAllowed")
-            }
-            <<< ButtonRow(){
-                
-                $0.hidden = Condition.function(["isAdsAllowed"], { form in
-                    return ((form.rowBy(tag: "isAdsAllowed") as? SwitchRow)?.value ?? false)
-                })
-                $0.title = "bağış yap"
-                $0.onCellSelection(self.buttonTapped)
             }
             
             +++ Section(header: "ikon", footer: "ana ekranda görmek istediğiniz ikonu seçin")
@@ -55,13 +51,43 @@ final class SettingsVC: FormViewController {
                     break
                 }
             }
+        
+        if let section = form.sectionBy(tag: "adsSection") {
+            for product in iapObserver.products {
+                section
+                    <<< ButtonRow() {
+                    $0.tag = product.productIdentifier
+                    $0.hidden = Condition.function(["isAdsAllowed"], { form in
+                        return ((form.rowBy(tag: "isAdsAllowed") as? SwitchRow)?.value ?? false)
+                    })
+                    $0.title = product.localizedTitle + " - " + product.regularPrice!
+                    $0.onCellSelection(self.buttonTapped)
+                }
+            }
+        }
     }
     
     func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
-        print("tapped!")
+        if let product = (iapObserver.products.filter{ $0.productIdentifier == row.tag }).first {
+            iapObserver.buy(product)
+        }
     }
 }
 
 extension SettingsVC: SettingsVMOutputProtocol {
     
+}
+
+extension SettingsVC: StoreObserverOutputDelegate {
+    func didPurchase() {
+        let ac = UIAlertController(title: "teşekkürler!", message: "desteğin için teşekkürler! iyi ki varsın!", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "ne demek", style: .default))
+        self.present(ac, animated: true)
+    }
+    
+    func failedPurchase(error: Error) {
+        let ac = UIAlertController(title: "eyvah!", message: "bir hata oldu...", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "tamam", style: .default))
+        self.present(ac, animated: true)
+    }
 }

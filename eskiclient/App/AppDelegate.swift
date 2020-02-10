@@ -19,7 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["5221ff4276388f681e7dea644060adaa", kGADSimulatorID as! String]
+        if iapObserver.isAuthorizedForPayments {
+            SKPaymentQueue.default().add(iapObserver)
+        }
+        
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        SKPaymentQueue.default().remove(iapObserver)
     }
 }
 
