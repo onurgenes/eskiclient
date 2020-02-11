@@ -23,7 +23,7 @@ final class SettingsVC: FormViewController {
         iapObserver.delegate = self
         
         form +++ Section(header: "reklam", footer: "uygulamaya destek olmak için reklamları açabilirsiniz :)") {
-                $0.tag = "adsSection"
+            $0.tag = "adsSection"
             }
             <<< SwitchRow("isAdsAllowed") {
                 $0.title = "reklamları göster"
@@ -50,18 +50,30 @@ final class SettingsVC: FormViewController {
                 default:
                     break
                 }
-            }
-        
+        }
         if let section = form.sectionBy(tag: "adsSection") {
-            for product in iapObserver.products {
-                section
-                    <<< ButtonRow() {
-                    $0.tag = product.productIdentifier
-                    $0.hidden = Condition.function(["isAdsAllowed"], { form in
-                        return ((form.rowBy(tag: "isAdsAllowed") as? SwitchRow)?.value ?? false)
-                    })
-                    $0.title = product.localizedTitle + " - " + product.regularPrice!
-                    $0.onCellSelection(self.buttonTapped)
+            if !iapObserver.products.isEmpty {
+                
+                for product in iapObserver.products {
+                    section
+                        <<< ButtonRow() {
+                            $0.tag = product.productIdentifier
+                            $0.hidden = Condition.function(["isAdsAllowed"], { form in
+                                return ((form.rowBy(tag: "isAdsAllowed") as? SwitchRow)?.value ?? false)
+                            })
+                            var productTitle = ""
+                            if product.productIdentifier == "com.onurgenes.eskiclient.kucukbagis" {
+                                productTitle = "küçük destek - "
+                            } else if product.productIdentifier == "com.onurgenes.eskiclient.buyukbagis" {
+                                productTitle = "büyük destek - "
+                            }
+                            $0.title = productTitle + product.regularPrice!
+                            $0.onCellSelection(self.buttonTapped)
+                    }
+                }
+            } else {
+                section <<< LabelRow() {
+                    $0.title = "uygulama içi satın almalar yüklenemedi."
                 }
             }
         }
