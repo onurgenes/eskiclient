@@ -11,6 +11,8 @@ import Eureka
 
 final class SettingsVC: FormViewController {
     
+    private var isProductsLoaded = false
+    
     var viewModel: SettingsVM! {
         didSet {
             viewModel.delegate = self
@@ -51,8 +53,21 @@ final class SettingsVC: FormViewController {
                     break
                 }
         }
-        if let section = form.sectionBy(tag: "adsSection") {
-            if !iapObserver.products.isEmpty {
+        // If products loaded and init, load here else, wait for delegate method
+        addProductsToForm()
+    }
+    
+    func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
+        if let product = (iapObserver.products.filter{ $0.productIdentifier == row.tag }).first {
+            iapObserver.buy(product)
+        }
+    }
+    
+    func addProductsToForm() {
+        if !isProductsLoaded {
+            if let section = form.sectionBy(tag: "adsSection"), !iapObserver.products.isEmpty {
+                
+                isProductsLoaded = true
                 
                 for product in iapObserver.products {
                     section
@@ -71,18 +86,9 @@ final class SettingsVC: FormViewController {
                             $0.onCellSelection(self.buttonTapped)
                     }
                 }
-            } else {
-                section <<< LabelRow() {
-                    $0.title = "uygulama içi satın almalar yüklenemedi."
-                }
             }
         }
-    }
-    
-    func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
-        if let product = (iapObserver.products.filter{ $0.productIdentifier == row.tag }).first {
-            iapObserver.buy(product)
-        }
+        
     }
 }
 
@@ -101,5 +107,11 @@ extension SettingsVC: StoreObserverOutputDelegate {
         let ac = UIAlertController(title: "eyvah!", message: "bir hata oldu...", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "tamam", style: .default))
         self.present(ac, animated: true)
+    }
+    
+    func didGetProducts() {
+        DispatchQueue.main.async {
+            self.addProductsToForm()
+        }
     }
 }

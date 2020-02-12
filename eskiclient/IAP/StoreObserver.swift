@@ -14,6 +14,8 @@ let iapObserver = StoreObserver()
 protocol StoreObserverOutputDelegate: AnyObject {
     func didPurchase()
     func failedPurchase(error: Error)
+    
+    func didGetProducts()
 }
 
 final class StoreObserver: NSObject, SKPaymentTransactionObserver {
@@ -119,6 +121,8 @@ extension StoreObserver: SKProductsRequestDelegate {
         if !response.invalidProductIdentifiers.isEmpty {
             invalidProductIdentifiers = response.invalidProductIdentifiers
         }
+        
+        self.delegate?.didGetProducts()
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
