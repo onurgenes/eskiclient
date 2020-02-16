@@ -81,6 +81,8 @@ final class SettingsVC: FormViewController {
                                 productTitle = "küçük destek - "
                             } else if product.productIdentifier == "com.onurgenes.eskiclient.buyukbagis" {
                                 productTitle = "büyük destek - "
+                            } else if product.productIdentifier == "com.onurgenes.eskiclient.devasabagis" {
+                                productTitle = "devasa destek - "
                             }
                             $0.title = productTitle + product.regularPrice!
                             $0.onCellSelection(self.buttonTapped)

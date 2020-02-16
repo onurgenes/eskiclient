@@ -45,7 +45,7 @@ final class StoreObserver: NSObject, SKPaymentTransactionObserver {
     override init() {
         super.init()
         //Other initialization here.
-        fetchProducts(matchingIdentifiers: ["com.onurgenes.eskiclient.kucukbagis", "com.onurgenes.eskiclient.buyukbagis"])
+        fetchProducts(matchingIdentifiers: ["com.onurgenes.eskiclient.kucukbagis", "com.onurgenes.eskiclient.buyukbagis", "com.onurgenes.eskiclient.devasabagis"])
     }
     
     //Observe transaction updates.
