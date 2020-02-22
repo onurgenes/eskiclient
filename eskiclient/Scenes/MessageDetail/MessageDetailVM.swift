@@ -42,12 +42,16 @@ final class MessageDetailVM: MessageDetailVMProtocol {
                     let doc = try HTML(html: response, encoding: .utf8)
                     if let senderUsername = doc.xpath("//*[@id='message-thread-title']/a[2]").first?.text {
                         for messageDetail in doc.xpath("//*[@id='message-thread']/article") {
-                            if let content = messageDetail.xpath("p").first?.text,
+                            if var content = messageDetail.xpath("p").first?.text,
                                 let date = messageDetail.xpath("footer/time").first?.text {
                                 
                                 var isIncoming = false
                                 if let className = messageDetail.className, className == "incoming" {
                                     isIncoming = true
+                                } else {
+                                    let splittedString = content.components(separatedBy: ":")
+                                    content = ""
+                                    Array(splittedString.dropFirst()).forEach{ content += $0 }
                                 }
                                 let message = MessageDetail(isIncoming: isIncoming, content: content, senderUsername: senderUsername, date: date)
                                 self.messages.append(message)
