@@ -49,9 +49,9 @@ final class MessageDetailVM: MessageDetailVMProtocol {
                                 if let className = messageDetail.className, className == "incoming" {
                                     isIncoming = true
                                 } else {
-                                    let splittedString = content.components(separatedBy: ":")
-                                    content = ""
-                                    Array(splittedString.dropFirst()).forEach{ content += $0 }
+                                    if let index = content.range(of: ": ")?.upperBound {
+                                        content = String(content.suffix(from: index))
+                                    }
                                 }
                                 let message = MessageDetail(isIncoming: isIncoming, content: content, senderUsername: senderUsername, date: date)
                                 self.messages.append(message)
