@@ -10,14 +10,41 @@ import UIKit
 
 final class MessageVC: BaseTableVC<MessageVM, MessageCell> {
     
+    private let footerView = HeadingFooterView()
+    private var currentPageNumber = 1
+    private var pageCount = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.getMessages()
+        viewModel.getMessages(page: 1)
+        
+        tableView.tableFooterView = footerView
+        footerView.frame.size.height = 80
+        footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
+        footerView.previousPageButton.addTarget(self, action: #selector(getPreviousPage), for: .touchUpInside)
         
         tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         tableView.separatorStyle = .none
+        
+    }
+    
+    @objc func getNextPage() {
+        currentPageNumber += 1
+        if currentPageNumber > pageCount {
+            currentPageNumber = pageCount
+            return
+        }
+        viewModel.getMessages(page: currentPageNumber)
+    }
+    
+    @objc func getPreviousPage() {
+        if currentPageNumber == 1 {
+            return
+        }
+        currentPageNumber -= 1
+        viewModel.getMessages(page: currentPageNumber)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -53,6 +80,9 @@ extension MessageVC: MessageVMOutputProtocol {
             print(error)
         case .success(_):
             tableView.reloadData()
+            tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+            footerView.currentPageNumberLabel.text = String(viewModel.currentPage)
+            pageCount = Int(viewModel.pageCount) ?? 0
         }
     }
 }

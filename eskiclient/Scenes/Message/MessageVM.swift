@@ -10,7 +10,7 @@ import Foundation
 import Kanna
 
 protocol MessageVMProtocol: BaseVMProtocol {
-    func getMessages()
+    func getMessages(page: Int)
     
     func openMessageDetail(url: String)
 }
@@ -29,15 +29,25 @@ final class MessageVM: MessageVMProtocol {
     }
     
     var messages = [Message]()
+    var currentPage = ""
+    var pageCount = ""
     
-    func getMessages() {
-        networkManager.getMessages(page: 1) { result in
+    func getMessages(page: Int) {
+        networkManager.getMessages(page: page) { result in
             switch result {
             case .failure(let error):
                 self.delegate?.didGetMessages(result: .failure(error))
             case .success(let response):
                 do {
+                    
+                    self.messages.removeAll()
                     let doc = try HTML(html: response, encoding: .utf8)
+                    if let currentPage = doc.xpath("//*[@id='message-thread-list-form']/div[@class='pager']/@data-currentpage").first?.text {
+                        self.currentPage = currentPage
+                    }
+                    if let pageCount = doc.xpath("//*[@id='message-thread-list-form']/div[@class='pager']/@data-pagecount").first?.text {
+                        self.pageCount = pageCount
+                    }
                     for messageContent in doc.xpath("//*[@id='threads']/li/article") {
                         if let content = messageContent.xpath("a/p").first?.text,
                             let senderUsername = messageContent.xpath("a/h2").first?.text,

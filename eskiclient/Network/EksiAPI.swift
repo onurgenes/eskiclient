@@ -95,7 +95,7 @@ extension EksiAPI: TargetType {
         case .getLatestEntries:
             return .requestPlain
         case .getMessages(let page):
-            return .requestParameters(parameters: ["q": page], encoding: NoURLEncoding())
+            return .requestParameters(parameters: ["p": page], encoding: NoURLEncoding())
         case .getMessageDetails:
             return .requestPlain
         case .heading(let url, let isWithoutDate, let focusTo, let pageNumber, let isQuery):
