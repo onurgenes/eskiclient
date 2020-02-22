@@ -64,13 +64,22 @@ final class TabBarCoordinator: Coordinator {
         if tabBarVC.viewControllers!.contains(where: { ($0 as! UINavigationController).viewControllers.first is ProfileVC }) {
             return
         }
+        
+        let messageNavController = CustomNavController()
+        let messageCoordinator = MessageCoordinator(navigationController: messageNavController)
+        messageCoordinator.parentCoordinator = self
+        childCoordinators.append(messageCoordinator)
+        messageCoordinator.start()
+        
+        tabBarVC.viewControllers?.insert(messageNavController, at: 2)
+        
         let profileNavController = CustomNavController()
         let profileCoordinator = ProfileCoordinator(navigationController: profileNavController)
         profileCoordinator.parentCoordinator = self
         childCoordinators.append(profileCoordinator)
         profileCoordinator.start()
         
-        tabBarVC.viewControllers?.append(profileNavController)
+        tabBarVC.viewControllers?.insert(profileNavController, at: 3)
     }
     
     private func removeProfile() {

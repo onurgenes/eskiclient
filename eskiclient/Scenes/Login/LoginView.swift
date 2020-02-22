@@ -20,6 +20,7 @@ final class LoginView: UIView {
     
     convenience init() {
         self.init(frame: .zero)
+        backgroundColor = .white
         
         addSubview(webView)
         

@@ -22,6 +22,9 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         setHeaderFooter()
         viewModel.getHeading(isWithoutDate: false, focusTo: "", pageNumber: nil)
         
+        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
+        tableView.separatorStyle = .none
+        
         if UserDefaults.standard.string(forKey: "currentUsername") != nil {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "entry gir", style: .plain, target: self, action: #selector(addEntry))
         }
@@ -37,8 +40,6 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         
         tableView.tableFooterView = footerView
         tableView.tableHeaderView = headerView
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
         
         headerView.showAllButton.addTarget(self, action: #selector(getEntriesWithoutDate), for: .touchUpInside)
         
@@ -87,6 +88,8 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         switch sender.state {
         case .ended:
             viewModel.getHeading(isWithoutDate: isWithoutDate, focusTo: "", pageNumber: "1")
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
         default:
             break
         }
@@ -96,6 +99,8 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         switch sender.state {
         case .ended:
             viewModel.getHeading(isWithoutDate: isWithoutDate, focusTo: "", pageNumber: viewModel.lastPageNumber)
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
         default:
             break
         }

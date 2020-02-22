@@ -22,4 +22,6 @@ protocol Networkable: AnyObject {
     func search(query: String, completion: @escaping (Result<SearchModel, Error>) -> ())
     func sendEntry(model: NewEntryModel, completion: @escaping (Result<String, Error>) -> ())
     func vote(model: Entry, isUpVote: Bool, completion: @escaping (Result<VoteResultModel, Error>) -> ())
+    func getMessages(page: Int, completion: @escaping (Result<String, Error>) -> ())
+    func getMessageDetails(threadId: Int, completion: @escaping (Result<String, Error>) -> ())
 }

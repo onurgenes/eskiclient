@@ -129,4 +129,12 @@ final class NetworkManager: Networkable {
     func sendEntry(model: NewEntryModel, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.sendEntry(model: model)) { completion($0) }
     }
+    
+    func getMessages(page: Int = 1, completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.getMessages(page: page)) { completion($0) }
+    }
+    
+    func getMessageDetails(threadId: Int, completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.getMessageDetails(id: threadId)) { completion($0)}
+    }
 }

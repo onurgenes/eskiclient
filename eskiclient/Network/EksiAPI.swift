@@ -12,7 +12,8 @@ enum EksiAPI {
     case homepage(pageNumber: Int)
     case me(username: String)
     case getLatestEntries(username: String)
-    case message
+    case getMessages(page: Int)
+    case getMessageDetails(id: Int)
     case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, isQuery: Bool)
     case entry(number: String)
     case search(query: String)
@@ -33,8 +34,10 @@ extension EksiAPI: TargetType {
             return "/biri/\(username)"
         case .getLatestEntries(let username):
             return "/basliklar/istatistik/\(username)/son-entryleri"
-        case .message:
-            return ""
+        case .getMessages:
+            return "/mesaj"
+        case .getMessageDetails(let id):
+            return "/mesaj/\(id)"
         case .heading(let url, _, _, _, let isQuery):
             if isQuery {
                 return "/"
@@ -62,7 +65,9 @@ extension EksiAPI: TargetType {
             return .get
         case .getLatestEntries:
             return .get
-        case .message:
+        case .getMessages:
+            return .get
+        case .getMessageDetails:
             return .get
         case .heading:
             return .get
@@ -89,7 +94,9 @@ extension EksiAPI: TargetType {
             return .requestPlain
         case .getLatestEntries:
             return .requestPlain
-        case .message:
+        case .getMessages(let page):
+            return .requestParameters(parameters: ["q": page], encoding: NoURLEncoding())
+        case .getMessageDetails:
             return .requestPlain
         case .heading(let url, let isWithoutDate, let focusTo, let pageNumber, let isQuery):
             if isQuery {

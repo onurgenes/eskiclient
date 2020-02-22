@@ -2,7 +2,7 @@ platform :ios, '11.0'
 
 target 'eskiclient' do
   use_frameworks!
-  pod 'Moya', '~> 14.0.0-beta.6'
+  pod 'Moya'
   pod 'Firebase/Analytics'
   pod 'Firebase/AdMob'
   pod 'Firebase/Crashlytics'
