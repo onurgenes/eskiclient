@@ -23,6 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SKPaymentQueue.default().add(iapObserver)
         }
         
+        if !UserDefaults.standard.bool(forKey: "launchedBefore") {
+            UserDefaults.standard.set(true, forKey: "isAdsAllowed")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+        }
+        
         return true
     }
     
