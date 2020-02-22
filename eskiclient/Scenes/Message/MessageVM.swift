@@ -51,7 +51,7 @@ final class MessageVM: MessageVMProtocol {
                     for messageContent in doc.xpath("//*[@id='threads']/li/article") {
                         if let content = messageContent.xpath("a/p").first?.text,
                             let senderUsername = messageContent.xpath("a/h2").first?.text,
-                            let date = messageContent.xpath("footer/time").first?.text,
+                            let date = messageContent.xpath("footer/time/@title").first?.text,
                             let threadId = doc.css("input[name^=threadId]").first?["value"],
                             let url = messageContent.xpath("a/@href").first?.text {
                             
@@ -59,8 +59,18 @@ final class MessageVM: MessageVMProtocol {
                             self.messages.append(message)
                         }
                     }
-                    
                     self.delegate?.didGetMessages(result: .success(self.messages))
+                    
+                    if let latestMessageDateString = self.messages.first?.date {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+                        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                        dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
+                        
+                        let savingDate = dateFormatter.date(from: latestMessageDateString)
+                        UserDefaults.standard.set(savingDate, forKey: "lastMessageDate")
+                    }
+                    
                 } catch let error {
                     self.delegate?.didGetMessages(result: .failure(error))
                 }
