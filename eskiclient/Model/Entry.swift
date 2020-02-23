@@ -13,14 +13,16 @@ final class Entry: NSObject {
     let author: String
     let date: String
     let favoritesCount: String
+    let isFavorited: Bool
     let entryId: String
     let authorId: String
     
-    init(content: NSAttributedString, author: String, date: String, favoritesCount: String, entryId: String, authorId: String) {
+    init(content: NSAttributedString, author: String, date: String, favoritesCount: String, entryId: String, authorId: String, isFavorited: Bool) {
         self.content = content
         self.author = author
         self.date = date
         self.favoritesCount = favoritesCount
+        self.isFavorited = isFavorited
         self.entryId = entryId
         self.authorId = authorId
     }

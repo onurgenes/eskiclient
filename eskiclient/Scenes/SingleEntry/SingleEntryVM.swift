@@ -45,7 +45,9 @@ final class SingleEntryVM: SingleEntryVMProtocol {
                         let date = baslik?.xpath("footer/div[@class='info']/a[@class='entry-date permalink']").first?.text,
                         let favoriteCount = baslik?.xpath("@data-favorite-count").first?.text,
                         let entryId = baslik?.xpath("@data-id").first?.text,
-                        let authorId = baslik?.xpath("@data-author-id").first?.text {
+                        let authorId = baslik?.xpath("@data-author-id").first?.text,
+                        let isFavorited = baslik?.xpath("@data-isfavorite").first?.text  {
+                        
                         let attributedString = try NSMutableAttributedString(data: entry,
                                                                              options: [.documentType: NSAttributedString.DocumentType.html,
                                                                                        .characterEncoding: String.Encoding.utf8.rawValue],
@@ -55,7 +57,8 @@ final class SingleEntryVM: SingleEntryVMProtocol {
                         if #available(iOS 13.0, *) {
                             attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: NSRange(location: 0, length: attributedString.length))
                         }
-                        let entry = Entry(content: attributedString.trimWhiteSpace(), author: author, date: date, favoritesCount: favoriteCount, entryId: entryId, authorId: authorId)
+                        // TODO FAV
+                        let entry = Entry(content: attributedString.trimWhiteSpace(), author: author, date: date, favoritesCount: favoriteCount, entryId: entryId, authorId: authorId, isFavorited: isFavorited == "true" ? true : false)
                         self.entry = entry
                     }
                     

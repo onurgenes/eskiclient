@@ -134,6 +134,14 @@ extension HeadingVC: HeadingVMOutputProtocol {
     func failedFav(error: Error) {
         SwiftMessagesViewer.error(message: error.localizedDescription)
     }
+    
+    func didRemoveFav(isSuccess: Bool) {
+        SwiftMessagesViewer.success(title: "fav kalktı", backgroundColor: R.color.themeMain()!)
+    }
+    
+    func failedRemoveFav(error: Error) {
+        SwiftMessagesViewer.error(message: error.localizedDescription)
+    }
 }
 
 extension HeadingVC: HeadingTappedDelegate {
@@ -171,9 +179,16 @@ extension HeadingVC: HeadingTappedDelegate {
             let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             self.present(ac, animated: true)
         }))
-        ac.addAction(UIAlertAction(title: "favla", style: .default, handler: { _ in
-            self.viewModel.fav(entryId: entry.entryId)
-        }))
+        if entry.isFavorited {
+            ac.addAction(UIAlertAction(title: "favlama", style: .default, handler: { _ in
+                self.viewModel.removeFav(entryId: entry.entryId)
+            }))
+        } else {
+            ac.addAction(UIAlertAction(title: "favla", style: .default, handler: { _ in
+                self.viewModel.fav(entryId: entry.entryId)
+            }))
+        }
+        
         ac.addAction(UIAlertAction(title: "yukarı oyla", style: .default, handler: { _ in
             self.viewModel.vote(entry: entry, isUpVote: true)
         }))

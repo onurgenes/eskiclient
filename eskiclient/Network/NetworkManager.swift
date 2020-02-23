@@ -130,6 +130,10 @@ final class NetworkManager: Networkable {
         fetchModel(.fav(entryId: entryId)) { completion($0) }
     }
     
+    func removeFav(entryId: String, completion: @escaping (Result<FavResultModel, Error>) -> ()) {
+        fetchModel(.removeFav(entryId: entryId)) { completion($0) }
+    }
+    
     func sendEntry(model: NewEntryModel, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.sendEntry(model: model)) { completion($0) }
     }

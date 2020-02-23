@@ -110,6 +110,11 @@ final class HeadingCell: UITableViewCell {
         authorButton.setTitle(entry.author, for: .normal)
         dateButton.setTitle(entry.date, for: .normal)
         favoriteCountLabel.text = entry.favoritesCount + " favori"
+        if entry.isFavorited {
+            favoriteCountLabel.textColor = R.color.themeMain()
+        } else {
+            favoriteCountLabel.textColor = nil
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

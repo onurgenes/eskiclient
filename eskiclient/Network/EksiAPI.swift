@@ -20,6 +20,7 @@ enum EksiAPI {
     case sendEntry(model: NewEntryModel)
     case vote(model: Entry, isUpVote: Bool)
     case fav(entryId: String)
+    case removeFav(entryId: String)
 }
 
 extension EksiAPI: TargetType {
@@ -57,6 +58,8 @@ extension EksiAPI: TargetType {
             return "/entry/vote"
         case .fav:
             return "/entry/favla"
+        case .removeFav:
+            return "/entry/favlama"
         }
     }
     
@@ -83,6 +86,8 @@ extension EksiAPI: TargetType {
         case .vote:
             return .post
         case .fav:
+            return .post
+        case .removeFav:
             return .post
         }
     }
@@ -143,12 +148,14 @@ extension EksiAPI: TargetType {
                                                    "rate": isUpVote ? "1" : "-1"], encoding: URLEncoding.default)
         case .fav(let entryId):
             return .requestParameters(parameters: ["entryId": entryId], encoding: URLEncoding.default)
+        case .removeFav(let entryId):
+            return .requestParameters(parameters: ["entryId": entryId], encoding: URLEncoding.default)
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .search, .sendEntry, .vote, .fav:
+        case .search, .sendEntry, .vote, .fav, .removeFav:
             return ["X-Requested-With": "XMLHttpRequest"]
         default:
             return nil

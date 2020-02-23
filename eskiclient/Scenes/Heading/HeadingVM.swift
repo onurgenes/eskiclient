@@ -17,6 +17,7 @@ protocol HeadingVMProtocol: BaseVMProtocol {
     func openOutsideLink(url: URL)
     func vote(entry: Entry, isUpVote: Bool)
     func fav(entryId: String)
+    func removeFav(entryId: String)
     func openAddEntry()
 }
 
@@ -27,6 +28,8 @@ protocol HeadingVMOutputProtocol: BaseVMOutputProtocol {
     func failedVote(error: Error)
     func didFav(isSucces: Bool)
     func failedFav(error: Error)
+    func didRemoveFav(isSuccess: Bool)
+    func failedRemoveFav(error: Error)
 }
 
 final class HeadingVM: HeadingVMProtocol {
@@ -98,7 +101,9 @@ final class HeadingVM: HeadingVMProtocol {
                             let date = baslik.xpath("footer/div[@class='info']/a[@class='entry-date permalink']").first?.text,
                             let favoriteCount = baslik.xpath("@data-favorite-count").first?.text,
                             let entryId = baslik.xpath("@data-id").first?.text,
-                            let authorId = baslik.xpath("@data-author-id").first?.text  {
+                            let authorId = baslik.xpath("@data-author-id").first?.text,
+                            let isFavorited = baslik.xpath("@data-isfavorite").first?.text {
+                            
                             let attributedString = try NSMutableAttributedString(data: entry,
                                                                                  options: [.documentType: NSAttributedString.DocumentType.html,
                                                                                            .characterEncoding: String.Encoding.utf8.rawValue],
@@ -108,7 +113,8 @@ final class HeadingVM: HeadingVMProtocol {
                             if #available(iOS 13.0, *) {
                                 attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: NSRange(location: 0, length: attributedString.length))
                             }
-                            let entry = Entry(content: attributedString.trimWhiteSpace(), author: author, date: date, favoritesCount: favoriteCount, entryId: entryId, authorId: authorId)
+                            
+                            let entry = Entry(content: attributedString.trimWhiteSpace(), author: author, date: date, favoritesCount: favoriteCount, entryId: entryId, authorId: authorId, isFavorited: isFavorited == "true" ? true : false)
                             self.entries.append(entry)
                         }
                     }
@@ -162,6 +168,18 @@ final class HeadingVM: HeadingVMProtocol {
             case .success(let favModel):
                 guard let success = favModel.success else { return }
                 self.delegate?.didFav(isSucces: success)
+            }
+        }
+    }
+    
+    func removeFav(entryId: String) {
+        networkManager.removeFav(entryId: entryId) { result in
+            switch result {
+            case .failure(let error):
+                self.delegate?.failedRemoveFav(error: error)
+            case .success(let favModel):
+                guard let success = favModel.success else { return }
+                self.delegate?.didRemoveFav(isSuccess: success)
             }
         }
     }
