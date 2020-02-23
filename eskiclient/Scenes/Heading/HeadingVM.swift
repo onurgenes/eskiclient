@@ -16,6 +16,7 @@ protocol HeadingVMProtocol: BaseVMProtocol {
     func openSelectedEntry(number: String)
     func openOutsideLink(url: URL)
     func vote(entry: Entry, isUpVote: Bool)
+    func fav(entryId: String)
     func openAddEntry()
 }
 
@@ -24,6 +25,8 @@ protocol HeadingVMOutputProtocol: BaseVMOutputProtocol {
     func failedGetHeading(error: Error)
     func didVote(message: String)
     func failedVote(error: Error)
+    func didFav(isSucces: Bool)
+    func failedFav(error: Error)
 }
 
 final class HeadingVM: HeadingVMProtocol {
@@ -147,6 +150,18 @@ final class HeadingVM: HeadingVMProtocol {
                 self.delegate?.didVote(message: message)
             case .failure(let error):
                 self.delegate?.failedVote(error: error)
+            }
+        }
+    }
+    
+    func fav(entryId: String) {
+        networkManager.fav(entryId: entryId) { result in
+            switch result {
+            case .failure(let error):
+                self.delegate?.failedFav(error: error)
+            case .success(let favModel):
+                guard let success = favModel.success else { return }
+                self.delegate?.didFav(isSucces: success)
             }
         }
     }

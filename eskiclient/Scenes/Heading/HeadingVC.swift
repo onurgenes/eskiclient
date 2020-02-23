@@ -126,6 +126,14 @@ extension HeadingVC: HeadingVMOutputProtocol {
     func failedVote(error: Error) {
         SwiftMessagesViewer.error(message: error.localizedDescription)
     }
+    
+    func didFav(isSucces: Bool) {
+        SwiftMessagesViewer.success(title: "favlandı", backgroundColor: R.color.themeMain()!)
+    }
+    
+    func failedFav(error: Error) {
+        SwiftMessagesViewer.error(message: error.localizedDescription)
+    }
 }
 
 extension HeadingVC: HeadingTappedDelegate {
@@ -162,6 +170,9 @@ extension HeadingVC: HeadingTappedDelegate {
             guard let url = URL(string: "https://eksisozluk.com/entry/" + entry.entryId) else { return }
             let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             self.present(ac, animated: true)
+        }))
+        ac.addAction(UIAlertAction(title: "favla", style: .default, handler: { _ in
+            self.viewModel.fav(entryId: entry.entryId)
         }))
         ac.addAction(UIAlertAction(title: "yukarı oyla", style: .default, handler: { _ in
             self.viewModel.vote(entry: entry, isUpVote: true)

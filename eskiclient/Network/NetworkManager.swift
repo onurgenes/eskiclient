@@ -126,6 +126,10 @@ final class NetworkManager: Networkable {
         fetchModel(.vote(model: model, isUpVote: isUpVote)) { completion($0) }
     }
     
+    func fav(entryId: String, completion: @escaping (Result<FavResultModel, Error>) -> ()) {
+        fetchModel(.fav(entryId: entryId)) { completion($0) }
+    }
+    
     func sendEntry(model: NewEntryModel, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.sendEntry(model: model)) { completion($0) }
     }

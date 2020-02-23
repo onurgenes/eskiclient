@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.0.0)
+  - Alamofire (5.0.1)
   - ContextMenu (0.5.1)
   - Eureka (5.2.0)
   - Firebase/AdMob (6.17.0):
@@ -109,7 +109,7 @@ DEPENDENCIES:
   - Firebase/Crashlytics
   - FontAwesome.swift
   - Kanna
-  - Moya (~> 14.0.0-beta.6)
+  - Moya
   - R.swift
   - SwiftEntryKit
   - TinyConstraints
@@ -153,7 +153,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/GitHawkApp/ContextMenu.git
 
 SPEC CHECKSUMS:
-  Alamofire: 58ff2bfb8daaacaa233d5c36e37b10a5248f59b1
+  Alamofire: 41c162d645ba6a78e7fd030fcdaf6aa394ca39a0
   ContextMenu: 08e6f8c653ba1944764b1d3d2a31dd1046011412
   Eureka: 820a761c700f6eaab3b60758f138e0d9b99072b3
   Firebase: 2672e5636b42f977177716317e68346ae5e9de25
@@ -181,6 +181,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: 504b5fa18360cb0d89e18188dbbebd5c134faad0
+PODFILE CHECKSUM: de41c4bbad17af511ff1ee79944a8e4814d1a9db
 
 COCOAPODS: 1.8.4
