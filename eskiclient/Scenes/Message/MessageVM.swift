@@ -8,6 +8,7 @@
 
 import Foundation
 import Kanna
+import FirebaseAnalytics
 
 protocol MessageVMProtocol: BaseVMProtocol {
     func getMessages(page: Int)
@@ -33,6 +34,8 @@ final class MessageVM: MessageVMProtocol {
     var pageCount = ""
     
     func getMessages(page: Int) {
+        // ANALYTICS
+        Analytics.logEvent("messagesRequested", parameters: ["isMessagesRequested": true])
         networkManager.getMessages(page: page) { result in
             switch result {
             case .failure(let error):

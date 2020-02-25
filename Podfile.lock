@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.0.1)
+  - Alamofire (5.0.2)
   - ContextMenu (0.5.1)
   - Eureka (5.2.0)
   - Firebase/AdMob (6.17.0):
@@ -153,7 +153,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/GitHawkApp/ContextMenu.git
 
 SPEC CHECKSUMS:
-  Alamofire: 41c162d645ba6a78e7fd030fcdaf6aa394ca39a0
+  Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
   ContextMenu: 08e6f8c653ba1944764b1d3d2a31dd1046011412
   Eureka: 820a761c700f6eaab3b60758f138e0d9b99072b3
   Firebase: 2672e5636b42f977177716317e68346ae5e9de25

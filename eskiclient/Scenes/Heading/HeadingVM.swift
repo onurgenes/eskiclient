@@ -8,6 +8,7 @@
 
 import Foundation
 import Kanna
+import FirebaseAnalytics
 
 protocol HeadingVMProtocol: BaseVMProtocol {
     func getHeading(isWithoutDate: Bool, focusTo: String, pageNumber: String?)
@@ -69,6 +70,8 @@ final class HeadingVM: HeadingVMProtocol {
                     }
                     if let title = doc.title, let seperatedTitle = title.split(separator: "-").first {
                         self.title = String(seperatedTitle)
+                        // ANALYTICS
+                        Analytics.logEvent("openedHeadingTitle", parameters: ["title": title])
                     }
                     if let token = doc.css("input[name^=__RequestVerificationToken]").first?["value"] {
                         self.newEntryModel.token = token

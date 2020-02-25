@@ -6,7 +6,7 @@
 //  Copyright © 2019 Onur Geneş. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum OnboardPages: CaseIterable {
     case pageZero
@@ -14,16 +14,16 @@ enum OnboardPages: CaseIterable {
     case pageTwo
     case pageThree
     
-    var name: String {
+    var view: UIView {
         switch self {
         case .pageZero:
-            return "This is page zero"
+            return UIView()
         case .pageOne:
-            return "This is page one"
+            return UIView()
         case .pageTwo:
-            return "This is page two"
+            return UIView()
         case .pageThree:
-            return "This is page three"
+            return UIView()
         }
     }
     

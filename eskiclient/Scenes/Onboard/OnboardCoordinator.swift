@@ -26,4 +26,8 @@ final class OnboardCoordinator: Coordinator {
         vm.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
+    
+    func finish() {
+        app.start()
+    }
 }

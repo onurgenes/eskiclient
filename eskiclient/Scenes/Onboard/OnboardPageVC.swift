@@ -7,16 +7,16 @@
 //
 
 import UIKit
+import TinyConstraints
 
 class OnboardPageVC: UIViewController {
     
-    var titleLabel: UILabel?
-    
     var page: OnboardPages
+    let onboardView: UIView
     
-    init(with page: OnboardPages) {
+    init(with page: OnboardPages, onboardView: UIView) {
         self.page = page
-        
+        self.onboardView = onboardView
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,10 +27,6 @@ class OnboardPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-        titleLabel?.center = CGPoint(x: 160, y: 250)
-        titleLabel?.textAlignment = NSTextAlignment.center
-        titleLabel?.text = page.name
-        self.view.addSubview(titleLabel!)
+        
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Eureka
+import FirebaseAnalytics
 
 final class SettingsVC: FormViewController {
     
@@ -74,7 +75,10 @@ final class SettingsVC: FormViewController {
                         <<< ButtonRow() {
                             $0.tag = product.productIdentifier
                             $0.hidden = Condition.function(["isAdsAllowed"], { form in
-                                return ((form.rowBy(tag: "isAdsAllowed") as? SwitchRow)?.value ?? false)
+                                let formValue = ((form.rowBy(tag: "isAdsAllowed") as? SwitchRow)?.value ?? false)
+                                // ANALYTICS
+                                Analytics.logEvent("isAdsAllowed", parameters: ["allowed": formValue])
+                                return formValue
                             })
                             var productTitle = ""
                             if product.productIdentifier == "com.onurgenes.eskiclient.kucukbagis" {

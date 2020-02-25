@@ -24,13 +24,23 @@ final class AppCoordinator: Coordinator {
     }
     
     func start() {
-//        if UserDefaults.standard.bool(forKey: "isReturningUser") {
-            let tabBarCoordinator = TabBarCoordinator()
-            tabBarCoordinator.parentCoordinator = self
-            childCoordinators.append(tabBarCoordinator)
-            tabBarCoordinator.start()
+        if !UserDefaults.standard.bool(forKey: "launchedBefore") {
+            UserDefaults.standard.set(true, forKey: "isAdsAllowed")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+        }
+        let tabBarCoordinator = TabBarCoordinator()
+        tabBarCoordinator.parentCoordinator = self
+        childCoordinators.append(tabBarCoordinator)
+        tabBarCoordinator.start()
+//        if UserDefaults.standard.bool(forKey: "launchedBefore") {
+//            let tabBarCoordinator = TabBarCoordinator()
+//            tabBarCoordinator.parentCoordinator = self
+//            childCoordinators.append(tabBarCoordinator)
+//            tabBarCoordinator.start()
 //            return
 //        }
+//        UserDefaults.standard.set(true, forKey: "isAdsAllowed")
+//        UserDefaults.standard.set(true, forKey: "launchedBefore")
 //        startOnboarding()
     }
     

@@ -28,7 +28,7 @@ final class OnboardVC: BaseVC<OnboardVM, OnboardView> {
         self.addChild(self.pageController)
         self.view.addSubview(self.pageController.view)
         self.pageController.view.edgesToSuperview()
-        let initialVC = OnboardPageVC(with: pages[0])
+        let initialVC = OnboardPageVC(with: pages[0], onboardView: pages[0].view)
         self.pageController.setViewControllers([initialVC], direction: .forward, animated: true, completion: nil)
         
         self.pageController.didMove(toParent: self)
@@ -41,40 +41,28 @@ extension OnboardVC: OnboardVMOutputProtocol {
 
 extension OnboardVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
         guard let currentVC = viewController as? OnboardPageVC else {
             return nil
         }
-        
         var index = currentVC.page.index
-        
         if index == 0 {
             return nil
         }
-        
         index -= 1
-        
-        let vc = OnboardPageVC(with: pages[index])
-        
+        let vc = OnboardPageVC(with: pages[index], onboardView: pages[index].view)
         return vc
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        
         guard let currentVC = viewController as? OnboardPageVC else {
             return nil
         }
-        
         var index = currentVC.page.index
-        
         if index >= self.pages.count - 1 {
             return nil
         }
-        
         index += 1
-        
-        let vc = OnboardPageVC(with: pages[index])
-        
+        let vc = OnboardPageVC(with: pages[index], onboardView: pages[index].view)
         return vc
     }
     

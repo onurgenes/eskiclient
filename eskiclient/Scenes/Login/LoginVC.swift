@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import FirebaseAnalytics
 
 final class LoginVC: BaseVC<LoginVM, LoginView> {
     
@@ -31,10 +32,13 @@ extension LoginVC: WKNavigationDelegate {
             WKWebsiteDataStore.default().httpCookieStore.getAllCookies { (cookies) in
                 CookieJar.save(cookies: cookies)
                 DispatchQueue.main.async {
+                    // ANALYTICS
+                    Analytics.logEvent("userLoggedIn", parameters: ["userLoggedIn": true])
+                    
                     NotificationCenter.default.post(name: .checkLoginNotificationName, object: nil, userInfo: nil)
                     UIApplication.shared.endIgnoringInteractionEvents()
                 }
             }
-        }
+        } 
     }
 }
