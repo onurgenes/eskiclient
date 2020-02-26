@@ -35,6 +35,7 @@ extension LoginVC: WKNavigationDelegate {
                     // ANALYTICS
                     Analytics.logEvent("userLoggedIn", parameters: ["userLoggedIn": true])
                     
+                    UserDefaults.standard.set(true, forKey: "userLoggedIn")
                     NotificationCenter.default.post(name: .checkLoginNotificationName, object: nil, userInfo: nil)
                     UIApplication.shared.endIgnoringInteractionEvents()
                 }

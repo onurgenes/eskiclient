@@ -25,17 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SKPaymentQueue.default().add(iapObserver)
         }
         
-        UIApplication.shared.setMinimumBackgroundFetchInterval(3600)
-        
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (granted, error) in
-            if let error = error {
-                NSLog(error.localizedDescription)
-            }
-            
-            Analytics.logEvent("grantedNotificationPermission", parameters: ["isGranted": granted])
-        }
-        
         return true
     }
     
