@@ -25,6 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SKPaymentQueue.default().add(iapObserver)
         }
         
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
+            default:
+                break
+            }
+        }
+        
         return true
     }
     
