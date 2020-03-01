@@ -27,4 +27,5 @@ protocol Networkable: AnyObject {
     
     func getMessages(page: Int, completion: @escaping (Result<String, Error>) -> ())
     func getMessageDetails(threadId: Int, completion: @escaping (Result<String, Error>) -> ())
+    func sendMessage(model: NewMessageModel, completion: @escaping (Result<String, Error>) -> ())
 }

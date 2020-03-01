@@ -10,14 +10,26 @@ import UIKit
 
 final class MessageDetailVC: BaseTableVC<MessageDetailVM, MessageDetailCell> {
     
+    private let footerView = MessageDetailFooterView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel.getMessageDetails()
         
+        footerView.frame.size.height = 200
+        tableView.tableFooterView = footerView
         tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         tableView.separatorStyle = .none
+        
+        footerView.sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+    }
+    
+    @objc func sendMessage() {
+        guard let messageText = footerView.messageTextView.text else { return }
+        viewModel.newMessageModel.message = messageText
+        viewModel.sendMessage()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

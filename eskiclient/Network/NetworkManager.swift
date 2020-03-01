@@ -145,4 +145,8 @@ final class NetworkManager: Networkable {
     func getMessageDetails(threadId: Int, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.getMessageDetails(id: threadId)) { completion($0)}
     }
+    
+    func sendMessage(model: NewMessageModel, completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.sendMessage(model: model)) { completion($0) }
+    }
 }

@@ -14,6 +14,7 @@ enum EksiAPI {
     case getLatestEntries(username: String)
     case getMessages(page: Int)
     case getMessageDetails(id: Int)
+    case sendMessage(model: NewMessageModel)
     case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, isQuery: Bool)
     case entry(number: String)
     case search(query: String)
@@ -40,6 +41,8 @@ extension EksiAPI: TargetType {
             return "/mesaj"
         case .getMessageDetails(let id):
             return "/mesaj/\(id)"
+        case .sendMessage:
+            return "/mesaj/yolla"
         case .heading(let url, _, _, _, let isQuery):
             if isQuery {
                 return "/"
@@ -75,6 +78,8 @@ extension EksiAPI: TargetType {
             return .get
         case .getMessageDetails:
             return .get
+        case .sendMessage:
+            return .post
         case .heading:
             return .get
         case .entry:
@@ -108,6 +113,12 @@ extension EksiAPI: TargetType {
             return .requestParameters(parameters: ["p": page], encoding: NoURLEncoding())
         case .getMessageDetails:
             return .requestPlain
+        case .sendMessage(let model):
+            return .requestParameters(parameters: [ "Message": model.message,
+                                                    "IsReply": model.isReply,
+                                                    "ThreadId": model.threadId,
+                                                    "__RequestVerificationToken": model.token,
+                                                    "To": model.to], encoding: URLEncoding.default)
         case .heading(let url, let isWithoutDate, let focusTo, let pageNumber, let isQuery):
             if isQuery {
                 let path = url.split(separator: "=").last ?? ""
@@ -155,7 +166,7 @@ extension EksiAPI: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .search, .sendEntry, .vote, .fav, .removeFav:
+        case .search, .sendEntry, .vote, .fav, .removeFav, .sendMessage:
             return ["X-Requested-With": "XMLHttpRequest"]
         default:
             return nil
