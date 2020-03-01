@@ -29,6 +29,7 @@ final class HeadingCell: UITableViewCell {
         tv.isScrollEnabled = false
         tv.dataDetectorTypes = [.link]
         tv.isEditable = false
+        tv.tintColor = R.color.themeMainDark()
         return tv
     }()
     
