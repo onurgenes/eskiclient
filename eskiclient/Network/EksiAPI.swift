@@ -14,7 +14,7 @@ enum EksiAPI {
     case getLatestEntries(username: String)
     case getMessages(page: Int)
     case getMessageDetails(id: Int)
-    case sendMessage(model: NewMessageModel)
+    case sendNewMessage(model: NewMessageModel)
     case heading(url: String, isWithoutDate: Bool, focusTo: String, pageNumber: String?, isQuery: Bool)
     case entry(number: String)
     case search(query: String)
@@ -41,7 +41,7 @@ extension EksiAPI: TargetType {
             return "/mesaj"
         case .getMessageDetails(let id):
             return "/mesaj/\(id)"
-        case .sendMessage:
+        case .sendNewMessage:
             return "/mesaj/yolla"
         case .heading(let url, _, _, _, let isQuery):
             if isQuery {
@@ -78,7 +78,7 @@ extension EksiAPI: TargetType {
             return .get
         case .getMessageDetails:
             return .get
-        case .sendMessage:
+        case .sendNewMessage:
             return .post
         case .heading:
             return .get
@@ -113,7 +113,7 @@ extension EksiAPI: TargetType {
             return .requestParameters(parameters: ["p": page], encoding: NoURLEncoding())
         case .getMessageDetails:
             return .requestPlain
-        case .sendMessage(let model):
+        case .sendNewMessage(let model):
             return .requestParameters(parameters: [ "Message": model.message,
                                                     "IsReply": model.isReply,
                                                     "ThreadId": model.threadId,
@@ -166,7 +166,7 @@ extension EksiAPI: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .search, .sendEntry, .vote, .fav, .removeFav, .sendMessage:
+        case .search, .sendEntry, .vote, .fav, .removeFav, .sendNewMessage:
             return ["X-Requested-With": "XMLHttpRequest"]
         default:
             return nil

@@ -23,10 +23,10 @@ final class MessageDetailVC: BaseTableVC<MessageDetailVM, MessageDetailCell> {
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         tableView.separatorStyle = .none
         
-        footerView.sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        footerView.sendButton.addTarget(self, action: #selector(sendNewMessage), for: .touchUpInside)
     }
     
-    @objc func sendMessage() {
+    @objc func sendNewMessage() {
         guard let messageText = footerView.messageTextView.text else { return }
         viewModel.newMessageModel.message = messageText
         viewModel.sendMessage()
