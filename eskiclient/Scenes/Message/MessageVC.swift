@@ -88,11 +88,13 @@ extension MessageVC: MessageVMOutputProtocol {
         switch result {
         case .failure(let error):
             print(error)
-        case .success(_):
+        case .success(let messages):
             tableView.reloadData()
-            tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-            footerView.currentPageNumberLabel.text = String(viewModel.currentPage)
-            pageCount = Int(viewModel.pageCount) ?? 0
+            if messages.count > 0 {
+                tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                footerView.currentPageNumberLabel.text = String(viewModel.currentPage)
+                pageCount = Int(viewModel.pageCount) ?? 0
+            }
         }
     }
 }
