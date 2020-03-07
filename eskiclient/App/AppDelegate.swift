@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MoPub
 import Kanna
 
 @UIApplicationMain
@@ -21,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["5221ff4276388f681e7dea644060adaa", kGADSimulatorID as! String]
+        let mopubSDKConfig = MPMoPubConfiguration(adUnitIdForAppInitialization: "e1943fd37c5f4651b72943e6db1e5ee7")
+        MoPub.sharedInstance().initializeSdk(with: mopubSDKConfig)
+        
         if iapObserver.isAuthorizedForPayments {
             SKPaymentQueue.default().add(iapObserver)
         }

@@ -64,6 +64,9 @@ PODS:
   - GoogleDataTransportCCTSupport (1.4.1):
     - GoogleDataTransport (~> 4.0)
     - nanopb (~> 0.3.901)
+  - GoogleMobileAdsMediationMoPub (5.10.0.0):
+    - Google-Mobile-Ads-SDK (>= 7.52.0)
+    - mopub-ios-sdk/Core (= 5.10.0)
   - GoogleUtilities/AppDelegateSwizzler (6.5.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -83,6 +86,7 @@ PODS:
   - GoogleUtilities/UserDefaults (6.5.1):
     - GoogleUtilities/Logger
   - Kanna (5.0.0)
+  - mopub-ios-sdk/Core (5.10.0)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
@@ -108,6 +112,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - FontAwesome.swift
+  - GoogleMobileAdsMediationMoPub
   - Kanna
   - Moya
   - R.swift
@@ -132,8 +137,10 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
+    - GoogleMobileAdsMediationMoPub
     - GoogleUtilities
     - Kanna
+    - mopub-ios-sdk
     - Moya
     - nanopb
     - PromisesObjC
@@ -170,8 +177,10 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 39ecba10918b21c83877d392246157f65db351cf
   GoogleDataTransport: 653963cf5be60fb59cf051e070f0836fdc305f81
   GoogleDataTransportCCTSupport: 84e4d4bbab642f2e9d83ee65d78aca2b5527d314
+  GoogleMobileAdsMediationMoPub: 2da3fe1802746259585edbff8aac232164c1f09c
   GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
+  mopub-ios-sdk: 3d65133b95b6498aa871a66818a11a5ba307e565
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
@@ -181,6 +190,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: de41c4bbad17af511ff1ee79944a8e4814d1a9db
+PODFILE CHECKSUM: e50ed17eea4a806a1bf3beb7b57b9ed0a80ff769
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.0

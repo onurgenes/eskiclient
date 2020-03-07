@@ -5,6 +5,7 @@ target 'eskiclient' do
   pod 'Moya'
   pod 'Firebase/Analytics'
   pod 'Firebase/AdMob'
+  pod 'GoogleMobileAdsMediationMoPub'
   pod 'Firebase/Crashlytics'
   pod 'Kanna'
   pod 'TinyConstraints'
