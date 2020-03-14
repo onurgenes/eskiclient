@@ -7,6 +7,7 @@ target 'eskiclient' do
   pod 'Firebase/AdMob'
   pod 'GoogleMobileAdsMediationMoPub'
   pod 'Firebase/Crashlytics'
+  pod 'Firebase/Performance'
   pod 'Kanna'
   pod 'TinyConstraints'
   pod 'SwiftEntryKit', :inhibit_warnings => true
