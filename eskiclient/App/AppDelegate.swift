@@ -18,12 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["5221ff4276388f681e7dea644060adaa", kGADSimulatorID as! String]
-        let mopubSDKConfig = MPMoPubConfiguration(adUnitIdForAppInitialization: "e1943fd37c5f4651b72943e6db1e5ee7")
-        MoPub.sharedInstance().initializeSdk(with: mopubSDKConfig)
         FirebaseApp.configure()
-        
         app.start()
         
         if iapObserver.isAuthorizedForPayments {

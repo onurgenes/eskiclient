@@ -8,6 +8,7 @@ target 'eskiclient' do
   pod 'GoogleMobileAdsMediationMoPub'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Performance'
+  pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['Debug']
   pod 'Kanna'
   pod 'TinyConstraints'
   pod 'SwiftEntryKit', :inhibit_warnings => true

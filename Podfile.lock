@@ -1,21 +1,21 @@
 PODS:
-  - Alamofire (5.0.2)
+  - Alamofire (5.0.4)
   - ContextMenu (0.5.1)
   - Eureka (5.2.0)
-  - Firebase/AdMob (6.19.0):
+  - Firebase/AdMob (6.20.0):
     - Firebase/CoreOnly
     - Google-Mobile-Ads-SDK (~> 7.50)
-  - Firebase/Analytics (6.19.0):
+  - Firebase/Analytics (6.20.0):
     - Firebase/Core
-  - Firebase/Core (6.19.0):
+  - Firebase/Core (6.20.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.3.1)
-  - Firebase/CoreOnly (6.19.0):
+  - Firebase/CoreOnly (6.20.0):
     - FirebaseCore (= 6.6.4)
-  - Firebase/Crashlytics (6.19.0):
+  - Firebase/Crashlytics (6.20.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 4.0.0-beta.5)
-  - Firebase/Performance (6.19.0):
+  - Firebase/Performance (6.20.0):
     - Firebase/CoreOnly
     - FirebasePerformance (~> 3.1.10)
   - FirebaseABTesting (3.2.0):
@@ -93,32 +93,154 @@ PODS:
   - GoogleMobileAdsMediationMoPub (5.10.0.1):
     - Google-Mobile-Ads-SDK (>= 7.56.0)
     - mopub-ios-sdk/Core (= 5.10.0)
+  - GoogleMobileAdsMediationTestSuite (1.2.0):
+    - Google-Mobile-Ads-SDK (>= 7.47.0)
+    - MaterialComponents/Cards (~> 103.0)
+    - MaterialComponents/Dialogs (~> 103.0)
+    - "MaterialComponents/Dialogs+DialogThemer (~> 103.0)"
+    - MaterialComponents/Tabs (~> 103.0)
   - GoogleToolboxForMac/Defines (2.2.2)
   - GoogleToolboxForMac/Logger (2.2.2):
     - GoogleToolboxForMac/Defines (= 2.2.2)
   - "GoogleToolboxForMac/NSData+zlib (2.2.2)":
     - GoogleToolboxForMac/Defines (= 2.2.2)
-  - GoogleUtilities/AppDelegateSwizzler (6.5.1):
+  - GoogleUtilities/AppDelegateSwizzler (6.5.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.5.1)
-  - GoogleUtilities/ISASwizzler (6.5.1)
-  - GoogleUtilities/Logger (6.5.1):
+  - GoogleUtilities/Environment (6.5.2)
+  - GoogleUtilities/ISASwizzler (6.5.2)
+  - GoogleUtilities/Logger (6.5.2):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.5.1):
+  - GoogleUtilities/MethodSwizzler (6.5.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.5.1):
+  - GoogleUtilities/Network (6.5.2):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.5.1)"
-  - GoogleUtilities/Reachability (6.5.1):
+  - "GoogleUtilities/NSData+zlib (6.5.2)"
+  - GoogleUtilities/Reachability (6.5.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.5.1):
+  - GoogleUtilities/UserDefaults (6.5.2):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.3.1)
   - Kanna (5.0.0)
+  - MaterialComponents/AnimationTiming (103.1.0)
+  - MaterialComponents/Buttons (103.1.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Shapes
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - "MaterialComponents/Buttons+ButtonThemer (103.1.0)":
+    - MaterialComponents/Buttons
+    - "MaterialComponents/Buttons+ColorThemer"
+    - "MaterialComponents/Buttons+ShapeThemer"
+    - "MaterialComponents/Buttons+TypographyThemer"
+    - MaterialComponents/Palettes
+  - "MaterialComponents/Buttons+ColorThemer (103.1.0)":
+    - MaterialComponents/Buttons
+    - MaterialComponents/schemes/Color
+  - "MaterialComponents/Buttons+ShapeThemer (103.1.0)":
+    - MaterialComponents/Buttons
+    - MaterialComponents/schemes/Shape
+  - "MaterialComponents/Buttons+TypographyThemer (103.1.0)":
+    - MaterialComponents/Buttons
+    - MaterialComponents/schemes/Typography
+  - MaterialComponents/Cards (103.1.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Icons/ic_check_circle
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Shapes
+  - MaterialComponents/Dialogs (103.1.0):
+    - MaterialComponents/Buttons
+    - MaterialComponents/Elevation
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+    - MDFInternationalization
+  - "MaterialComponents/Dialogs+ColorThemer (103.1.0)":
+    - "MaterialComponents/Buttons+ColorThemer"
+    - MaterialComponents/Dialogs
+    - MaterialComponents/Themes
+  - "MaterialComponents/Dialogs+DialogThemer (103.1.0)":
+    - "MaterialComponents/Buttons+ButtonThemer"
+    - MaterialComponents/Dialogs
+    - "MaterialComponents/Dialogs+ColorThemer"
+    - "MaterialComponents/Dialogs+TypographyThemer"
+  - "MaterialComponents/Dialogs+TypographyThemer (103.1.0)":
+    - "MaterialComponents/Buttons+TypographyThemer"
+    - MaterialComponents/Dialogs
+    - MaterialComponents/schemes/Typography
+  - MaterialComponents/Elevation (103.1.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Ink (103.1.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Palettes (103.1.0)
+  - MaterialComponents/private/Application (103.1.0)
+  - MaterialComponents/private/Color (103.1.0)
+  - MaterialComponents/private/Icons/Base (103.1.0)
+  - MaterialComponents/private/Icons/ic_check_circle (103.1.0):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/KeyboardWatcher (103.1.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (103.1.0)
+  - MaterialComponents/Ripple (103.1.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/schemes/Color (103.1.0):
+    - MaterialComponents/private/Color
+  - MaterialComponents/schemes/Shape (103.1.0):
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+  - MaterialComponents/schemes/Typography (103.1.0):
+    - "MaterialComponents/schemes/Typography+BasicFontScheme"
+    - "MaterialComponents/schemes/Typography+Scheming"
+    - MaterialComponents/Typography
+  - "MaterialComponents/schemes/Typography+BasicFontScheme (103.1.0)"
+  - "MaterialComponents/schemes/Typography+Scheming (103.1.0)"
+  - MaterialComponents/ShadowElevations (103.1.0)
+  - MaterialComponents/ShadowLayer (103.1.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (103.1.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (103.1.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/Tabs (103.1.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+    - MDFInternationalization
+  - MaterialComponents/Themes (103.1.0):
+    - MaterialComponents/schemes/Color
+    - MaterialComponents/schemes/Typography
+  - MaterialComponents/Typography (103.1.0):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+  - MDFInternationalization (2.0.0)
+  - MDFTextAccessibility (2.0.0)
   - mopub-ios-sdk/Core (5.10.0)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
@@ -148,6 +270,7 @@ DEPENDENCIES:
   - Firebase/Performance
   - FontAwesome.swift
   - GoogleMobileAdsMediationMoPub
+  - GoogleMobileAdsMediationTestSuite
   - Kanna
   - Moya
   - R.swift
@@ -176,10 +299,14 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleMobileAdsMediationMoPub
+    - GoogleMobileAdsMediationTestSuite
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
     - Kanna
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
     - mopub-ios-sdk
     - Moya
     - nanopb
@@ -201,10 +328,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/GitHawkApp/ContextMenu.git
 
 SPEC CHECKSUMS:
-  Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
+  Alamofire: 0fe5fd24b4298dc377a6550da7d5f1b30e286fcb
   ContextMenu: 08e6f8c653ba1944764b1d3d2a31dd1046011412
   Eureka: 820a761c700f6eaab3b60758f138e0d9b99072b3
-  Firebase: d55ddb0e0bb3207166cddc028647833d8a1b5b6f
+  Firebase: fe7f74012742ab403451dd283e6909b8f1fb348a
   FirebaseABTesting: 821a3a3e4a145987e80fee3657c4de1cb9adf693
   FirebaseAnalytics: 572e467f3d977825266e8ccd52674aa3e6f47eac
   FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
@@ -222,10 +349,14 @@ SPEC CHECKSUMS:
   GoogleDataTransport: a857c6a002d201b524dd4bc2ed7e7355ed07e785
   GoogleDataTransportCCTSupport: 32f75fbe904c82772fcbb6b6bd4525bfb6f2a862
   GoogleMobileAdsMediationMoPub: be5e124093a37c2f6c849825d0446413205cb613
+  GoogleMobileAdsMediationTestSuite: 422bd3f7f9e03a60d952c62405d0150d6319f785
   GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
-  GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
+  GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
+  MaterialComponents: 0312a643d1aed5e5f10cba4be06a6aa62bd07c14
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   mopub-ios-sdk: 3d65133b95b6498aa871a66818a11a5ba307e565
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
@@ -237,6 +368,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: b00aacc6bef3e81c876c1e6b1f0b276e6895a1b3
+PODFILE CHECKSUM: cdec32d7ca01869b466f734132a79cf4cf28199f
 
 COCOAPODS: 1.9.1
