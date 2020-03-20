@@ -112,7 +112,9 @@ extension HeadingVC: HeadingVMOutputProtocol {
         title = viewModel.title
         footerView.currentPageNumberLabel.text = viewModel.currentPageNumber
         tableView.reloadData()
-        tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+        if viewModel.entries.count >= 0 {
+            tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+        }
     }
     
     func failedGetHeading(error: Error) {
@@ -147,10 +149,13 @@ extension HeadingVC: HeadingVMOutputProtocol {
 extension HeadingVC: HeadingTappedDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? HeadingCell else { fatalError() }
-        let entry = viewModel.entries[indexPath.row]
-        cell.setupWith(entry: entry)
-        cell.delegate = self
-        cell.contentTextView.delegate = self
+        if let entry = viewModel.entries[safe: indexPath.row] {
+            cell.setupWith(entry: entry)
+            cell.delegate = self
+            cell.contentTextView.delegate = self
+        } else {
+            SwiftMessagesViewer.error(message: "Eğer bu hatayı görüyorsanız lütfen bize bildirin!")
+        }
         return cell
     }
     

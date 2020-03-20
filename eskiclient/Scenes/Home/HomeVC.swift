@@ -9,9 +9,9 @@
 import UIKit
 import GoogleMobileAds
 import MoPub
-#if DEBUG
-import GoogleMobileAdsMediationTestSuite
-#endif
+//#if DEBUG
+//import GoogleMobileAdsMediationTestSuite
+//#endif
 
 final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
     
@@ -59,9 +59,9 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
             DispatchQueue.main.async {
                 GADMobileAds.sharedInstance().start(completionHandler: nil)
                 GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["5221ff4276388f681e7dea644060adaa", kGADSimulatorID as! String]
-                #if DEBUG
-                GoogleMobileAdsMediationTestSuite.present(on: self, delegate: nil)
-                #endif
+//                #if DEBUG
+//                GoogleMobileAdsMediationTestSuite.present(on: self, delegate: nil)
+//                #endif
             }
         }
     }

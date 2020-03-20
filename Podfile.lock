@@ -78,7 +78,7 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 6.2)"
     - Protobuf (>= 3.9.2, ~> 3.9)
   - FontAwesome.swift (1.8.3)
-  - Google-Mobile-Ads-SDK (7.56.0):
+  - Google-Mobile-Ads-SDK (7.57.0):
     - GoogleAppMeasurement (~> 6.0)
   - GoogleAppMeasurement (6.3.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
@@ -90,15 +90,10 @@ PODS:
   - GoogleDataTransportCCTSupport (2.0.0):
     - GoogleDataTransport (~> 5.0)
     - nanopb (~> 0.3.901)
-  - GoogleMobileAdsMediationMoPub (5.10.0.1):
+  - GoogleMobileAdsMediationMoPub (5.11.0.0):
     - Google-Mobile-Ads-SDK (>= 7.56.0)
-    - mopub-ios-sdk/Core (= 5.10.0)
-  - GoogleMobileAdsMediationTestSuite (1.2.0):
-    - Google-Mobile-Ads-SDK (>= 7.47.0)
-    - MaterialComponents/Cards (~> 103.0)
-    - MaterialComponents/Dialogs (~> 103.0)
-    - "MaterialComponents/Dialogs+DialogThemer (~> 103.0)"
-    - MaterialComponents/Tabs (~> 103.0)
+    - mopub-ios-sdk/Core (= 5.11.0)
+    - mopub-ios-sdk/NativeAds (= 5.11.0)
   - GoogleToolboxForMac/Defines (2.2.2)
   - GoogleToolboxForMac/Logger (2.2.2):
     - GoogleToolboxForMac/Defines (= 2.2.2)
@@ -125,123 +120,9 @@ PODS:
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.3.1)
   - Kanna (5.0.0)
-  - MaterialComponents/AnimationTiming (103.1.0)
-  - MaterialComponents/Buttons (103.1.0):
-    - MaterialComponents/Elevation
-    - MaterialComponents/Ink
-    - MaterialComponents/private/Math
-    - MaterialComponents/Ripple
-    - MaterialComponents/ShadowElevations
-    - MaterialComponents/ShadowLayer
-    - MaterialComponents/Shapes
-    - MaterialComponents/Typography
-    - MDFInternationalization
-    - MDFTextAccessibility
-  - "MaterialComponents/Buttons+ButtonThemer (103.1.0)":
-    - MaterialComponents/Buttons
-    - "MaterialComponents/Buttons+ColorThemer"
-    - "MaterialComponents/Buttons+ShapeThemer"
-    - "MaterialComponents/Buttons+TypographyThemer"
-    - MaterialComponents/Palettes
-  - "MaterialComponents/Buttons+ColorThemer (103.1.0)":
-    - MaterialComponents/Buttons
-    - MaterialComponents/schemes/Color
-  - "MaterialComponents/Buttons+ShapeThemer (103.1.0)":
-    - MaterialComponents/Buttons
-    - MaterialComponents/schemes/Shape
-  - "MaterialComponents/Buttons+TypographyThemer (103.1.0)":
-    - MaterialComponents/Buttons
-    - MaterialComponents/schemes/Typography
-  - MaterialComponents/Cards (103.1.0):
-    - MaterialComponents/Elevation
-    - MaterialComponents/Ink
-    - MaterialComponents/private/Icons/ic_check_circle
-    - MaterialComponents/private/Math
-    - MaterialComponents/Ripple
-    - MaterialComponents/ShadowLayer
-    - MaterialComponents/Shapes
-  - MaterialComponents/Dialogs (103.1.0):
-    - MaterialComponents/Buttons
-    - MaterialComponents/Elevation
-    - MaterialComponents/private/KeyboardWatcher
-    - MaterialComponents/private/Math
-    - MaterialComponents/ShadowElevations
-    - MaterialComponents/ShadowLayer
-    - MaterialComponents/Typography
-    - MDFInternationalization
-  - "MaterialComponents/Dialogs+ColorThemer (103.1.0)":
-    - "MaterialComponents/Buttons+ColorThemer"
-    - MaterialComponents/Dialogs
-    - MaterialComponents/Themes
-  - "MaterialComponents/Dialogs+DialogThemer (103.1.0)":
-    - "MaterialComponents/Buttons+ButtonThemer"
-    - MaterialComponents/Dialogs
-    - "MaterialComponents/Dialogs+ColorThemer"
-    - "MaterialComponents/Dialogs+TypographyThemer"
-  - "MaterialComponents/Dialogs+TypographyThemer (103.1.0)":
-    - "MaterialComponents/Buttons+TypographyThemer"
-    - MaterialComponents/Dialogs
-    - MaterialComponents/schemes/Typography
-  - MaterialComponents/Elevation (103.1.0):
-    - MaterialComponents/private/Color
-    - MaterialComponents/private/Math
-  - MaterialComponents/Ink (103.1.0):
-    - MaterialComponents/private/Color
-    - MaterialComponents/private/Math
-  - MaterialComponents/Palettes (103.1.0)
-  - MaterialComponents/private/Application (103.1.0)
-  - MaterialComponents/private/Color (103.1.0)
-  - MaterialComponents/private/Icons/Base (103.1.0)
-  - MaterialComponents/private/Icons/ic_check_circle (103.1.0):
-    - MaterialComponents/private/Icons/Base
-  - MaterialComponents/private/KeyboardWatcher (103.1.0):
-    - MaterialComponents/private/Application
-  - MaterialComponents/private/Math (103.1.0)
-  - MaterialComponents/Ripple (103.1.0):
-    - MaterialComponents/AnimationTiming
-    - MaterialComponents/private/Color
-    - MaterialComponents/private/Math
-  - MaterialComponents/schemes/Color (103.1.0):
-    - MaterialComponents/private/Color
-  - MaterialComponents/schemes/Shape (103.1.0):
-    - MaterialComponents/ShapeLibrary
-    - MaterialComponents/Shapes
-  - MaterialComponents/schemes/Typography (103.1.0):
-    - "MaterialComponents/schemes/Typography+BasicFontScheme"
-    - "MaterialComponents/schemes/Typography+Scheming"
-    - MaterialComponents/Typography
-  - "MaterialComponents/schemes/Typography+BasicFontScheme (103.1.0)"
-  - "MaterialComponents/schemes/Typography+Scheming (103.1.0)"
-  - MaterialComponents/ShadowElevations (103.1.0)
-  - MaterialComponents/ShadowLayer (103.1.0):
-    - MaterialComponents/ShadowElevations
-  - MaterialComponents/ShapeLibrary (103.1.0):
-    - MaterialComponents/private/Math
-    - MaterialComponents/Shapes
-  - MaterialComponents/Shapes (103.1.0):
-    - MaterialComponents/private/Color
-    - MaterialComponents/private/Math
-    - MaterialComponents/ShadowLayer
-  - MaterialComponents/Tabs (103.1.0):
-    - MaterialComponents/AnimationTiming
-    - MaterialComponents/Elevation
-    - MaterialComponents/Ink
-    - MaterialComponents/Palettes
-    - MaterialComponents/private/Math
-    - MaterialComponents/Ripple
-    - MaterialComponents/ShadowElevations
-    - MaterialComponents/ShadowLayer
-    - MaterialComponents/Typography
-    - MDFInternationalization
-  - MaterialComponents/Themes (103.1.0):
-    - MaterialComponents/schemes/Color
-    - MaterialComponents/schemes/Typography
-  - MaterialComponents/Typography (103.1.0):
-    - MaterialComponents/private/Application
-    - MaterialComponents/private/Math
-  - MDFInternationalization (2.0.0)
-  - MDFTextAccessibility (2.0.0)
-  - mopub-ios-sdk/Core (5.10.0)
+  - mopub-ios-sdk/Core (5.11.0)
+  - mopub-ios-sdk/NativeAds (5.11.0):
+    - mopub-ios-sdk/Core
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
@@ -270,7 +151,6 @@ DEPENDENCIES:
   - Firebase/Performance
   - FontAwesome.swift
   - GoogleMobileAdsMediationMoPub
-  - GoogleMobileAdsMediationTestSuite
   - Kanna
   - Moya
   - R.swift
@@ -299,14 +179,10 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleMobileAdsMediationMoPub
-    - GoogleMobileAdsMediationTestSuite
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
     - Kanna
-    - MaterialComponents
-    - MDFInternationalization
-    - MDFTextAccessibility
     - mopub-ios-sdk
     - Moya
     - nanopb
@@ -344,20 +220,16 @@ SPEC CHECKSUMS:
   FirebasePerformance: a9b0985f80d2a5cf780cf9bd4db920b45c200507
   FirebaseRemoteConfig: 47abf7a04a9082091955ea555aa79cfdd249b19c
   FontAwesome.swift: 2a3235131a6caffc6b2ccba318e94d793b2fd342
-  Google-Mobile-Ads-SDK: 65e335fadc97c5a91a9d4546214bfd3a2fb11047
+  Google-Mobile-Ads-SDK: ec897018b9ab9b447e7aa4876e7f75aba13ba2de
   GoogleAppMeasurement: c29d405ff76e18551b5d158eaba6753fda8c7542
   GoogleDataTransport: a857c6a002d201b524dd4bc2ed7e7355ed07e785
   GoogleDataTransportCCTSupport: 32f75fbe904c82772fcbb6b6bd4525bfb6f2a862
-  GoogleMobileAdsMediationMoPub: be5e124093a37c2f6c849825d0446413205cb613
-  GoogleMobileAdsMediationTestSuite: 422bd3f7f9e03a60d952c62405d0150d6319f785
+  GoogleMobileAdsMediationMoPub: 5799a5f4a192705533478fbe0bc65061c5294edb
   GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
-  MaterialComponents: 0312a643d1aed5e5f10cba4be06a6aa62bd07c14
-  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
-  MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
-  mopub-ios-sdk: 3d65133b95b6498aa871a66818a11a5ba307e565
+  mopub-ios-sdk: 292b8e9a55a2e72a34afc04ec01e85486af46240
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
@@ -368,6 +240,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: cdec32d7ca01869b466f734132a79cf4cf28199f
+PODFILE CHECKSUM: 1a312d433be258bc588212b086348e198b574dbc
 
 COCOAPODS: 1.9.1

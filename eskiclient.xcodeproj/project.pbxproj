@@ -29,6 +29,7 @@
 		6E44DB96232F964C00D12B7B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44DB95232F964C00D12B7B /* LoginView.swift */; };
 		6E44DB98232F965400D12B7B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44DB97232F965400D12B7B /* LoginVC.swift */; };
 		6E44DB9A232FC0A500D12B7B /* CookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44DB99232FC0A500D12B7B /* CookieJar.swift */; };
+		6E53B14624254DC5005F9571 /* Collection+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53B14524254DC5005F9571 /* Collection+Safe.swift */; };
 		6E66671C23361FC6006046BF /* UserHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E66671B23361FC6006046BF /* UserHeading.swift */; };
 		6E66671E233620D5006046BF /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E66671D233620D5006046BF /* ProfileCell.swift */; };
 		6E6E5C13232CDC0700B62B1A /* HeadingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6E5C12232CDC0700B62B1A /* HeadingHeaderView.swift */; };
@@ -134,6 +135,7 @@
 		6E44DB95232F964C00D12B7B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6E44DB97232F965400D12B7B /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		6E44DB99232FC0A500D12B7B /* CookieJar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieJar.swift; sourceTree = "<group>"; };
+		6E53B14524254DC5005F9571 /* Collection+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Safe.swift"; sourceTree = "<group>"; };
 		6E66671B23361FC6006046BF /* UserHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeading.swift; sourceTree = "<group>"; };
 		6E66671D233620D5006046BF /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		6E6E5C12232CDC0700B62B1A /* HeadingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingHeaderView.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				6E10D7772324B77D003CC840 /* NSMutableAttributedString.swift */,
 				6EB11BAE2331152400059647 /* NotificationName.swift */,
 				6ED756DD23DAE8DC00307C7D /* UIImageFromView.swift */,
+				6E53B14524254DC5005F9571 /* Collection+Safe.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -577,7 +580,6 @@
 				6EFD1EBD231528F3005941F1 /* Resources */,
 				BE1479EFF843C196BFDEB4F1 /* [CP] Embed Pods Frameworks */,
 				6E80161823EAD96F005D67BE /* Crashlytics */,
-				04118D3168F79CE40412B987 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -639,23 +641,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		04118D3168F79CE40412B987 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-eskiclient/Pods-eskiclient-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-eskiclient/Pods-eskiclient-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eskiclient/Pods-eskiclient-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		0CDD35415224DBEFBE4A3CD0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -768,6 +753,7 @@
 				6E720C9223B24869000260E4 /* SingleEntryCoordinator.swift in Sources */,
 				6EB279FD2401266F00320E1E /* MessageDetailVC.swift in Sources */,
 				6E720C9523B248E6000260E4 /* SingleEntryVM.swift in Sources */,
+				6E53B14624254DC5005F9571 /* Collection+Safe.swift in Sources */,
 				6E831141232E70C700AAE15C /* TabBarCoordinator.swift in Sources */,
 				6E66671C23361FC6006046BF /* UserHeading.swift in Sources */,
 				6EB3ACB123AE060800BB6AD2 /* AddEntryVC.swift in Sources */,
@@ -972,7 +958,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_new;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = J24764G4F3;
 				INFOPLIST_FILE = eskiclient/Info.plist;
@@ -981,7 +967,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.onurgenes.eskiclient;
 				PRODUCT_NAME = eski;
 				SWIFT_VERSION = 5.0;
@@ -995,7 +981,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_new;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = J24764G4F3;
 				INFOPLIST_FILE = eskiclient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -1003,7 +989,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.onurgenes.eskiclient;
 				PRODUCT_NAME = eski;
 				SWIFT_VERSION = 5.0;
