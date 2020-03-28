@@ -56,6 +56,7 @@ extension MessageDetailVC: MessageDetailVMOutputProtocol {
             navigationItem.title = viewModel.messages.first?.senderUsername
             let indexPath = IndexPath(row: viewModel.messages.count - 1, section: 0)
             tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: false)
+            footerView.messageTextView.text = ""
         }
     }
 }

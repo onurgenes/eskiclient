@@ -27,4 +27,11 @@ final class SettingsCoordinator: Coordinator {
         settingsVC.tabBarItem.image = UIImage.fontAwesomeIcon(name: .cogs, style: .solid, textColor: .white, size: CGSize(width: 32, height: 32))
         navigationController.pushViewController(settingsVC, animated: false)
     }
+    
+    func openEskiHeading() {
+        let headingCoordinator = HeadingCoordinator(navigationController: navigationController, url: "eskisozluk-client--6329236", isQuery: false, isComingFromHeading: true)
+        headingCoordinator.parentCoordinator = self
+        childCoordinators.append(headingCoordinator)
+        headingCoordinator.start()
+    }
 }

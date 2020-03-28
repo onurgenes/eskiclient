@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import MoPub
 import Kanna
 
 @UIApplicationMain
@@ -19,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["5221ff4276388f681e7dea644060adaa", kGADSimulatorID as! String]
         app.start()
         
         if iapObserver.isAuthorizedForPayments {

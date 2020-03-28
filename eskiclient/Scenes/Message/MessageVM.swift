@@ -33,7 +33,7 @@ final class MessageVM: MessageVMProtocol {
     var currentPage = ""
     var pageCount = ""
     
-    func getMessages(page: Int) {
+    @objc func getMessages(page: Int) {
         // ANALYTICS
         Analytics.logEvent("messagesRequested", parameters: ["isMessagesRequested": true])
         networkManager.getMessages(page: page) { result in
@@ -57,8 +57,12 @@ final class MessageVM: MessageVMProtocol {
                             let date = messageContent.xpath("footer/time/@title").first?.text,
                             let threadId = doc.css("input[name^=threadId]").first?["value"],
                             let url = messageContent.xpath("a/@href").first?.text {
-                            
-                            let message = Message(threadId: threadId, senderUsername: senderUsername, content: content, date: date, url: url)
+                            var unread = false
+                            if let isUnreadText = messageContent.xpath("@class").first?.text,
+                                isUnreadText == "unread" {
+                                unread = true
+                            }
+                            let message = Message(threadId: threadId, senderUsername: senderUsername, content: content, date: date, url: url, isUnread: unread)
                             self.messages.append(message)
                         }
                     }

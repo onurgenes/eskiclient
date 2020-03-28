@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SettingsVMProtocol: BaseVMProtocol {
-    
+    func openEskiHeading()
 }
 
 protocol SettingsVMOutputProtocol: BaseVMOutputProtocol {
@@ -24,5 +24,7 @@ final class SettingsVM: SettingsVMProtocol {
         
     }
     
-    
+    func openEskiHeading() {
+        coordinator?.openEskiHeading()
+    }
 }

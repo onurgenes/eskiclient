@@ -11,6 +11,12 @@ import FirebaseAnalytics
 
 final class MessageVC: BaseTableVC<MessageVM, MessageCell> {
     
+    lazy var tableRefreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(refreshMessages), for: .valueChanged)
+        return rc
+    }()
+    
     private let footerView = HeadingFooterView()
     private var currentPageNumber = 1
     private var pageCount = 0
@@ -20,6 +26,7 @@ final class MessageVC: BaseTableVC<MessageVM, MessageCell> {
         
         viewModel.getMessages(page: 1)
         
+        tableView.refreshControl = tableRefreshControl
         tableView.tableFooterView = footerView
         footerView.frame.size.height = 80
         footerView.nextPageButton.addTarget(self, action: #selector(getNextPage), for: .touchUpInside)
@@ -38,6 +45,16 @@ final class MessageVC: BaseTableVC<MessageVM, MessageCell> {
             Analytics.logEvent("grantedNotificationPermission", parameters: ["isGranted": granted])
         }
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.getMessages(page: currentPageNumber)
+    }
+    
+    @objc func refreshMessages() {
+        viewModel.getMessages(page: 1)
     }
     
     @objc func getNextPage() {
@@ -67,6 +84,7 @@ final class MessageVC: BaseTableVC<MessageVM, MessageCell> {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? MessageCell else { fatalError("Can not find MessageCell") }
         let message = viewModel.messages[indexPath.row]
         cell.usernameLabel.text = message.senderUsername
+        cell.usernameLabel.textColor = message.isUnread ? R.color.themeMainDark() : nil
         cell.contentLabel.text = message.content
         cell.dateLabel.text = message.date
         return cell
@@ -85,6 +103,7 @@ final class MessageVC: BaseTableVC<MessageVM, MessageCell> {
 
 extension MessageVC: MessageVMOutputProtocol {
     func didGetMessages(result: Result<[Message], Error>) {
+        tableRefreshControl.endRefreshing()
         switch result {
         case .failure(let error):
             print(error)

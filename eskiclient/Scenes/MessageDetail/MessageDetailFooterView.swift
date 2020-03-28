@@ -18,6 +18,7 @@ final class MessageDetailFooterView: UIView {
         tv.layer.borderColor = UIColor.gray.cgColor
         tv.layer.cornerRadius = 5
         tv.layer.borderWidth = 1
+        tv.autocapitalizationType = .none
         return tv
     }()
     

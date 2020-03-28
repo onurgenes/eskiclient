@@ -14,12 +14,14 @@ final class Message {
     let content: String?
     let date: String?
     let url: String?
+    let isUnread: Bool
     
-    internal init(threadId: String?, senderUsername: String?, content: String?, date: String?, url: String?) {
+    internal init(threadId: String?, senderUsername: String?, content: String?, date: String?, url: String?, isUnread: Bool) {
         self.threadId = threadId
         self.senderUsername = senderUsername
         self.content = content
         self.date = date
         self.url = url
+        self.isUnread = isUnread
     }
 }

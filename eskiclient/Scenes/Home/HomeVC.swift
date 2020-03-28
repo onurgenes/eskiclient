@@ -8,10 +8,6 @@
 
 import UIKit
 import GoogleMobileAds
-import MoPub
-//#if DEBUG
-//import GoogleMobileAdsMediationTestSuite
-//#endif
 
 final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
     
@@ -48,22 +44,6 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "giriş", style: .plain, target: self, action: #selector(openLoginTapped))
         NotificationCenter.default.addObserver(self, selector: #selector(removeLoginButton(_:)), name: .loginNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getHomePage), name: .checkLoginNotificationName, object: nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let mopubSDKConfig = MPMoPubConfiguration(adUnitIdForAppInitialization: "e6eb35cc89044cb6a0474a06230b27c1")
-        mopubSDKConfig.loggingLevel = .debug
-        MoPub.sharedInstance().initializeSdk(with: mopubSDKConfig) {
-            DispatchQueue.main.async {
-                GADMobileAds.sharedInstance().start(completionHandler: nil)
-                GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["5221ff4276388f681e7dea644060adaa", kGADSimulatorID as! String]
-//                #if DEBUG
-//                GoogleMobileAdsMediationTestSuite.present(on: self, delegate: nil)
-//                #endif
-            }
-        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

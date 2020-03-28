@@ -100,6 +100,7 @@ extension HomeVM: GADUnifiedNativeAdLoaderDelegate {
     }
     
     func adLoaderDidFinishLoading(_ adLoader: GADAdLoader) {
+        guard tableViewItems.count > 0 else { return }
         for (index, ad) in nativeAds.enumerated() {
             tableViewItems.insert(ad, at: (index + 1) * 5)
         }

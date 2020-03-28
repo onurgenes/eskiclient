@@ -9,6 +9,7 @@
 import UIKit
 import Eureka
 import FirebaseAnalytics
+import MessageUI
 
 final class SettingsVC: FormViewController {
     
@@ -53,9 +54,41 @@ final class SettingsVC: FormViewController {
                 default:
                     break
                 }
-        }
+            }
+            +++ Section(header: "destek", footer: "buradaki seçeneklerle istek ve önerilerini bize bildirebilirsin")
+            <<< ButtonRow() {
+                $0.title = "başlığa yaz"
+                $0.onCellSelection(headingButtonTapped)
+            }
+            <<< ButtonRow() {
+                $0.title = "maıl gönder"
+                $0.onCellSelection(mailButtonTapped)
+            }
+        
         // If products loaded and init, load here else, wait for delegate method
         addProductsToForm()
+    }
+    
+    func headingButtonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
+        viewModel.openEskiHeading()
+    }
+    
+    func mailButtonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["onur@onurgenes.com"])
+            if let text = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+                mail.setSubject("eşkiclient \(text)")
+            }
+            mail.setMessageBody("eşki hakkında:\n", isHTML: false)
+
+            present(mail, animated: true)
+        } else {
+            let ac = UIAlertController(title: "pardon", message: "cihazın mail göndermeye uygun değilmiş", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "tamam", style: .cancel))
+            self.present(ac, animated: true)
+        }
     }
     
     func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
@@ -119,5 +152,11 @@ extension SettingsVC: StoreObserverOutputDelegate {
         DispatchQueue.main.async {
             self.addProductsToForm()
         }
+    }
+}
+
+extension SettingsVC: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }
