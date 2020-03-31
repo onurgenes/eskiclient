@@ -91,6 +91,10 @@ extension HomeVC: HomeVMOutputProtocol {
         tableRefreshControl.endRefreshing()
         footerView.currentPageNumberLabel.text = String(currentPageNumber)
         tableView.reloadData()
+        guard viewModel.headings.count > 0 else {
+            SwiftMessagesViewer.error(message: "başlıklar getirilemedi...")
+            return
+        }
         tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
     }
     
