@@ -8,13 +8,24 @@
 
 import UIKit
 import GoogleMobileAds
+import TinyConstraints
 
 final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
+    
+    private var bannerHeightConstraint: Constraint?
     
     lazy var tableRefreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
         rc.addTarget(self, action: #selector(getHomePage), for: .valueChanged)
         return rc
+    }()
+    
+    lazy var bannerView: GADBannerView = {
+        let bv = GADBannerView(adSize: kGADAdSizeBanner)
+        bv.adUnitID = "ca-app-pub-1229547290062551/5824387185"
+        bv.rootViewController = self
+        bv.delegate = self
+        return bv
     }()
     
     private let footerView = HeadingFooterView()
@@ -28,6 +39,7 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
         viewModel.initAdLoader(with: self)
         
         getHomePage()
+        setupBanner()
         
         tableView.refreshControl = tableRefreshControl
         tableView.tableFooterView = footerView
@@ -83,6 +95,15 @@ final class HomeVC: BaseTableVC<HomeVM, HomeCell> {
     
     @objc func openLoginTapped() {
         viewModel.openLogin()
+    }
+    
+    func setupBanner() {
+        tableView.addSubview(bannerView)
+        bannerView.edgesToSuperview(excluding: .top, usingSafeArea: true)
+        bannerHeightConstraint = bannerView.height(bannerView.intrinsicContentSize.height)
+        
+        let request = GADRequest()
+        bannerView.load(request)
     }
 }
 
@@ -198,26 +219,53 @@ extension HomeVC {
 extension HomeVC : GADUnifiedNativeAdDelegate {
     
     func nativeAdDidRecordClick(_ nativeAd: GADUnifiedNativeAd) {
-        print("\(#function) called")
+        
     }
     
     func nativeAdDidRecordImpression(_ nativeAd: GADUnifiedNativeAd) {
-        print("\(#function) called")
+        
     }
     
     func nativeAdWillPresentScreen(_ nativeAd: GADUnifiedNativeAd) {
-        print("\(#function) called")
+        
     }
     
     func nativeAdWillDismissScreen(_ nativeAd: GADUnifiedNativeAd) {
-        print("\(#function) called")
+        
     }
     
     func nativeAdDidDismissScreen(_ nativeAd: GADUnifiedNativeAd) {
-        print("\(#function) called")
+        
     }
     
     func nativeAdWillLeaveApplication(_ nativeAd: GADUnifiedNativeAd) {
-        print("\(#function) called")
+        
+    }
+}
+
+extension HomeVC: GADBannerViewDelegate {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("BANNER",#function)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bannerView.intrinsicContentSize.height, right: 0)
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("BANNER",error.localizedDescription)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        shrinkBanner(animated: true)
+    }
+    
+    func shrinkBanner(animated: Bool) {
+        bannerHeightConstraint?.constant = 0
+        self.view.setNeedsLayout()
+        
+        if animated {
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
+        } else {
+            self.view.layoutIfNeeded()
+        }
+        
     }
 }

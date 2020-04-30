@@ -665,7 +665,7 @@
 		};
 		6E80161823EAD96F005D67BE /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -679,9 +679,9 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nfind dSYM_directory -name \"*.dSYM\" | xargs -I \\{\\} $PODS_ROOT/FirebaseCrashlytics/upload-symbols -gsp /Users/onurgenes/Developer/ios/eskiclient/assets/GoogleService-Info.plist -p platform \\{\\}\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"find ${DWARF_DSYM_FOLDER_PATH}\" -name \"*.dSYM\" | xargs -I \\{\\} \"$PODS_ROOT/FirebaseCrashlytics/upload-symbols\" -gsp \"$SRCROOT/assets/GoogleService-Info.plist\" -p ios \\{\\}\n";
 		};
 		6ED756E323DB1D4D00307C7D /* RSwift */ = {
 			isa = PBXShellScriptBuildPhase;

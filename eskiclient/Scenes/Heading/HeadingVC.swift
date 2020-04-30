@@ -8,18 +8,31 @@
 
 import UIKit
 import ContextMenu
-//import TinyConstraints
+import TinyConstraints
+import GoogleMobileAds
 
 final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
+    
+    private var bannerHeightConstraint: Constraint?
     
     private let headerView = HeadingHeaderView()
     private let footerView = HeadingFooterView()
     private var isWithoutDate = false
     
+    lazy var bannerView: GADBannerView = {
+        let bv = GADBannerView(adSize: kGADAdSizeBanner)
+        bv.adUnitID = "ca-app-pub-1229547290062551/2049575239"
+        bv.rootViewController = self
+        bv.delegate = self
+        return bv
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setHeaderFooter()
+        setupBanner()
+        
         viewModel.getHeading(isWithoutDate: false, focusTo: "", pageNumber: nil)
         
         tableView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .black : R.color.lightGray()
@@ -104,6 +117,15 @@ final class HeadingVC: BaseTableVC<HeadingVM, HeadingCell> {
         default:
             break
         }
+    }
+    
+    func setupBanner() {
+        tableView.addSubview(bannerView)
+        bannerView.edgesToSuperview(excluding: .top, usingSafeArea: true)
+        bannerHeightConstraint = bannerView.height(bannerView.intrinsicContentSize.height)
+        
+        let request = GADRequest()
+        bannerView.load(request)
     }
 }
 
@@ -219,5 +241,32 @@ extension HeadingVC: UITextViewDelegate {
         }
         viewModel.openOutsideLink(url: URL)
         return false
+    }
+}
+
+extension HeadingVC: GADBannerViewDelegate {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("BANNER",#function)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bannerView.intrinsicContentSize.height, right: 0)
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("BANNER",error.localizedDescription)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        shrinkBanner(animated: true)
+    }
+    
+    func shrinkBanner(animated: Bool) {
+        bannerHeightConstraint?.constant = 0
+        self.view.setNeedsLayout()
+        
+        if animated {
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
+        } else {
+            self.view.layoutIfNeeded()
+        }
+        
     }
 }
