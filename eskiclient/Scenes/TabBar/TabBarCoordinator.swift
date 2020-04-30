@@ -19,6 +19,7 @@ final class TabBarCoordinator: Coordinator {
         navigationController = UINavigationController()
         childCoordinators = []
         NotificationCenter.default.addObserver(self, selector: #selector(onReceivedLogin), name: .loginNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onReceivedLogOut(_:)), name: .loggedOutNotificationName, object: nil)
     }
     
     @objc func onReceivedLogin(_ notification:Notification) {
@@ -29,6 +30,11 @@ final class TabBarCoordinator: Coordinator {
                 removeProfile()
             }
         }
+    }
+    
+    @objc func onReceivedLogOut(_ notification:Notification) {
+        tabBarVC.selectedIndex = 0
+        removeProfile()
     }
     
     func start() {
@@ -83,6 +89,9 @@ final class TabBarCoordinator: Coordinator {
     }
     
     private func removeProfile() {
-        tabBarVC.viewControllers = tabBarVC.viewControllers?.filter{ !($0 is ProfileVC) }
+        tabBarVC.viewControllers = tabBarVC.viewControllers?.filter{
+            !(($0 as! UINavigationController).viewControllers.first is ProfileVC ||
+            ($0 as! UINavigationController).viewControllers.first is MessageVC)
+        }
     }
 }

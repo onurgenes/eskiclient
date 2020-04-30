@@ -13,15 +13,20 @@ final class ProfileVC: BaseTableVC<ProfileVM, ProfileCell> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.largeTitleDisplayMode = .automatic
+        
         if let username = viewModel.otherProfileUsername {
             title = username
             viewModel.getProfile(username: username)
         } else if let username = UserDefaults.standard.string(forKey: "currentUsername") {
             title = username
             viewModel.getProfile(username: username)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "çıkış yap", style: .plain, target: self, action: #selector(logoutTapped))
         }
-        
-        
+    }
+    
+    @objc func logoutTapped() {
+        viewModel.logout()
     }
 }
 
@@ -51,5 +56,13 @@ extension ProfileVC: ProfileVMOutputProtocol {
     
     func failedGetProfile(error: Error) {
         SwiftMessagesViewer.error(message: error.localizedDescription)
+    }
+    
+    func didLogout() {
+        
+    }
+    
+    func failedLogout(error: Error) {
+        print(error)
     }
 }

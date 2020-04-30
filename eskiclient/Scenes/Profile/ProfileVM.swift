@@ -12,11 +12,16 @@ import Kanna
 protocol ProfileVMProtocol: BaseVMProtocol {
     func getProfile(username: String)
     func openHeading(url: String)
+    
+    func logout()
 }
 
 protocol ProfileVMOutputProtocol: BaseVMOutputProtocol {
     func didGetProfile()
     func failedGetProfile(error: Error)
+    
+    func didLogout()
+    func failedLogout(error: Error)
 }
 
 final class ProfileVM: ProfileVMProtocol {
@@ -52,6 +57,19 @@ final class ProfileVM: ProfileVMProtocol {
                 } catch {
                     self.delegate?.failedGetProfile(error: error)
                 }
+            }
+        }
+    }
+    
+    func logout() {
+        networkManager.logout { result in
+            switch result {
+            case .failure(let error):
+                self.delegate?.failedLogout(error: error)
+            case .success(_):
+                NotificationCenter.default.post(name: .loggedOutNotificationName, object: nil)
+                CookieJar.clear()
+                self.delegate?.didLogout()
             }
         }
     }

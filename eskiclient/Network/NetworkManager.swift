@@ -149,4 +149,8 @@ final class NetworkManager: Networkable {
     func sendMessage(model: NewMessageModel, completion: @escaping (Result<String, Error>) -> ()) {
         fetch(.sendNewMessage(model: model)) { completion($0) }
     }
+    
+    func logout(completion: @escaping (Result<String, Error>) -> ()) {
+        fetch(.logout) { completion($0) }
+    }
 }

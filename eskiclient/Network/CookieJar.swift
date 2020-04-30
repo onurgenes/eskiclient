@@ -33,4 +33,8 @@ final class CookieJar {
         }
         return cookies
     }
+    
+    static func clear() {
+        UserDefaults.standard.setValue(nil, forKey: cookiesKey)
+    }
 }

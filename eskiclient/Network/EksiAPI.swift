@@ -22,6 +22,7 @@ enum EksiAPI {
     case vote(model: Entry, isUpVote: Bool)
     case fav(entryId: String)
     case removeFav(entryId: String)
+    case logout
 }
 
 extension EksiAPI: TargetType {
@@ -63,6 +64,8 @@ extension EksiAPI: TargetType {
             return "/entry/favla"
         case .removeFav:
             return "/entry/favlama"
+        case .logout:
+            return "/terk"
         }
     }
     
@@ -94,6 +97,8 @@ extension EksiAPI: TargetType {
             return .post
         case .removeFav:
             return .post
+        case .logout:
+            return .get
         }
     }
     
@@ -161,6 +166,8 @@ extension EksiAPI: TargetType {
             return .requestParameters(parameters: ["entryId": entryId], encoding: URLEncoding.default)
         case .removeFav(let entryId):
             return .requestParameters(parameters: ["entryId": entryId], encoding: URLEncoding.default)
+        case .logout:
+            return .requestPlain
         }
     }
     
