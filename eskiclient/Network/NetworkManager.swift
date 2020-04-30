@@ -48,7 +48,8 @@ final class NetworkManager: Networkable {
                             let username = username.split(separator: "/").last
                             UserDefaults.standard.set(username, forKey: "currentUsername")
                         }
-                        
+                    } else {
+                        UserDefaults.standard.set(nil, forKey: "currentUsername")
                     }
                     NotificationCenter.default.post(name: .loginNotificationName, object: nil, userInfo: ["isLoggedIn": isLoggedIn])
                     

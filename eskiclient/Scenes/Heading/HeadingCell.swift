@@ -11,7 +11,11 @@ import TinyConstraints
 
 protocol HeadingTappedDelegate: AnyObject {
     func didTappedAuthor(name: String)
-    func didTappedOnOptions(entry: Entry, cell: UITableViewCell)
+    
+    func didTappedShare(entry: Entry, cell: UITableViewCell)
+    func didTappedFav(entry: Entry, cell: UITableViewCell)
+    func didTappedUpVote(entry: Entry, cell: UITableViewCell)
+    func didTappedDownVote(entry: Entry, cell: UITableViewCell)
 }
 
 final class HeadingCell: UITableViewCell {
@@ -59,13 +63,48 @@ final class HeadingCell: UITableViewCell {
         return lbl
     }()
     
-    lazy var optionButton: UIButton = {
+    lazy var shareButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.titleLabel?.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
-        btn.setTitle(String.fontAwesomeIcon(name: .ellipsisH), for: .normal)
-        btn.addTarget(self, action: #selector(didTapOnOptions), for: .touchUpInside)
+        btn.setTitle(String.fontAwesomeIcon(name: .share), for: .normal)
+        btn.addTarget(self, action: #selector(didTapShare), for: .touchUpInside)
         btn.setTitleColor(R.color.themeMain(), for: .normal)
         return btn
+    }()
+    
+    lazy var favButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.titleLabel?.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
+        btn.setTitle(String.fontAwesomeIcon(name: .tint), for: .selected)
+        btn.setTitle(String.fontAwesomeIcon(name: .tintSlash), for: .normal)
+        btn.addTarget(self, action: #selector(didTapFav), for: .touchUpInside)
+        btn.setTitleColor(R.color.themeMain(), for: .selected)
+        btn.setTitleColor(R.color.darkGray(), for: .normal)
+        return btn
+    }()
+    
+    lazy var upVoteButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.titleLabel?.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
+        btn.setTitle(String.fontAwesomeIcon(name: .chevronUp), for: .normal)
+        btn.addTarget(self, action: #selector(didTapUpVote), for: .touchUpInside)
+        btn.setTitleColor(R.color.themeMain(), for: .normal)
+        return btn
+    }()
+    
+    lazy var downVoteButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.titleLabel?.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
+        btn.setTitle(String.fontAwesomeIcon(name: .chevronDown), for: .normal)
+        btn.addTarget(self, action: #selector(didTapDownVote), for: .touchUpInside)
+        btn.setTitleColor(R.color.themeMain(), for: .normal)
+        return btn
+    }()
+    
+    lazy var optionStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [shareButton, favButton, upVoteButton, downVoteButton])
+        sv.distribution = .fillEqually
+        return sv
     }()
     
     lazy var bottomStackView: UIStackView = {
@@ -77,9 +116,10 @@ final class HeadingCell: UITableViewCell {
     }()
     
     lazy var infoStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [dateButton, bottomStackView, optionButton])
+        let sv = UIStackView(arrangedSubviews: [dateButton, bottomStackView, optionStackView])
         sv.axis = .vertical
         sv.distribution = .fill
+        sv.spacing = 8
         return sv
     }()
     
@@ -93,7 +133,7 @@ final class HeadingCell: UITableViewCell {
         insetView.addSubview(contentTextView)
         insetView.addSubview(infoStackView)
         
-        infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
+        infoStackView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 20, left: 10, bottom: 10, right: 10), usingSafeArea: true)
         
         contentTextView.edgesToSuperview(excluding: .bottom, insets: TinyEdgeInsets(top: 10, left: 10, bottom: 0, right: 10), usingSafeArea: true)
         contentTextView.bottomToTop(of: infoStackView, offset: -10)
@@ -132,9 +172,25 @@ final class HeadingCell: UITableViewCell {
         }
     }
     
-    @objc func didTapOnOptions() {
+    @objc func didTapShare() {
         guard let entry = entry else { return }
-        self.delegate?.didTappedOnOptions(entry: entry, cell: self)
+        self.delegate?.didTappedShare(entry: entry, cell: self)
+    }
+    
+    @objc func didTapFav() {
+        guard let entry = entry else { return }
+        favButton.isSelected = !favButton.isSelected
+        self.delegate?.didTappedFav(entry: entry, cell: self)
+    }
+    
+    @objc func didTapUpVote() {
+        guard let entry = entry else { return }
+        self.delegate?.didTappedUpVote(entry: entry, cell: self)
+    }
+    
+    @objc func didTapDownVote() {
+        guard let entry = entry else { return }
+        self.delegate?.didTappedDownVote(entry: entry, cell: self)
     }
     
     required init?(coder aDecoder: NSCoder) {

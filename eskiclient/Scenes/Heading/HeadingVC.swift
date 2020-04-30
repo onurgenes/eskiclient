@@ -175,6 +175,13 @@ extension HeadingVC: HeadingTappedDelegate {
             cell.setupWith(entry: entry)
             cell.delegate = self
             cell.contentTextView.delegate = self
+            if UserDefaults.standard.string(forKey: "currentUsername") == nil {
+                cell.favButton.isEnabled = false
+                cell.favButton.setTitleColor(R.color.lightGray(), for: .normal)
+            } else {
+                cell.favButton.isEnabled = true
+            }
+            cell.favButton.isSelected = entry.isFavorited
         } else {
             SwiftMessagesViewer.error(message: "Eğer bu hatayı görüyorsanız lütfen bize bildirin!")
         }
@@ -224,6 +231,38 @@ extension HeadingVC: HeadingTappedDelegate {
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         self.present(ac, animated: true)
+    }
+    
+    func didTappedShare(entry: Entry, cell: UITableViewCell) {
+        let ac = UIAlertController(title: "seçenekler", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "resim olarak paylaş", style: .default, handler: { _ in
+            let image = UIImage(view: cell)
+            let ac = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+            self.present(ac, animated: true)
+        }))
+        ac.addAction(UIAlertAction(title: "link olarak paylaş", style: .default, handler: { _ in
+            guard let url = URL(string: "https://eksisozluk.com/entry/" + entry.entryId) else { return }
+            let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            self.present(ac, animated: true)
+        }))
+        ac.addAction(UIAlertAction(title: "vazgeç", style: .cancel))
+        self.present(ac, animated: true)
+    }
+    
+    func didTappedFav(entry: Entry, cell: UITableViewCell) {
+        if entry.isFavorited {
+            self.viewModel.removeFav(entryId: entry.entryId)
+        } else {
+            self.viewModel.fav(entryId: entry.entryId)
+        }
+    }
+    
+    func didTappedUpVote(entry: Entry, cell: UITableViewCell) {
+        self.viewModel.vote(entry: entry, isUpVote: true)
+    }
+    
+    func didTappedDownVote(entry: Entry, cell: UITableViewCell) {
+        self.viewModel.vote(entry: entry, isUpVote: false)
     }
 }
 
